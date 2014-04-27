@@ -1,0 +1,21 @@
+<div class="home iscroll-wrapper">
+<div class="content">
+
+  {{#each articles}}
+    <div id="{{reference.type}}-{{reference.id}}" class="article-summary">
+      <div class="illustration" style="background-image:url('{{illustration.main.url}}')"></div>
+      <div class="summary"{{#if colors}} style="border-color:{{colors.primary}};"{{/if}}>
+        <h1>{{{title}}}</h1>
+        <div class="description">
+          {{{descriptions.long}}}
+          <button type="button" class="btn" data-article-id="{{reference.id}}"{{#if colors}} style="background-color:{{colors.lighten}};border-color:{{colors.primary}};"{{/if}}>Show</button>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+
+  <hr>
+
+  <img src="{{map.url}}" style="width:100%;"/>
+</div>
+</div>

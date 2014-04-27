@@ -1,0 +1,4 @@
+bower_components
+node_modules
+resources
+templates/build/templates.js

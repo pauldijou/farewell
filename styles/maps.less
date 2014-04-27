@@ -1,0 +1,53 @@
+.current-map {
+  position: relative;
+  width: 100%;
+
+  .map {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .longitude, .latitude {
+    position: absolute;
+    content: ' ';
+
+    &::before {
+      content: ' ';
+      background-color: red;
+      display: block;
+    }
+  }
+
+  .longitude {
+    top: 0;
+    bottom: 0;
+    width: 11px;
+
+    &::before {
+      width: 1px;
+      height: 100%;
+      margin-left: 5px;
+    }
+
+    &:hover {
+      cursor: col-resize;
+    }
+  }
+
+  .latitude {
+    left: 0;
+    right: 0;
+    height: 11px;
+
+    &::before {
+      height: 1px;
+      width: 100%;
+      margin-top: 5px;
+    }
+
+    &:hover {
+      cursor: row-resize;
+    }
+  }
+}
