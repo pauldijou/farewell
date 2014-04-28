@@ -1,0 +1,42 @@
+#aside-top {
+  @aside-top-arrow-size: 40px;
+  @aside-top-arrow-padding-vertical: 10px;
+  @aside-top-arrow-padding-horizontal: 20px;
+
+  .map {
+    position: relative;
+    z-index: 500;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .map-arrow {
+    z-index: 100;
+    position: absolute;
+    right: 5%;
+    bottom: 0;
+    // width: @aside-top-arrow-size;
+    line-height: @aside-top-arrow-size;
+    padding: @aside-top-arrow-padding-vertical @aside-top-arrow-padding-horizontal;
+    //margin-left: (@aside-top-arrow-size / 2);
+    color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    .transition(bottom .5s);
+
+    .fa {
+      .transition-transform(1s);
+    }
+  }
+
+  &.loaded .map-arrow {
+    bottom: (-1 * (@aside-top-arrow-size + 2 * @aside-top-arrow-padding-vertical));
+  }
+}
+
+.aside-top-open #aside-top .map-arrow .fa {
+  .rotate(180deg);
+}

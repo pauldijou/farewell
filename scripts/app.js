@@ -11,28 +11,39 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
   }
 }
 
-var utils = require('./utils');
-
-if (utils.isMobile) {
-  $('body').classList.add('mobile');
-}
-
 var templates = require('./templates'),
     router = require('./router'),
     api = require('./api'),
     aside = require('./aside'),
+    map = require('./map'),
     states = {
       home: require('./states/home'),
       maps: require('./states/maps')
     };
 
-aside.mask.addEventListener('click', function() {
-  aside.hide();
+map.load();
+
+aside.elements.rightMask.addEventListener('click', function() {
+  aside.hide('right');
+});
+
+aside.elements.rightBisMask.addEventListener('click', function() {
+  aside.hide('right-bis');
+});
+
+aside.elements.topMask.addEventListener('click', function() {
+  aside.hide('top');
 });
 
 document.addEventListener('keyup', function (event) {
+  // Escape
   if (event.keyCode === 27) {
-    aside.hide();
+    aside.hideTop();
+  }
+
+  // M
+  if (event.keyCode === 77 && map.isLoaded()) {
+    map.toggle();
   }
 });
 

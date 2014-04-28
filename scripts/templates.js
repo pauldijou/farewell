@@ -32,6 +32,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });;
 this["templates"] = this["templates"] || {};
+this["templates"]["feedback"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"feedback\">\n  <div class=\"btn-feedback\">Feedback</div>\n  <div id=\"disqus_thread\" class=\"disqus-thread\"></div>\n  <noscript>Please enable JavaScript to view the <a href=\"http://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>\n  <a href=\"http://disqus.com\" class=\"dsq-brlink\">comments powered by <span class=\"logo-disqus\">Disqus</span></a>\n</div>\n";
+  });;
+this["templates"] = this["templates"] || {};
 this["templates"]["home"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -84,12 +93,30 @@ function program4(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"home iscroll-wrapper\">\n<div class=\"content\">\n\n  ";
+  buffer += "<div class=\"home iscroll-wrapper\">\n<div class=\"content\">\n  <h1 class=\"main-title\">Farewell...</h1>\n\n  ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.articles), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n\n  <hr>\n\n  <img src=\""
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.map)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" style=\"width:100%;\"/>\n</div>\n</div>\n";
+  buffer += "\n</div>\n</div>\n";
+  return buffer;
+  });;
+this["templates"] = this["templates"] || {};
+this["templates"]["map"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"map\" style=\"background-color:";
+  if (stack1 = helpers.bgColor) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.bgColor); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ";background-image:url('"
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.image)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "')\"></div>\n<div class=\"map-arrow\" style=\"background-color:";
+  if (stack2 = helpers.bgColor) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.bgColor); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + ";\">\n  <span class=\"fa fa-chevron-circle-down\"></span> World map\n</div>\n";
   return buffer;
   });;
 this["templates"] = this["templates"] || {};

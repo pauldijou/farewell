@@ -6,6 +6,7 @@ var q = require('q'),
     templates = require('../templates'),
     api = require('../api'),
     aside = require('../aside'),
+    disqus = require('../disqus'),
     utils = require('../utils'),
     article = require('../models/article'),
     $ = utils.$,
@@ -22,7 +23,17 @@ var showArticle = function () {
   });
 
   if (article) {
-    aside.show(templates.article(article));
+    aside.show('right', templates.article(article));
+
+    aside.set('right-bis', templates.feedback());
+    disqus.reload({
+      id: article.reference.type + '-' + article.reference.id,
+      title: article.reference.slug
+    });
+
+    $('#aside-right h1').addEventListener('click', function () {
+      aside.show('right-bis');
+    });
   }
 };
 
@@ -37,21 +48,14 @@ module.exports = State('/', {
     articles = [];
 
     q.all([
-      api.maps(),
-      api.places(),
       api.articles()
-    ]).spread(function (maps, places, articlesDocs) {
-      var map = maps.results[_.random(maps.results.length - 1)];
-
+    ]).spread(function (articlesDocs) {
       // HACK
       var oneArticle = articlesDocs.results[0];
       
       articles = _.map([oneArticle, oneArticle, oneArticle, oneArticle], article.fromDoc);
 
       document.getElementById('content').innerHTML = templates.home({
-        map: {
-          url: map.getImage('map.map').main.url
-        },
         articles: articles
       });
 

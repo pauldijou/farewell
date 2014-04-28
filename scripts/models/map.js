@@ -39,9 +39,10 @@ var coordinates = {
   }
 };
 
-function Map (reference, name, image, coordinates) {
+function Map (reference, name, bgColor, image, coordinates) {
   this.reference = reference;
   this.name = name;
+  this.bgColor = bgColor;
   this.image = image;
   this.coordinates = coordinates;
 }
@@ -50,6 +51,7 @@ var fromDoc = function (doc) {
   return new Map(
     reference.fromDoc(doc),
     doc.getText('map.name'),
+    doc.getText('map.color') || '#000000',
     doc.getImage('map.map').main,
     {
       alaska: doc.getNumber('map.alaska'),
