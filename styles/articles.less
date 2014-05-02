@@ -1,4 +1,4 @@
-@article-image-width: 60%;
+@article-summary-image-width: 50%;
 
 #aside-right {
   overflow-y: auto;
@@ -9,7 +9,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 300px;
+  height: 50%;
   display: block;
   background-size: cover;
   background-repeat: no-repeat;
@@ -17,6 +17,8 @@
 
 .article {
   .cover-mask();
+  width: 100%;
+  height: 100%;
   padding: 30px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -38,13 +40,13 @@
     }
 
     position: relative;
+    top: 40%;
     z-index: 100;
     background-color: #ffffff;
     width: 100%;
-    max-width: 860px;
-    padding: 0 30px;
-    margin: 200px auto 0;
-    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 50px;
     border-radius: 10px 10px 0 0;
   }
 }
@@ -53,14 +55,14 @@
   position: relative;
   width: 100%;
   margin: 100px 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 
   .illustration {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: @article-image-width;
+    width: @article-summary-image-width;
     display: block;
     background-size: cover;
     background-repeat: no-repeat;
@@ -75,26 +77,30 @@
     border-width: 3px 3px 6px 3px;
     border-style: solid;
     border-color: #aab3bb;
-    min-height: 300px;
+    width: 70%;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   &:nth-child(odd) {
-    padding-left: (@article-image-width - 10%);
-    padding-right: 10%;
-
     .illustration {
       left: 0;
       border-radius: 0 10px 10px 0;
     }
+
+    .summary {
+      .translate3d(15%, 0, 0);
+    }
   }
 
   &:nth-child(even) {
-    padding-right: (@article-image-width - 10%);
-    padding-left: 10%;
-
     .illustration {
       right: 0;
       border-radius: 10px 0 0 10px;
+    }
+
+    .summary {
+      .translate3d(-15%, 0, 0);
     }
   }
 }

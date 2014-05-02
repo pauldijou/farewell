@@ -15,24 +15,32 @@ var templates = require('./templates'),
     router = require('./router'),
     api = require('./api'),
     aside = require('./aside'),
+    router = require('./router'),
     map = require('./map'),
-    states = {
-      home: require('./states/home'),
-      maps: require('./states/maps')
-    };
+    on = require('./on'),
+    $ = require('./utils').$;
 
 map.load();
 
+$('.btn-feedback', aside.elements.feedback).addEventListener('click', function() {
+  aside.toggle('feedback');
+});
+
 aside.elements.rightMask.addEventListener('click', function() {
+  // router.search({i: null, t: null});
   aside.hide('right');
 });
 
-aside.elements.rightBisMask.addEventListener('click', function() {
-  aside.hide('right-bis');
+aside.elements.feedbackMask.addEventListener('click', function() {
+  aside.hide('feedback');
 });
 
 aside.elements.topMask.addEventListener('click', function() {
   aside.hide('top');
+});
+
+window.addEventListener('resize', function (event) {
+  on.resized.dispatch(event);
 });
 
 document.addEventListener('keyup', function (event) {
@@ -45,9 +53,14 @@ document.addEventListener('keyup', function (event) {
   if (event.keyCode === 77 && map.isLoaded()) {
     map.toggle();
   }
+
+  // C
+  if (event.keyCode === 67 && aside.isOpen('right')) {
+    aside.toggle('feedback');
+  }
 });
 
 router
-  .addState('home', states.home)
-  .addState('maps', states.maps)
+  .addState('home', require('./states/home'))
+  .addState('maps', require('./states/maps'))
   .init();

@@ -8,6 +8,7 @@ var q = require('q'),
     aside = require('../aside'),
     disqus = require('../disqus'),
     utils = require('../utils'),
+    router = require('../router'),
     article = require('../models/article'),
     $ = utils.$,
     $$ = utils.$$;
@@ -25,27 +26,24 @@ var showArticle = function () {
   if (article) {
     aside.show('right', templates.article(article));
 
-    aside.set('right-bis', templates.feedback());
-    disqus.reload({
-      id: article.reference.type + '-' + article.reference.id,
-      title: article.reference.slug
-    });
+    disqus.reloadReference(article.reference);
 
     $('#aside-right h1').addEventListener('click', function () {
-      aside.show('right-bis');
+      aside.show('feedback');
     });
   }
 };
 
-module.exports = State('/', {
+module.exports = State('?page&search', {
   exit: function () {
     if (scroller) {
       scroller.destroy();
       scroller = undefined;
     }
   },
-  enter: function () {
+  enter: function (params) {
     articles = [];
+    var state = this;
 
     q.all([
       api.articles()
@@ -75,8 +73,18 @@ module.exports = State('/', {
         new mobileButton.Touchend({
           el: elem,
           f: showArticle.bind({id: elem.getAttribute('data-article-id')})
+          // f: (function () {
+          //   router.search({i: this.id, t: 'article'});
+          // }).bind({id: elem.getAttribute('data-article-id')})
         }).bind();
       });
     }).done();
+  },
+  update: function (params) {
+    console.log('UPDATE', params);
+
+    // if (params.t && params.t === 'article') {
+    //   showArticle.call({id: params.i});
+    // }
   }
 });

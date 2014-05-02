@@ -3,18 +3,18 @@ var _ = require('lodash'),
     $ = utils.$;
 
 var body = $('body'),
-    ordering = ['right-bis', 'right', 'top'],
+    ordering = ['feedback', 'right', 'top'],
     elements = {
       right: document.getElementById('aside-right'),
       rightMask: document.getElementById('mask-right'),
-      rightBis: document.getElementById('aside-right-bis'),
-      rightBisMask: document.getElementById('mask-right-bis'),
+      feedback: document.getElementById('aside-feedback'),
+      feedbackMask: document.getElementById('mask-feedback'),
       top: document.getElementById('aside-top'),
       topMask: document.getElementById('mask-top'),
     },
     mapping = {
       'right': elements.right,
-      'right-bis': elements.rightBis,
+      'feedback': elements.feedback,
       'top': elements.top
     };
 
@@ -50,6 +50,16 @@ var isOpen = function (position) {
   return body.classList.contains(className(position));
 };
 
+var allHidden = function () {
+  var result = true;
+
+  _.forEach(ordering, function (position) {
+    result = result && !isOpen(position);
+  });
+
+  return result;
+};
+
 var set = function (position, content) {
   mapping[position].innerHTML = content;
 };
@@ -83,8 +93,16 @@ var hideTop = function () {
 
 var hideAll = function () {
   _.forEach(ordering, function (position) {
-    if (!hidden && isOpen(position)) {
+    if (isOpen(position)) {
       hide(position);
+    }
+  });
+};
+
+var hideOthers = function (position) {
+  _.forEach(ordering, function (currentPosition) {
+    if (position !== currentPosition && isOpen(currentPosition)) {
+      hide(currentPosition);
     }
   });
 };
@@ -93,9 +111,11 @@ module.exports = {
   elements: elements,
   set: set,
   isOpen: isOpen,
+  allHidden: allHidden,
   show: show,
   hide: hide,
   toggle: toggle,
   hideTop: hideTop,
-  hideAll: hideAll
+  hideAll: hideAll,
+  hideOthers: hideOthers
 };

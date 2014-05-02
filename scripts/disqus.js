@@ -41,8 +41,16 @@ var reload = function (config) {
   }
 };
 
+var reloadReference = function (reference) {
+  reload({
+    id: reference.type + '-' + reference.id,
+    title: reference.slug
+  });
+};
+
 module.exports = {
   load: load,
   destroy: destroy,
-  reload: reload
+  reload: reload,
+  reloadReference: reloadReference
 };

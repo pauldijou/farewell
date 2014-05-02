@@ -16,11 +16,16 @@ var fromDoc = function (doc) {
   var colors;
 
   if (doc.get('article.color').value) {
-    var docColor = color(doc.get('article.color').value);
+    var docColor = color(doc.get('article.color') && doc.get('article.color').value || '#ffffff');
+    var docBgColor = color(doc.get('article.bgColor') && doc.get('article.color').value || '#aeaeae');
+
     colors = {
       primary: docColor.hexString(),
       lighten: docColor.lighten(0.2).hexString(),
-      darken: docColor.darken(0.2).hexString()
+      darken: docColor.darken(0.2).hexString(),
+      bgPrimary: docColor.hexString(),
+      bgLighten: docColor.lighten(0.2).hexString(),
+      bgDarken: docColor.darken(0.2).hexString()
     };
   }
 

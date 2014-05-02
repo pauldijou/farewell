@@ -2,11 +2,18 @@
   .btn-feedback {
     position: absolute;
     bottom: -300px;
-    left: -200px;
+    right: 115%;
     padding: 20px;
     background-color: #000000;
     color: #ffffff;
-    .transition(bottom 500ms 500ms)
+    .transition(bottom 500ms 250ms, right 500ms;);
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+
+    .fa {
+      margin-right: 10px;
+    }
   }
 
   .disqus-thread {
@@ -18,4 +25,13 @@
 
 .aside-right-open .feedback .btn-feedback {
   bottom: 0px;
+}
+
+.aside-feedback-open .feedback .btn-feedback {
+  right: 100%;
+  border-radius: 10px 0 0 0;
+
+  .fa::before {
+    content: '\f057';
+  }
 }

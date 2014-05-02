@@ -1,4 +1,11 @@
-<div class="map" style="background-color:{{bgColor}};background-image:url('{{image.url}}')"></div>
-<div class="map-arrow" style="background-color:{{bgColor}};">
+<div class="map" style="background-color:{{map.bgColor}};background-image:url('{{map.image.url}}')">
+  <ul class="places" style="margin:0;padding:0;">
+    {{#each places}}
+      <li data-place-id="{{reference.id}}" style="-webkit-transform:translate3d({{position.left}}px, {{position.top}}px, 0);transform:translate3d({{position.left}}px, {{position.top}}px, 0);"></li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="map-arrow" style="background-color:{{map.bgColor}};">
   <span class="fa fa-chevron-circle-down"></span> World map
 </div>

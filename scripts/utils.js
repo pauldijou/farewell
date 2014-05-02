@@ -12,31 +12,53 @@ module.exports.isDefined = function (value) {
 
 module.exports.getViewportHeight = function () { return isMobile ? window.outerHeight : window.innerHeight; };
 
-var dummyStyle = document.createElement('div').style,
-    vendor = (function () {
-      var vendors = 't,webkitT,MozT,msT,OT'.split(','),
-        t,
-        i = 0,
-        l = vendors.length;
+// var dummyStyle = document.createElement('div').style,
+//     vendor = (function () {
+//       var vendors = 't,webkitT,MozT,msT,OT'.split(','),
+//         t,
+//         i = 0,
+//         l = vendors.length;
 
-      for ( ; i < l; i++ ) {
-        t = vendors[i] + 'ransform';
-        if ( t in dummyStyle ) {
-          return vendors[i].substr(0, vendors[i].length - 1);
-        }
-      }
+//       for ( ; i < l; i++ ) {
+//         t = vendors[i] + 'ransform';
+//         if ( t in dummyStyle ) {
+//           return vendors[i].substr(0, vendors[i].length - 1);
+//         }
+//       }
 
-      return false;
-    })(),
-    cssVendor = vendor ? '-' + vendor.toLowerCase() + '-' : '';
+//       return false;
+//     })(),
+//     cssVendor = vendor ? '-' + vendor.toLowerCase() + '-' : '';
 
-module.exports.vendor = vendor;
-module.exports.cssVendor = cssVendor;
+// module.exports.vendor = vendor;
+// module.exports.cssVendor = cssVendor;
 
-module.exports.prefixStyle = function (style) {
-  if ( vendor === '' ) return style;
-  style = style.charAt(0).toUpperCase() + style.substr(1);
-  return vendor + style;
+var vendor = module.exports.vendor = (function () {
+  var styles = window.getComputedStyle(document.documentElement, ''),
+    pre = (Array.prototype.slice
+      .call(styles)
+      .join('') 
+      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1],
+    dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+  return {
+    dom: dom,
+    lowercase: pre,
+    css: '-' + pre + '-',
+    js: pre[0].toUpperCase() + pre.substr(1)
+  };
+})();
+
+console.log('UTILS', vendor);
+
+var prefixStyle = module.exports.prefixStyle = function (style) {
+  return vendor.lowercase + style.charAt(0).toUpperCase() + style.substr(1);
+};
+
+module.exports.setStyle = function (elem, property, value) {
+  elem.style[prefixStyle(property)] = value;
+  elem.style[property] = value;
+  return elem;
 };
 
 module.exports.preventDefault = function (event) {
