@@ -80,7 +80,7 @@ var toggle = function (position) {
   body.classList.toggle(className(position));
 };
 
-var hideTop = function () {
+var hideCloser = function () {
   var hidden = false;
 
   _.forEach(ordering, function (position) {
@@ -107,6 +107,23 @@ var hideOthers = function (position) {
   });
 };
 
+$('.btn-feedback', elements.feedback).addEventListener('click', function() {
+  toggle('feedback');
+});
+
+elements.rightMask.addEventListener('click', function() {
+  // router.search({i: null, t: null});
+  hide('right');
+});
+
+elements.feedbackMask.addEventListener('click', function() {
+  hide('feedback');
+});
+
+elements.topMask.addEventListener('click', function() {
+  hide('top');
+});
+
 module.exports = {
   elements: elements,
   set: set,
@@ -115,7 +132,7 @@ module.exports = {
   show: show,
   hide: hide,
   toggle: toggle,
-  hideTop: hideTop,
+  hideCloser: hideCloser,
   hideAll: hideAll,
   hideOthers: hideOthers
 };

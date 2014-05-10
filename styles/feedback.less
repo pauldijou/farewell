@@ -1,13 +1,13 @@
-.feedback {
+#aside-feedback {
   .btn-feedback {
     position: absolute;
     bottom: -300px;
-    right: 115%;
+    right: 0;
+    left: 0;
     padding: 20px;
     background-color: #000000;
     color: #ffffff;
     .transition(bottom 500ms 250ms, right 500ms;);
-    border-radius: 10px 10px 0 0;
     cursor: pointer;
     white-space: nowrap;
 
@@ -23,15 +23,27 @@
   }
 }
 
-.aside-right-open .feedback .btn-feedback {
+.aside-right-open #aside-feedback .btn-feedback {
   bottom: 0px;
 }
 
-.aside-feedback-open .feedback .btn-feedback {
-  right: 100%;
-  border-radius: 10px 0 0 0;
-
+.aside-feedback-open #aside-feedback .btn-feedback {
   .fa::before {
     content: '\f057';
+  }
+}
+
+.desktop {
+  #aside-feedback {
+    .btn-feedback {
+      right: 115%;
+      left: auto;
+      border-radius: 10px 10px 0 0;
+    }
+  }
+
+  .aside-feedback-open #aside-feedback .btn-feedback {
+    right: 100%;
+    border-radius: 10px 0 0 0;
   }
 }

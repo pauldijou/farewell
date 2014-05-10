@@ -1,4 +1,9 @@
-var Handlebars = require('handlebars');
+var Handlebars = require('handlebars'),
+    lang = require('./lang');
+
+Handlebars.registerHelper('i18n', function(key) {
+  return new Handlebars.SafeString(lang.msg(key));
+});
 
 Handlebars.registerHelper('json', function(obj) {
   return JSON.stringify(obj);

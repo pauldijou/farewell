@@ -103,7 +103,7 @@ this["templates"] = this["templates"] || {};
 this["templates"]["map"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -131,7 +131,10 @@ function program1(depth0,data) {
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n  </ul>\n</div>\n\n<div class=\"map-arrow\" style=\"background-color:"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.map)),stack1 == null || stack1 === false ? stack1 : stack1.bgColor)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ";\">\n  <span class=\"fa fa-chevron-circle-down\"></span> World map\n</div>\n";
+    + ";\">\n  <span class=\"fa fa-chevron-circle-down\"></span> ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.i18n || (depth0 && depth0.i18n)),stack1 ? stack1.call(depth0, "global.world.map", options) : helperMissing.call(depth0, "i18n", "global.world.map", options)))
+    + "\n</div>\n";
   return buffer;
   });;
 this["templates"] = this["templates"] || {};

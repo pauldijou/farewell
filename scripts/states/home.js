@@ -25,12 +25,7 @@ var showArticle = function () {
 
   if (article) {
     aside.show('right', templates.article(article));
-
     disqus.reloadReference(article.reference);
-
-    $('#aside-right h1').addEventListener('click', function () {
-      aside.show('feedback');
-    });
   }
 };
 

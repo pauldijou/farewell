@@ -1,3 +1,16 @@
+if ( typeof Object.getPrototypeOf !== "function" ) {
+  if ( typeof "test".__proto__ === "object" ) {
+    Object.getPrototypeOf = function(object){
+      return object.__proto__;
+    };
+  } else {
+    Object.getPrototypeOf = function(object){
+      // May break if the constructor has been tampered with
+      return object.constructor.prototype;
+    };
+  }
+}
+
 // var isMobile = module.exports.isMobile = /WebKit.*Mobile.*|Android/.test(window.navigator.userAgent);
 module.exports.isMobile = window.isMobile;
 
