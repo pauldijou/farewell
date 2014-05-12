@@ -20,7 +20,7 @@ keys.bind('esc', function() { aside.hideCloser(); });
 keys.bind('m', function() { map.toggle(); });
 keys.bind('c', function() { aside.toggle('feedback'); });
 
-router
-  .addState('home', require('./states/home'))
-  .addState('maps', require('./states/maps'))
-  .init();
+router.
+  addState('home', require('./states/home')).
+  addState('maps', require('./states/maps')).
+  init();
