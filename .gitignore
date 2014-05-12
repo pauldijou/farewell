@@ -2,4 +2,5 @@ bower_components
 node_modules
 resources/*
 !resources/fonts
+!resources/mobile.js
 templates/build/templates.js
