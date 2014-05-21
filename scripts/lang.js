@@ -1,4 +1,5 @@
-var lang = 'fr',
+var config = require('./config')
+    lang = config('lang'),
     availables = ['fr', 'en'],
     messages = {};
 

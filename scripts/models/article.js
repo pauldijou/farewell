@@ -1,47 +1,99 @@
-var color = require('color'),
-    reference = require('./reference');
+var reference = require('./reference'),
+    theme = require('../theme');
 
-function Article (reference, title, date, author, illustration, colors, descriptions, content) {
+var is = {
+  image: {
+    template: {
+      full: function (image) { return image.template && image.template.toLowerCase() === 'full'; },
+      partial: function (image) { return image.template && image.template.toLowerCase() === 'partial'; },
+      thumbnail: function (image) { return image.template && image.template.toLowerCase() === 'thumbnail'; }
+    },
+    position: {
+      top: function (image) { return image.position && image.position.toLowerCase() === 'top'; },
+      bottom: function (image) { return image.position && image.position.toLowerCase() === 'bottom'; },
+      left: function (image) { return image.position && image.position.toLowerCase() === 'left'; },
+      right: function (image) { return image.position && image.position.toLowerCase() === 'right'; }
+    }
+  }
+}
+
+function Article (reference, title, date, author, illustration, color, image, text, descriptions, content) {
   this.reference = reference;
   this.title = title;
   this.date = date;
   this.author = author;
   this.illustration = illustration;
-  this.colors = colors;
+  this.color = color;
+  this.image = image;
+  this.text = text;
   this.descriptions = descriptions;
   this.content = content;
+
+  this.classes = '';
+  this.style = '';
+  this.illustrationStyle = '';
+  this.summaryStyle = '';
+
+  if (color) {
+    this.classes += 'color-' + color.split(' (')[0].toLowerCase() + ' ';
+  }
+
+  if (image.template) {
+    this.classes += 'image-template-' + image.template.toLowerCase() + ' ';
+  }
+
+  if (image.position) {
+    this.classes += 'image-position-' + image.position.toLowerCase() + ' ';
+  }
+
+  if (text.position) {
+    this.classes += 'text-position-' + text.position.toLowerCase() + ' ';
+  }
+
+  if (is.image.template.full(image)) {
+    if (theme.isFullscreen) {
+      this.style += 'background-image:url('+ illustration.main.url +');';
+    }
+  } else if (is.image.template.partial(image)) {
+    this.illustrationStyle += 'background-image:url('+ illustration.main.url +');';
+
+    if (is.image.position.top(image) || is.image.position.bottom(image)) {
+      this.illustrationStyle += 'flex-grow:'+ image.size +';';
+      this.summaryStyle += 'flex-grow:'+ text.size +';';
+    } else {
+      this.illustrationStyle += 'flex-grow:'+ image.size +';';
+      this.summaryStyle += 'flex-grow:'+ text.size +';';
+    }
+  } else if (is.image.template.thumbnail(image)) {
+    this.illustrationStyle += 'background-image:url('+ illustration.main.url +');';
+  }
 }
 
 var fromDoc = function (doc) {
-  var colors;
-
-  if (doc.get('article.color').value) {
-    var docColor = color(doc.get('article.color') && doc.get('article.color').value || '#ffffff');
-    var docBgColor = color(doc.get('article.bgColor') && doc.get('article.color').value || '#aeaeae');
-
-    colors = {
-      primary: docColor.hexString(),
-      lighten: docColor.lighten(0.2).hexString(),
-      darken: docColor.darken(0.2).hexString(),
-      bgPrimary: docColor.hexString(),
-      bgLighten: docColor.lighten(0.2).hexString(),
-      bgDarken: docColor.darken(0.2).hexString()
-    };
-  }
-
-  return new Article(
+  var toto = new Article(
     reference.fromDoc(doc),
     doc.get('article.title') && doc.get('article.title').asHtml(),
     doc.getDate('article.date'),
     doc.get('article.author'),
     doc.getImage('article.illustration'),
-    colors,
+    doc.getText('article.color'),
+    {
+      template: 'partial', //doc.getText('article.imageTemplate'),
+      size: 3, //doc.getNumber('article.imageSize'),
+      position: 'bottom' //doc.getText('article.imagePosition')
+    },
+    {
+      position: doc.getText('article.textPosition'),
+      size: 1 //doc.getNumber('article.textSize')
+    },
     {
       short: doc.get('article.shortdescription') && doc.get('article.shortdescription').asHtml(),
       long: doc.get('article.longdescription') && doc.get('article.longdescription').asHtml()
     },
     doc.get('article.content') && doc.get('article.content').asHtml()
   );
+  console.log(toto);
+  return toto;
 };
 
 module.exports = {

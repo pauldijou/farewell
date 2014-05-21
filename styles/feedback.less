@@ -2,14 +2,13 @@
   .btn-feedback {
     position: absolute;
     bottom: -300px;
-    right: 0;
-    left: 0;
     padding: 20px;
     background-color: #000000;
     color: #ffffff;
     .transition(bottom 500ms 250ms, right 500ms;);
     cursor: pointer;
     white-space: nowrap;
+    text-align: center;
 
     .fa {
       margin-right: 10px;
@@ -33,11 +32,23 @@
   }
 }
 
+.mobile {
+  #aside-feedback {
+    .btn-feedback {
+      right: 100%;
+      width: 100%
+    }
+  }
+
+  .aside-feedback-open #aside-feedback .btn-feedback {
+    right: 0;
+  }
+}
+
 .desktop {
   #aside-feedback {
     .btn-feedback {
       right: 115%;
-      left: auto;
       border-radius: 10px 10px 0 0;
     }
   }

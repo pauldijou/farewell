@@ -19,7 +19,7 @@
   .cover-mask();
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 5%;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -34,7 +34,7 @@
     background-repeat: no-repeat;
   }
 
-  .content {
+  .article-content {
     h1, .title {
       margin-top: 0;
     }
@@ -46,12 +46,98 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 50px;
+    padding: 10%;
     border-radius: 10px 10px 0 0;
   }
 }
 
-.article-summary {
+.desktop .article .article-content {
+  padding: 30px;
+}
+
+.fullscreen .article-summary {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+
+  .summary {
+    padding: 30px;
+  }
+
+  &.image-template-full {
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 10%;
+
+    .illustration { display: none; }
+
+    &.text-position-left, &.text-position-right, &.text-position-right, &.text-position-bottom {
+      .summary {
+        max-width: 600px;
+      }
+    }
+
+    &.text-position-left {
+      flex-direction: row;
+    }
+
+    &.text-position-right {
+      flex-direction: row-reverse;
+    }
+
+    &.text-position-top {
+      flex-direction: column;
+    }
+
+    &.text-position-bottom {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &.image-template-partial {
+    align-items: stretch;
+
+    &.image-position-left {
+      flex-direction: row;
+    }
+
+    &.image-position-right {
+      flex-direction: row-reverse;
+    }
+
+    &.image-position-top {
+      flex-direction: column;
+    }
+
+    &.image-position-bottom {
+      flex-direction: column-reverse;
+    }
+
+    .illustration {
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &.image-template-thumbnail {
+    .illustration {
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .summary {
+    h1, .title {
+      margin-top: 0;
+    }
+  }
+
+  &.color-seance { .article-color(#9A12B3); }
+  &.color-thunderbird { .article-color(#9B59B6); }
+}
+
+.zigzag .article-summary {
   position: relative;
   width: 100%;
   margin: 100px 0;

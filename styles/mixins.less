@@ -9,3 +9,12 @@
 .no-appearance() {
   -webkit-appearance: none;
 }
+
+.article-color(@color) {
+  background-color: @color;
+
+  .summary {
+    background-color: @color;
+    color: #ffffff;
+  }
+}

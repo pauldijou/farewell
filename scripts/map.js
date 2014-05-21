@@ -1,4 +1,5 @@
 var q = require('q'),
+    hammer = require('hammerjs'),
     _ = require('lodash'),
     router = require('./router'),
     aside = require('./aside'),
@@ -121,12 +122,12 @@ var load = function () {
     elements.places = $('.map .places', aside.elements.top);
     elements.arrow = $('.map-arrow', aside.elements.top);
 
-    elements.arrow.addEventListener('click', function() {
+    hammer(elements.arrow).on('tap', function() {
       toggle();
     });
 
     _.forEach($$('[data-place-id]', elements.places), function (place) {
-      place.addEventListener('click', function(event) {
+      hammer(place).on('tap', function(event) {
         showPlaceDetail(event.target.getAttribute('data-place-id'));
       });
     });

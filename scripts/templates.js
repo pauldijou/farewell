@@ -20,7 +20,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
   buffer += "<div class=\"illustration\" style=\"background-image:url('"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.illustration)),stack1 == null || stack1 === false ? stack1 : stack1.main)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "')\"></div>\n\n<div class=\"article\">\n  <div class=\"content\">\n    ";
+    + "')\"></div>\n\n<div class=\"article\">\n  <div class=\"article-content\">\n    ";
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.title); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -53,16 +53,26 @@ function program1(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.reference)),stack1 == null || stack1 === false ? stack1 : stack1.type)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "-"
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.reference)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" class=\"article-summary\">\n      <div class=\"illustration\" style=\"background-image:url('"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.illustration)),stack1 == null || stack1 === false ? stack1 : stack1.main)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "')\"></div>\n      <div class=\"summary\"";
-  stack2 = helpers['if'].call(depth0, (depth0 && depth0.colors), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+    + "\" class=\"article-summary ";
+  if (stack2 = helpers.classes) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.classes); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\"";
+  stack2 = helpers['if'].call(depth0, (depth0 && depth0.style), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += ">\n        <h1>";
+  buffer += ">\n      <div class=\"illustration\" style=\"";
+  if (stack2 = helpers.illustrationStyle) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.illustrationStyle); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "')\"></div>\n      <div class=\"summary\" style=\"";
+  if (stack2 = helpers.summaryStyle) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.summaryStyle); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\">\n        ";
   if (stack2 = helpers.title) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.title); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "</h1>\n        <div class=\"description\">\n          ";
+  buffer += "\n        <div class=\"description\">\n          ";
   stack2 = ((stack1 = ((stack1 = (depth0 && depth0.descriptions)),stack1 == null || stack1 === false ? stack1 : stack1['long'])),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n          <button type=\"button\" class=\"btn\" data-article-id=\""
@@ -76,9 +86,11 @@ function program1(depth0,data) {
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += " style=\"border-color:"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.colors)),stack1 == null || stack1 === false ? stack1 : stack1.primary)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ";\"";
+  buffer += " style=\"";
+  if (stack1 = helpers.style) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.style); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\"";
   return buffer;
   }
 

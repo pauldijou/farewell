@@ -1,4 +1,5 @@
 var _ = require('lodash'),
+    hammer = require('hammerjs'),
     utils = require('./utils'),
     $ = utils.$;
 
@@ -107,20 +108,32 @@ var hideOthers = function (position) {
   });
 };
 
-$('.btn-feedback', elements.feedback).addEventListener('click', function() {
-  toggle('feedback');
-});
-
-elements.rightMask.addEventListener('click', function() {
+hammer(elements.rightMask).on('tap', function() {
   // router.search({i: null, t: null});
   hide('right');
 });
 
-elements.feedbackMask.addEventListener('click', function() {
+hammer(elements.right, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
+  hide('right');
+});
+
+hammer(elements.feedbackMask).on('tap', function() {
   hide('feedback');
 });
 
-elements.topMask.addEventListener('click', function() {
+hammer(elements.feedback, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
+  hide('feedback');
+});
+
+hammer($('.btn-feedback', elements.feedback)).on('tap', function() {
+  toggle('feedback');
+});
+
+hammer(elements.topMask).on('tap', function() {
+  hide('top');
+});
+
+hammer(elements.top, {preventDefault: true}).on('swipeup', function () {
   hide('top');
 });
 
