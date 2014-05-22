@@ -17,6 +17,9 @@ gulp.task('out', function() {
       path.extname = '.min.js';
     }))
     .pipe(gulp.dest('./out/resources'))
+    .pipe(gulp.dest('./out'))
+    .pipe(gulp.src(['./resources/fonts', './resources/mobile.js']))
+    .pipe(gulp.dest('./out/resources'))
     .pipe(gulp.src(['./index.html', 'CNAME']))
     .pipe(gulp.dest('./out'))
     .on('error', handleErrors);
