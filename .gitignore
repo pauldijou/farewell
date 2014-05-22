@@ -1,6 +1,7 @@
 # GLOBAL
 bower_components
 node_modules
+out
 templates/build/templates.js
 
 # ENV
