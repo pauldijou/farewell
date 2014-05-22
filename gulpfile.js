@@ -11,4 +11,6 @@ tasks.forEach(function(task) {
 
 gulp.task('build', ['handlebars', 'browserify', 'less']);
 
+gulp.task('prod', ['build', 'uglify', 'minifyCss']);
+
 gulp.task('default', ['build', 'watch', 'connect']);

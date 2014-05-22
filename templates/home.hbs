@@ -1,18 +1,14 @@
-<div class="home iscroll-wrapper">
-<div class="content">
-  <h1 class="main-title">Farewell...</h1>
+<h1 class="main-title">Farewell...</h1>
 
-  {{#each articles}}
-    <div id="{{reference.type}}-{{reference.id}}" class="article-summary {{classes}}"{{#if style}} style="{{style}}"{{/if}}>
-      <div class="illustration" style="{{illustrationStyle}}')"></div>
-      <div class="summary" style="{{summaryStyle}}">
-        {{{title}}}
-        <div class="description">
-          {{{descriptions.long}}}
-          <button type="button" class="btn" data-article-id="{{reference.id}}"{{#if colors}} style="background-color:{{colors.lighten}};border-color:{{colors.primary}};"{{/if}}>Show</button>
-        </div>
+{{#each articles}}
+  <div id="{{reference.type}}-{{reference.id}}" class="article-summary {{classes}}"{{#if style}} style="{{style}}"{{/if}}>
+    <div class="illustration" style="{{illustrationStyle}}')"></div>
+    <div class="summary" style="{{summaryStyle}}">
+      {{{title}}}
+      <div class="description">
+        {{{descriptions.long}}}
+        <button type="button" class="btn" data-article-id="{{reference.id}}"{{#if colors}} style="background-color:{{colors.lighten}};border-color:{{colors.primary}};"{{/if}}>Show</button>
       </div>
     </div>
-  {{/each}}
-</div>
-</div>
+  </div>
+{{/each}}

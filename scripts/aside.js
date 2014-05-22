@@ -1,22 +1,19 @@
 var _ = require('lodash'),
     hammer = require('hammerjs'),
     utils = require('./utils'),
+    scroller = require('./scroller'),
     $ = utils.$;
 
 var body = $('body'),
     ordering = ['feedback', 'right', 'top'],
     elements = {
       right: document.getElementById('aside-right'),
+      rightContent: $('.content', document.getElementById('aside-right')),
       rightMask: document.getElementById('mask-right'),
       feedback: document.getElementById('aside-feedback'),
       feedbackMask: document.getElementById('mask-feedback'),
       top: document.getElementById('aside-top'),
       topMask: document.getElementById('mask-top'),
-    },
-    mapping = {
-      'right': elements.right,
-      'feedback': elements.feedback,
-      'top': elements.top
     };
 
 // var tShowMaskOpacity = zanimo.f('opacity', '0.5', 200);
@@ -62,7 +59,12 @@ var allHidden = function () {
 };
 
 var set = function (position, content) {
-  mapping[position].innerHTML = content;
+  if (elements[position + 'Content']) {
+    elements[position + 'Content'].innerHTML = content;
+    scroller.refresh['aside' + position]();
+  } else if (elements[position]) {
+    elements[position].innerHTML = content;
+  }
 };
 
 var show = function (position, content) {
@@ -117,11 +119,15 @@ hammer(elements.right, {dragLockToAxis: true, dragBlockHorizontal: true}).on('sw
   hide('right');
 });
 
+hammer($('.btn-back', elements.feedback)).on('tap', function() {
+  hide('right');
+});
+
 hammer(elements.feedbackMask).on('tap', function() {
   hide('feedback');
 });
 
-hammer(elements.feedback, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
+hammer(elements.feedback, {dragLockToAxis: true, dragBlockHorizontal: true, preventDefault: true}).on('swiperight', function () {
   hide('feedback');
 });
 

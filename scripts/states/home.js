@@ -1,6 +1,6 @@
 var q = require('q'),
     _ = require('lodash'),
-    IScroll = require('iscroll'),
+    hammer = require('hammerjs'),
     mobileButton = require('mobile-button'),
     State = require('abyssa').State,
     templates = require('../templates'),
@@ -10,11 +10,11 @@ var q = require('q'),
     utils = require('../utils'),
     router = require('../router'),
     article = require('../models/article'),
+    scroller = require('../scroller'),
     $ = utils.$,
     $$ = utils.$$;
 
-var scroller,
-    articles = [],
+var articles = [],
     elements = {};
 
 var showArticle = function () {
@@ -25,17 +25,12 @@ var showArticle = function () {
 
   if (article) {
     aside.show('right', templates.article(article));
+    scroller.create('asideright', $('.article', aside.elements.right));
     disqus.reloadReference(article.reference);
   }
 };
 
 module.exports = State('?page&search', {
-  exit: function () {
-    if (scroller) {
-      scroller.destroy();
-      scroller = undefined;
-    }
-  },
   enter: function (params) {
     articles = [];
     var state = this;
@@ -48,14 +43,11 @@ module.exports = State('?page&search', {
       
       articles = _.map([oneArticle, oneArticle, oneArticle, oneArticle], article.fromDoc);
 
-      document.getElementById('content').innerHTML = templates.home({
+      $('#content > .content').innerHTML = templates.home({
         articles: articles
       });
 
-      // scroller = new IScroll('.home', {
-      //   mouseWheel: true,
-      //   scrollbars: true
-      // });
+      scroller.refresh.content();
 
       elements.home = $('.home');
       elements.detail = $('.article-detail');
@@ -64,6 +56,10 @@ module.exports = State('?page&search', {
         // button.addEventListener('click', function(event) {
         //   aside.show();
         // });
+
+        hammer(elem).on('tap', function (e) {
+          console.log(e);
+        });
 
         new mobileButton.Touchend({
           el: elem,

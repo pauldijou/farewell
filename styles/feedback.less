@@ -1,5 +1,5 @@
 #aside-feedback {
-  .btn-feedback {
+  .buttons {
     position: absolute;
     bottom: -300px;
     padding: 20px;
@@ -16,44 +16,54 @@
   }
 
   .disqus-thread {
-    padding: 30px;
+    padding: 30px 30px 75px 30px;
     max-width: 800px;
     margin: 0 auto;
   }
 }
 
-.aside-right-open #aside-feedback .btn-feedback {
+.aside-right-open #aside-feedback .buttons {
   bottom: 0px;
 }
 
-.aside-feedback-open #aside-feedback .btn-feedback {
-  .fa::before {
+.aside-feedback-open #aside-feedback .buttons {
+  .btn-feedback .fa::before {
     content: '\f057';
   }
 }
 
 .mobile {
   #aside-feedback {
-    .btn-feedback {
+    .buttons {
       right: 100%;
-      width: 100%
+      width: 100%;
+
+      .btn-back, .btn-feedback {
+        width: 50%;
+        display: inline-block;
+      }
     }
   }
 
-  .aside-feedback-open #aside-feedback .btn-feedback {
+  .aside-feedback-open #aside-feedback .buttons {
     right: 0;
+
+    .btn-back { display: none; }
   }
 }
 
 .desktop {
   #aside-feedback {
-    .btn-feedback {
+    .buttons {
       right: 115%;
       border-radius: 10px 10px 0 0;
+
+      .btn-back { display: none; }
+      .btn-feedback { width: 100%; }
     }
   }
 
-  .aside-feedback-open #aside-feedback .btn-feedback {
+  .aside-feedback-open #aside-feedback .buttons {
     right: 100%;
     border-radius: 10px 0 0 0;
   }

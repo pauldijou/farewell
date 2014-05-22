@@ -4,7 +4,7 @@
   overflow-y: auto;
 }
 
-#aside-right > .illustration {
+#aside-right .illustration {
   position: absolute;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@
 }
 
 .article {
-  .cover-mask();
+  .iscroll-wrapper();
   width: 100%;
   height: 100%;
   padding: 5%;
@@ -46,13 +46,18 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 10%;
+    padding: 10% 10% 75px 10%;
     border-radius: 10px 10px 0 0;
   }
 }
 
+.mobile .article .article-content {
+  padding-bottom: 500px;
+  padding-bottom: 50vh;
+}
+
 .desktop .article .article-content {
-  padding: 30px;
+  padding: 30px 30px 75px 30px;
 }
 
 .fullscreen .article-summary {
