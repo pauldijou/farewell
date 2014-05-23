@@ -1,26 +1,13 @@
-var minifyCss    = require('gulp-minify-css');
-var uglify       = require('gulp-uglify');
-var rename       = require('gulp-rename');
+var clean        = require('gulp-clean');
 var gulp         = require('gulp');
 var handleErrors = require('./utils/handleErrors');
 
 gulp.task('out', function() {
-  return gulp.src('./resources/app.css')
-    .pipe(minifyCss())
-    .pipe(rename(function (path) {
-      path.extname = '.min.css';
-    }))
-    .pipe(gulp.dest('./out/resources'))
-    .pipe(gulp.src('./resources/app.js'))
-    .pipe(uglify())
-    .pipe(rename(function (path) {
-      path.extname = '.min.js';
-    }))
-    .pipe(gulp.dest('./out/resources'))
+  return gulp.src(['./out/resources/*.*', './out/resources/fonts/*.*', './out/index.html', './out/CNAME'], {read: false})
+    .pipe(clean())
+    .pipe(gulp.src(['./CNAME']))
     .pipe(gulp.dest('./out'))
-    .pipe(gulp.src(['./resources/fonts', './resources/mobile.js']))
-    .pipe(gulp.dest('./out/resources'))
-    .pipe(gulp.src(['./index.html', 'CNAME']))
-    .pipe(gulp.dest('./out'))
+    .pipe(gulp.src(['./resources/fonts/*']))
+    .pipe(gulp.dest('./out/resources/fonts'))
     .on('error', handleErrors);
 });

@@ -12,7 +12,9 @@ if ( typeof Object.getPrototypeOf !== "function" ) {
 }
 
 // var isMobile = module.exports.isMobile = /WebKit.*Mobile.*|Android/.test(window.navigator.userAgent);
-module.exports.isMobile = window.isMobile;
+module.exports.isMobile = window.farewell.isMobile;
+module.exports.hasIscroll = window.farewell.hasIscroll;
+module.exports.has = module.exports.can = window.farewell.can;
 
 module.exports.$ = function $(selector, context) { return (context || window.document).querySelector(selector); };
 module.exports.$$ = function $$(selector, context) { return (context || window.document).querySelectorAll(selector); };

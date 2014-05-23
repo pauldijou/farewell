@@ -2,13 +2,16 @@
   .buttons {
     position: absolute;
     bottom: -300px;
-    padding: 20px;
     background-color: #000000;
     color: #ffffff;
     .transition(bottom 500ms 250ms, right 500ms;);
     cursor: pointer;
     white-space: nowrap;
     text-align: center;
+
+    .btn-back, .btn-feedback {
+      padding: 20px;
+    }
 
     .fa {
       margin-right: 10px;
@@ -27,12 +30,14 @@
 }
 
 .aside-feedback-open #aside-feedback .buttons {
+  .btn-back { display: none; }
+
   .btn-feedback .fa::before {
     content: '\f057';
   }
 }
 
-.mobile {
+@media (max-width: @screen-sm-max) {
   #aside-feedback {
     .buttons {
       right: 100%;
@@ -47,19 +52,16 @@
 
   .aside-feedback-open #aside-feedback .buttons {
     right: 0;
-
-    .btn-back { display: none; }
   }
 }
 
-.desktop {
+@media (min-width: @screen-md-min) {
   #aside-feedback {
     .buttons {
       right: 115%;
       border-radius: 10px 10px 0 0;
 
-      .btn-back { display: none; }
-      .btn-feedback { width: 100%; }
+      .btn-back, .btn-feedback { display: inline-block; }
     }
   }
 

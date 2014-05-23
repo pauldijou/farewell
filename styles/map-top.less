@@ -54,12 +54,16 @@
   }
 }
 
-.mobile .map-arrow .map-arrow-label {
-  display: none;
+@media (max-width: @screen-sm-max) {
+  .map-arrow .map-arrow-label {
+    display: none;
+  }
 }
 
-.desktop .map-arrow .fa::before {
-  content: '\f13a';
+@media (min-width: @screen-md-min) {
+  .map-arrow .fa::before {
+    content: '\f13a';
+  }
 }
 
 .aside-top-open #aside-top .map-arrow .fa {

@@ -9,7 +9,7 @@ var defaultOptions = {
 };
   
 var create = function (name, elem, options) {
-  if (utils.isMobile) {
+  if (utils.has('iscroll')) {
     destroyIfExists(name);
     scrollers[name] = new IScroll(elem, _.defaults(options || {}, defaultOptions));
   }

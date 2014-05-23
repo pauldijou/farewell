@@ -14,8 +14,10 @@
   z-index: 2001;
 }
 
-.desktop #aside-right {
-  left: 15%;
+@media (min-width: @screen-md-min) {
+  #aside-right {
+    left: 15%;
+  }
 }
 
 #mask-feedback {
@@ -93,7 +95,7 @@
   }
 }
 
-.desktop {
+@media (min-width: @screen-md-min) {
   #aside-right {
     left: 15%;
   }
