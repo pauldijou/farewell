@@ -9,6 +9,6 @@ tasks.forEach(function(task) {
   require('./gulp/' + task);
 });
 
-gulp.task('build', ['handlebars', 'browserify', 'less']);
+gulp.task('build', ['handlebars', 'browserify', 'less', 'copy']);
 
 gulp.task('default', ['build', 'watch', 'connect']);

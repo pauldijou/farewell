@@ -1,11 +1,13 @@
-var IScroll = require('iscroll'),
-    _ = require('lodash'),
+// var IScroll = require('iscroll'),
+var  _ = require('lodash'),
     utils = require('./utils'),
     $ = utils.$,
     scrollers = {};
 
 var defaultOptions = {
-  bounce: false
+  bounce: false,
+  mouseWheel: true,
+  scrollbars: false
 };
   
 var create = function (name, elem, options) {
@@ -43,4 +45,4 @@ module.exports = {
   destroy: {
     asideright: function () { destroyIfExists('asideright'); }
   }
-}
+};

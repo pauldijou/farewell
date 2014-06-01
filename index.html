@@ -32,7 +32,7 @@
   <!-- endbuild -->
 </head>
 <body>
-  <div id="content" class="iscroll-wrapper fullscreen"><div class="content"></div></div>
+  <div id="content" class="iscroll-wrapper fullscreen content"></div>
 
   <div id="aside-top"></div>
   <div id="mask-top"></div>
@@ -41,19 +41,20 @@
   <div id="mask-right"></div>
 
   <div id="aside-feedback">
-    <div class="buttons">
-      <div class="btn-back">
-        <span class="fa fa-times-circle"></span><span><span class="text-underline">B</span>ack</span>
-      </div>
-      <div class="btn-feedback">
-        <span class="fa fa-comment"></span><span><span class="text-underline">C</span>omments</span>
-      </div>
-    </div>
     <div id="disqus_thread" class="disqus-thread"></div>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
   </div>
   <div id="mask-feedback"></div>
+
+  <div id="aside-feedback-buttons">
+    <div class="btn-back">
+      <span class="fa fa-times-circle"></span><span><span class="text-underline">B</span>ack</span>
+    </div>
+    <div class="btn-feedback">
+      <span class="fa fa-comment"></span><span><span class="text-underline">C</span>omments</span>
+    </div>
+  </div>
 
   <!-- build:js resources/app.min.js -->
   <script src="resources/app.js"></script>

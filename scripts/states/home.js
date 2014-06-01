@@ -10,7 +10,7 @@ var q = require('q'),
     utils = require('../utils'),
     router = require('../router'),
     article = require('../models/article'),
-    scroller = require('../scroller'),
+    // scroller = require('../scroller'),
     $ = utils.$,
     $$ = utils.$$;
 
@@ -25,7 +25,7 @@ var showArticle = function () {
 
   if (article) {
     aside.show('right', templates.article(article));
-    scroller.create('asideright', $('.article', aside.elements.right));
+    // scroller.create('asideright', $('.article', aside.elements.right));
     disqus.reloadReference(article.reference);
   }
 };
@@ -43,11 +43,11 @@ module.exports = State('?page&search', {
       
       articles = _.map([oneArticle, oneArticle, oneArticle, oneArticle], article.fromDoc);
 
-      $('#content > .content').innerHTML = templates.home({
+      $('#content.content').innerHTML = templates.home({
         articles: articles
       });
 
-      scroller.refresh.content();
+      // scroller.refresh.content();
 
       elements.home = $('.home');
       elements.detail = $('.article-detail');

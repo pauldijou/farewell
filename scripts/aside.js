@@ -12,6 +12,7 @@ var body = $('body'),
       rightMask: document.getElementById('mask-right'),
       feedback: document.getElementById('aside-feedback'),
       feedbackMask: document.getElementById('mask-feedback'),
+      feedbackButtons: document.getElementById('aside-feedback-buttons'),
       top: document.getElementById('aside-top'),
       topMask: document.getElementById('mask-top'),
     };
@@ -115,11 +116,7 @@ hammer(elements.rightMask).on('tap', function() {
   hide('right');
 });
 
-hammer(elements.right, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
-  hide('right');
-});
-
-hammer($('.btn-back', elements.feedback)).on('tap', function() {
+hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
   hide('right');
 });
 
@@ -127,11 +124,7 @@ hammer(elements.feedbackMask).on('tap', function() {
   hide('feedback');
 });
 
-hammer(elements.feedback, {dragLockToAxis: true, dragBlockHorizontal: true, preventDefault: true}).on('swiperight', function () {
-  hide('feedback');
-});
-
-hammer($('.btn-feedback', elements.feedback)).on('tap', function() {
+hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
   toggle('feedback');
 });
 
