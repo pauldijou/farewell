@@ -1,5 +1,6 @@
 var reference = require('./reference'),
-    theme = require('../theme');
+    theme = require('../theme'),
+    prismic = require('../prismic');
 
 var is = {
   image: {
@@ -27,7 +28,9 @@ function Article (reference, title, date, author, illustration, color, image, te
   this.image = image;
   this.text = text;
   this.descriptions = descriptions;
-  this.content = content;
+  this.content = content && prismic.asHtml(content, {}, {
+    lightbox: reference.type + '-' + reference.id
+  });
 
   this.classes = '';
   this.style = '';
@@ -90,9 +93,9 @@ var fromDoc = function (doc) {
       short: doc.get('article.shortdescription') && doc.get('article.shortdescription').asHtml(),
       long: doc.get('article.longdescription') && doc.get('article.longdescription').asHtml()
     },
-    doc.get('article.content') && doc.get('article.content').asHtml()
+    doc.get('article.content')
   );
-  console.log(toto);
+  // console.log(toto);
   return toto;
 };
 

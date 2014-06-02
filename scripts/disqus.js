@@ -26,22 +26,25 @@ var destroy = function () {
 };
 
 var reload = function (config) {
-  if (script) {
-    window.DISQUS.reset({
-      reload: true,
-      config: function () {
-        this.page.identifier = config.id;
-        this.page.title = config.title;
-        this.page.url = window.href;
-        // this.language = newLanguage;
-      }
-    });
-  } else {
-    load(config);
+  if (config && config.id && config.title) {
+    if (script && window.DISQUS) {
+      window.DISQUS.reset({
+        reload: true,
+        config: function () {
+          this.page.identifier = config.id;
+          this.page.title = config.title;
+          this.page.url = window.href;
+          // this.language = newLanguage;
+        }
+      });
+    } else {
+      load(config);
+    }
   }
 };
 
 var reloadReference = function (reference) {
+  reference = reference || {};
   reload({
     id: reference.type + '-' + reference.id,
     title: reference.slug

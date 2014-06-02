@@ -83,7 +83,7 @@ var showPlaceDetail = function (id) {
 };
 
 var show = function () {
-  aside.hideOthers('top');
+  aside.hideOthersUri('top');
   aside.show('top');
 
   if (firstShow) {
@@ -104,39 +104,38 @@ var toggle = function () {
   }
 };
 
-var load = function () {
-  q.all([api.maps(), api.places()]).spread(function (mapsDoc, placesDoc) {
-    maps = _.map(mapsDoc.results, Map.fromDoc);
-    places = _.map(placesDoc.results, Place.fromDoc);
+var load = function (mapsIn, placesIn) {
+  maps = mapsIn;
+  places = placesIn;
 
-    map = maps[_.random(maps.length - 1)];
+  map = maps[_.random(maps.length - 1)];
 
-    setPlacePosition();
+  setPlacePosition();
 
-    aside.elements.top.innerHTML = templates.map({
-      map: map,
-      places: places
+  aside.elements.top.innerHTML = templates.map({
+    map: map,
+    places: places
+  });
+
+  elements.map = $('.map', aside.elements.top);
+  elements.places = $('.map .places', aside.elements.top);
+  elements.arrow = $('.map-arrow', aside.elements.top);
+
+  hammer(elements.arrow).on('tap', function() {
+    // toggle();
+    aside.toggleUri('top');
+  });
+
+  _.forEach($$('[data-place-id]', elements.places), function (place) {
+    hammer(place).on('tap', function(event) {
+      showPlaceDetail(event.target.getAttribute('data-place-id'));
     });
+  });
 
-    elements.map = $('.map', aside.elements.top);
-    elements.places = $('.map .places', aside.elements.top);
-    elements.arrow = $('.map-arrow', aside.elements.top);
-
-    hammer(elements.arrow).on('tap', function() {
-      toggle();
-    });
-
-    _.forEach($$('[data-place-id]', elements.places), function (place) {
-      hammer(place).on('tap', function(event) {
-        showPlaceDetail(event.target.getAttribute('data-place-id'));
-      });
-    });
-
-    setTimeout(function () {
-      aside.elements.top.classList.add('loaded');
-      loaded = true;
-    }, 500);
-  }).done();
+  setTimeout(function () {
+    aside.elements.top.classList.add('loaded');
+    loaded = true;
+  }, 500);
 };
 
 module.exports = {
@@ -146,12 +145,5 @@ module.exports = {
   show: show,
   hide: hide,
   toggle: toggle,
-  places: {
-    all: function () { return places; },
-    byId : function (id) { return _.find(places, {reference: {id: id}}); }
-  },
-  maps: {
-    all: function () { return maps; },
-    byId : function (id) { return _.find(maps, {reference: {id: id}}); }
-  }
+  showPlaceDetail: showPlaceDetail
 };

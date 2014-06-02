@@ -1,0 +1,21 @@
+// PURPLE
+@color-seance: #9A12B3;
+
+// BLUE
+@color-thunderbird: #9B59B6;
+
+// GREEN
+@color-jade: #00B16A;
+
+.color-seance { background-color: @color-seance; };
+.color-thunderbird { background-color: @color-thunderbird; };
+.color-jade { background-color: @color-jade; };
+
+.article-color(@name) {
+  background-color: @@name;
+
+  .summary {
+    background-color: @@name;
+    color: #ffffff;
+  }
+}

@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 if ( typeof Object.getPrototypeOf !== "function" ) {
   if ( typeof "test".__proto__ === "object" ) {
     Object.getPrototypeOf = function(object){
@@ -64,8 +66,6 @@ var vendor = module.exports.vendor = (function () {
   };
 })();
 
-console.log('UTILS', vendor);
-
 var prefixStyle = module.exports.prefixStyle = function (style) {
   return vendor.lowercase + style.charAt(0).toUpperCase() + style.substr(1);
 };
@@ -86,4 +86,25 @@ module.exports.closest = function (element, tagName) {
     if (element.nodeName === tagName) return element;
     element = element.parentNode;
   }
+};
+
+module.exports.diff = function (newObject, oldObject) {
+  newObject = newObject || {};
+  oldObject = oldObject || {};
+  var result = {}, keys = [];
+
+  _.forOwn(newObject, function (value, key) {
+    keys.push(key);
+    if (value !== oldObject[key]) {
+      result[key] = value;
+    }
+  });
+
+  _.forOwn(oldObject, function (value, key) {
+    if (!_.contains(keys, key)) {
+      result[key] = undefined;
+    }
+  });
+
+  return result;
 };

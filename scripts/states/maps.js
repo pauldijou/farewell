@@ -46,8 +46,9 @@ var selectMap = function (map) {
 
 module.exports = State('/maps', {
   enter: function () {
-    api.maps().done(function (docs) {
-      var maps = _.map(docs.results, Map.fromDoc);
+    var state = this;
+    state.data('loaded').then(function () {
+      var maps = state.data('maps');
 
       document.getElementById('content').innerHTML = templates['maps']({
         maps: maps,

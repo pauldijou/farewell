@@ -15,8 +15,6 @@ var whatever = require('lightbox'),
     map = require('./map'),
     on = require('./on');
 
-map.load();
-
 window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
 });
@@ -25,9 +23,11 @@ hammer(window, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight
   if (lightbox.isVisible()) {
     lightbox.previous();
   } else if (aside.isOpen('feedback')) {
-    aside.hide('feedback');
+    // aside.hide('feedback');
+    router.search('feedback', null);
   } else if (aside.isOpen('right')) {
-    aside.hide('right');
+    // aside.hide('right');
+    router.search('right', null);
   }
 });
 
@@ -35,19 +35,24 @@ hammer(window, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swipeleft'
   if (lightbox.isVisible()) {
     lightbox.next();
   } else if (aside.isOpen('right')) {
-    aside.show('feedback');
+    // aside.show('feedback');
+    router.search('feedback', 'in');
   } else {
-    aside.show('right');
+    // aside.show('right');
+    router.search('right', 'in');
   }
 });
 
-keys.bind('esc', function() { aside.hideCloser(); });
-keys.bind('m', function() { map.toggle(); });
-keys.bind('c', function() { aside.toggle('feedback'); });
-keys.bind('b', function() { aside.toggle('right'); });
-keys.bind('r', function() { aside.toggle('right'); });
+// keys.bind('esc', function() { if (!lightbox.isVisible()) aside.hideCloser(); });
+// keys.bind('m', function() { map.toggle(); });
+// keys.bind('c', function() { aside.toggle('feedback'); });
+// keys.bind('b', function() { aside.toggle('right'); });
+// keys.bind('r', function() { aside.toggle('right'); });
 
-router.
-  addState('home', require('./states/home')).
-  addState('maps', require('./states/maps')).
-  init();
+keys.bind('esc', function() { if (!lightbox.isVisible()) aside.hideCloserUri(); });
+keys.bind('m', function() { aside.toggleUri('top'); });
+keys.bind('c', function() { aside.toggleUri('feedback'); });
+keys.bind('b', function() { aside.toggleUri('right'); });
+keys.bind('r', function() { aside.toggleUri('right'); });
+
+router.addState('global', require('./states/global')).init();

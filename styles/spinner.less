@@ -1,0 +1,54 @@
+// hay frand, play with these vars.
+@spinner-style: double; 
+@spinner-width: 0.5em;
+@spinner-color: #ecf0f1;
+@spinner-size: 150px;
+@spinner-speed: 1s;
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .cover-mask();
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  font-size: @spinner-size;
+  position: relative;
+
+  @media (max-width: @spinner-size * 1.5), (max-height: @spinner-size * 1.5) {
+    font-size: @spinner-size/2;
+  }
+
+  &::before, &::after {
+    content: "";
+    top: 0;
+    display: block;
+    width: 1em;
+    height: 1em;
+    position: absolute;
+    border-width: @spinner-width;
+    border-style: @spinner-style;
+    border-color: transparent;
+    box-sizing: border-box;
+    border-radius: 1em;
+    .animation(spin @spinner-speed infinite);
+  }
+  &::after {
+    left: 0;
+    border-left-color: @spinner-color;
+  }
+  &::before {
+    right: 0;
+    border-right-color: @spinner-color;
+   .animation-delay(@spinner-speed/-4);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(360deg);
+  }
+}

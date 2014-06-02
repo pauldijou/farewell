@@ -61,6 +61,10 @@ var collection = function (name, page, pageSize) {
   });
 };
 
+var authors = function () {
+  return collection('authors', 1, 9999999);
+};
+
 var maps = function () {
   return collection('maps', 1, 9999999);
 };
@@ -79,6 +83,7 @@ module.exports = {
     if (newRef) { ref = newRef; }
     return ref;
   },
+  authors: authors,
   maps: maps,
   places: places,
   articles: articles

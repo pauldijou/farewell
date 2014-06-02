@@ -2,7 +2,7 @@ var abyssa = require('abyssa'),
     _ = require('lodash');
 
 var router = module.exports = abyssa.Router().configure({
-  enableLogs: true,
+  enableLogs: false,
   urlSync: 'hash'
 });
 

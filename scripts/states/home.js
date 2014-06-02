@@ -10,22 +10,23 @@ var q = require('q'),
     utils = require('../utils'),
     router = require('../router'),
     article = require('../models/article'),
-    // scroller = require('../scroller'),
     $ = utils.$,
     $$ = utils.$$;
 
 var articles = [],
-    elements = {};
+    elements = {},
+    lastParams = {};
 
-var showArticle = function () {
-  var id = this.id;
+var showArticle = function (id) {
+  // var id = this.id;
   var article = _.find(articles, function (a) {
     return a.reference.id === id;
   });
 
+  console.log('showArticle', id, article);
+
   if (article) {
     aside.show('right', templates.article(article));
-    // scroller.create('asideright', $('.article', aside.elements.right));
     disqus.reloadReference(article.reference);
   }
 };
@@ -35,47 +36,58 @@ module.exports = State('?page&search', {
     articles = [];
     var state = this;
 
-    q.all([
-      api.articles()
-    ]).spread(function (articlesDocs) {
-      // HACK
-      var oneArticle = articlesDocs.results[0];
-      
-      articles = _.map([oneArticle, oneArticle, oneArticle, oneArticle], article.fromDoc);
+    state.data('loaded').then(function () {
+      q.all([
+        api.articles()
+      ]).spread(function (articlesDocs) {
+        // HACK
+        var oneArticle = articlesDocs.results[0];
+        
+        articles = _.map([oneArticle, oneArticle, oneArticle, oneArticle], article.fromDoc);
 
-      $('#content.content').innerHTML = templates.home({
-        articles: articles
-      });
-
-      // scroller.refresh.content();
-
-      elements.home = $('.home');
-      elements.detail = $('.article-detail');
-
-      _.forEach($$('.btn'), function (elem) {
-        // button.addEventListener('click', function(event) {
-        //   aside.show();
-        // });
-
-        hammer(elem).on('tap', function (e) {
-          console.log(e);
+        $('#content').innerHTML = templates.home({
+          articles: articles
         });
 
-        new mobileButton.Touchend({
-          el: elem,
-          f: showArticle.bind({id: elem.getAttribute('data-article-id')})
-          // f: (function () {
-          //   router.search({i: this.id, t: 'article'});
-          // }).bind({id: elem.getAttribute('data-article-id')})
-        }).bind();
-      });
-    }).done();
+        elements.home = $('.home');
+        elements.detail = $('.article-detail');
+
+        _.forEach($$('.btn'), function (elem) {
+          // button.addEventListener('click', function(event) {
+          //   aside.show();
+          // });
+
+          hammer(elem).on('tap', function (e) {
+            // showArticle(e.target.getAttribute('data-article-id'));
+            router.search('right', 'article-' + e.target.getAttribute('data-article-id'));
+          });
+
+          // new mobileButton.Touchend({
+          //   el: elem,
+          //   f: showArticle.bind({id: elem.getAttribute('data-article-id')})
+          //   // f: (function () {
+          //   //   router.search({i: this.id, t: 'article'});
+          //   // }).bind({id: elem.getAttribute('data-article-id')})
+          // }).bind();
+        });
+
+        state.update(params);
+      }).done();
+    });
   },
   update: function (params) {
-    console.log('UPDATE', params);
+    var diffParams = utils.diff(params, lastParams);
+    var keys = _.keys(diffParams);
 
-    // if (params.t && params.t === 'article') {
-    //   showArticle.call({id: params.i});
-    // }
+    if (_.contains(keys, 'right')) {
+      if (diffParams.right) {
+        var ref = diffParams.right.split('-');
+        if (ref[0] === 'article') {
+          showArticle(ref[1]);
+        }
+      }
+    }
+
+    lastParams = params;
   }
 });

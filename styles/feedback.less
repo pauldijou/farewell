@@ -6,7 +6,7 @@
   }
 }
 
-#aside-feedback-buttons {
+#aside-feedback-buttons .buttons {
   background-color: #000000;
   color: #ffffff;
   cursor: pointer;
@@ -22,22 +22,12 @@
   }
 }
 
-.aside-right-open #aside-feedback-buttons {
-  display: block;
-  bottom: 0px;
-}
-
-.aside-feedback-open #aside-feedback-buttons {
-  .btn-back { display: none; }
-  .btn-feedback { width: 100%; }
-
-  .btn-feedback .fa::before {
-    content: '\f057';
-  }
-}
-
 @media (max-width: @screen-sm-max) {
   #aside-feedback-buttons {
+    .buttons {
+      width: 100%;
+    }
+
     .btn-back, .btn-feedback {
       width: 50%;
       display: inline-block;
@@ -46,13 +36,27 @@
 }
 
 @media (min-width: @screen-md-min) {
-  #aside-feedback-right {
+  #aside-feedback-buttons .buttons {
+    display: inline-block;
+    float: right;
     border-radius: 10px 10px 0 0;
+    margin-right: 10%;
+    .transition(margin-right 250ms ease);
 
     .btn-back, .btn-feedback { display: inline-block; }
   }
 
-  .aside-feedback-open #aside-feedback-buttons {
+  .aside-feedback-open #aside-feedback-buttons .buttons {
     border-radius: 10px 0 0 0;
+    margin-right: 70%;
+  }
+}
+
+.aside-feedback-open #aside-feedback-buttons {
+  .btn-back { display: none; }
+  .btn-feedback { width: 100%; }
+
+  .btn-feedback .fa::before {
+    content: '\f057';
   }
 }

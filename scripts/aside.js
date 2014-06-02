@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     hammer = require('hammerjs'),
     utils = require('./utils'),
-    scroller = require('./scroller'),
+    router = require('./router'),
     $ = utils.$;
 
 var body = $('body'),
@@ -62,7 +62,6 @@ var allHidden = function () {
 var set = function (position, content) {
   if (elements[position + 'Content']) {
     elements[position + 'Content'].innerHTML = content;
-    scroller.refresh['aside' + position]();
   } else if (elements[position]) {
     elements[position].innerHTML = content;
   }
@@ -84,6 +83,14 @@ var toggle = function (position) {
   body.classList.toggle(className(position));
 };
 
+var toggleUri = function (position) {
+  if (isOpen(position)) {
+    router.search(position, null);
+  } else {
+    router.search(position, 'in');
+  }
+};
+
 var hideCloser = function () {
   var hidden = false;
 
@@ -91,6 +98,25 @@ var hideCloser = function () {
     if (!hidden && isOpen(position)) {
       hidden = true;
       hide(position);
+    }
+  });
+};
+
+var hideCloserUri = function () {
+  var hidden = false;
+
+  _.forEach(ordering, function (position) {
+    if (!hidden && isOpen(position)) {
+      hidden = true;
+      router.search(position, null);
+    }
+  });
+};
+
+var hideAllUri = function () {
+  _.forEach(ordering, function (position) {
+    if (isOpen(position)) {
+      router.search(position, null);
     }
   });
 };
@@ -111,29 +137,42 @@ var hideOthers = function (position) {
   });
 };
 
+var hideOthersUri = function (position) {
+  _.forEach(ordering, function (currentPosition) {
+    if (position !== currentPosition && isOpen(currentPosition)) {
+      router.search(currentPosition, null);
+    }
+  });
+};
+
 hammer(elements.rightMask).on('tap', function() {
-  // router.search({i: null, t: null});
-  hide('right');
+  // hide('right');
+  router.search('right', null);
 });
 
 hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
-  hide('right');
+  // hide('right');
+  router.search('right', null);
 });
 
 hammer(elements.feedbackMask).on('tap', function() {
-  hide('feedback');
+  // hide('feedback');
+  router.search('feedback', null);
 });
 
 hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
-  toggle('feedback');
+  // toggle('feedback');
+  toggleUri('feedback');
 });
 
 hammer(elements.topMask).on('tap', function() {
-  hide('top');
+  // hide('top');
+  router.search('top', null);
 });
 
 hammer(elements.top, {preventDefault: true}).on('swipeup', function () {
-  hide('top');
+  // hide('top');
+  router.search('top', null);
 });
 
 module.exports = {
@@ -144,7 +183,11 @@ module.exports = {
   show: show,
   hide: hide,
   toggle: toggle,
+  toggleUri: toggleUri,
   hideCloser: hideCloser,
+  hideCloserUri: hideCloserUri,
   hideAll: hideAll,
-  hideOthers: hideOthers
+  hideAllUri: hideAllUri,
+  hideOthers: hideOthers,
+  hideOthersUri: hideOthersUri
 };
