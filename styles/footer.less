@@ -1,0 +1,34 @@
+@footer-height: 20px;
+@footer-color: #ffffff;
+
+.footer {
+  height: @footer-height;
+  text-align: center;
+  border: 1px solid @footer-color;
+  border-bottom-width: 0;
+  cursor: pointer;
+  .transition(background-color 300ms);
+
+  .footer-icon {
+    .translate3d(0, -35px, 0);
+    padding: @footer-height;
+    font-size: (10 + @footer-height);
+    border-radius: 50%;
+    color: @footer-color;
+    border-top: 1px solid @footer-color;
+    border-left: 1px solid @footer-color;
+    .transition(background-color 300ms);
+  }
+}
+
+.aside-bottom-open .footer-icon {
+
+}
+
+@media (min-width: @screen-md-min) {
+  .footer {
+    width: 50%;
+    border-radius: @footer-height @footer-height 0 0;
+    margin: 0 auto;
+  }
+}

@@ -13,7 +13,8 @@ var whatever = require('lightbox'),
     aside = require('./aside'),
     router = require('./router'),
     map = require('./map'),
-    on = require('./on');
+    on = require('./on'),
+    footer = require('./footer');
 
 window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
@@ -41,6 +42,16 @@ hammer(window, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swipeleft'
     // aside.show('right');
     router.search('right', 'in');
   }
+});
+
+jQuery('body').on('lightboxstart', function () {
+  console.log('lightboxstart');
+  router.search('lightbox', 'in');
+});
+
+jQuery('body').on('lightboxend', function () {
+  console.log('lightboxend');
+  router.search('lightbox', null);
 });
 
 // keys.bind('esc', function() { if (!lightbox.isVisible()) aside.hideCloser(); });

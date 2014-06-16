@@ -1,5 +1,7 @@
 var Signal = require('signals').Signal;
 
 module.exports = {
-  resized: new Signal()
+  resized: new Signal(),
+  bottomReached: new Signal(),
+  footerTaped: new Signal()
 };

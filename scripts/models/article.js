@@ -1,5 +1,6 @@
 var reference = require('./reference'),
     theme = require('../theme'),
+    config = require('../config'),
     prismic = require('../prismic');
 
 var is = {
@@ -24,10 +25,11 @@ function Article (reference, title, date, author, illustration, color, image, te
   this.date = date;
   this.author = author;
   this.illustration = illustration;
-  this.color = color;
+  this.color = color && color.split(' (')[0].toLowerCase();
   this.image = image;
   this.text = text;
   this.descriptions = descriptions;
+  this.isNew = config.isNew(date.getTime());
   this.content = content && prismic.asHtml(content, {}, {
     lightbox: reference.type + '-' + reference.id
   });
@@ -38,7 +40,7 @@ function Article (reference, title, date, author, illustration, color, image, te
   this.summaryStyle = '';
 
   if (color) {
-    this.classes += 'color-' + color.split(' (')[0].toLowerCase() + ' ';
+    this.classes += 'color-' + this.color + ' ';
   }
 
   if (image.template) {

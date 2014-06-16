@@ -13,7 +13,7 @@ var _ = require('lodash'),
 var lastParams = {},
     lastRight;
 
-module.exports = State('?top&right&feedback', {
+module.exports = State('?top&right&feedback&lightbox', {
   enter: function (params) {
     var state = this;
 
@@ -71,8 +71,10 @@ module.exports = State('?top&right&feedback', {
       }
     }
 
-    if (lightbox.isVisible()) {
-      lightbox.hide();
+    if (_.contains(keys, 'lightbox')) {
+      if (!diffParams.lightbox) {
+        lightbox.hide();
+      }
     }
 
     lastParams = params;

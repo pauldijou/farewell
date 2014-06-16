@@ -1,24 +1,36 @@
-var configKey = 'farewellConfiguration';
+var _ = require('lodash'),
+    configKey = 'farewellConfiguration',
+    configuration = {},
+    defaultConfiguration = {
+      theme: 'fullscreen',
+      lang: 'fr',
+      lastRead: 0
+    },
+    lastRead = 0;
 
 var read = function () {
-  return JSON.parse(localStorage.getItem(configKey));
+  return _.defaults(JSON.parse(localStorage.getItem(configKey)) || {}, defaultConfiguration);
 };
 
-var write = function (value) {
-  return localStorage.setItem(configKey, JSON.stringify(value));
+var write = function () {
+  return localStorage.setItem(configKey, JSON.stringify(configuration));
 };
 
-var configuration = read() || {
-  theme: 'fullscreen',
-  lang: 'fr',
-  lastRead: 0
-};
+configuration = read();
+lastRead = configuration.lastRead;
+configuration.lastRead = Date.now();
+write();
 
 module.exports = function (key, value) {
   if (value !== undefined) {
     configuration[key] = value;
-    write(configuration);
+    write();
   }
 
   return configuration[key];
+};
+
+module.exports.isNew = function (timestamp) {
+  timestamp = timestamp || Date.now();
+  return (timestamp > lastRead);
 };

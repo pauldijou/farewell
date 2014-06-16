@@ -7,14 +7,15 @@ var _ = require('lodash'),
 var body = $('body'),
     ordering = ['feedback', 'right', 'top'],
     elements = {
+      bottom: document.getElementById('aside-bottom'),
+      topMask: document.getElementById('mask-top'),
+      top: document.getElementById('aside-top'),
+      rightMask: document.getElementById('mask-right'),
       right: document.getElementById('aside-right'),
       rightContent: $('.content', document.getElementById('aside-right')),
-      rightMask: document.getElementById('mask-right'),
-      feedback: document.getElementById('aside-feedback'),
       feedbackMask: document.getElementById('mask-feedback'),
-      feedbackButtons: document.getElementById('aside-feedback-buttons'),
-      top: document.getElementById('aside-top'),
-      topMask: document.getElementById('mask-top'),
+      feedback: document.getElementById('aside-feedback'),
+      feedbackButtons: document.getElementById('aside-feedback-buttons')
     };
 
 // var tShowMaskOpacity = zanimo.f('opacity', '0.5', 200);
