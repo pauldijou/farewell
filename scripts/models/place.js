@@ -1,27 +1,27 @@
-var reference = require('./reference');
+var reference = require('./reference'),
+    prismic = require('../prismic');
 
-function Place (reference, name, latitude, longitude, descriptions, dates, content) {
+function Place (reference, name, illustration, latitude, longitude, dates, content) {
   this.reference = reference;
-  this.name = name;
+  this.title = name;
+  this.illustration = illustration;
   this.latitude = latitude;
   this.longitude = longitude;
-  this.descriptions = descriptions;
   this.dates = dates;
-  this.content = content;
+  this.content = content && prismic.asHtml(content, {}, {
+    lightbox: reference.type + '-' + reference.id
+  });
 }
 
 var fromDoc = function (doc) {
   return new Place(
     reference.fromDoc(doc),
     doc.get('place.name') && doc.get('place.name').asHtml(),
+    doc.getImage('place.illustration'),
     doc.getNumber('place.latitude'),
     doc.getNumber('place.longitude'),
-    {
-      short: doc.get('place.shortdescription') && doc.get('place.shortdescription').asHtml(),
-      long: doc.get('place.longdescription') && doc.get('place.longdescription').asHtml()
-    },
     [],
-    doc.get('place.content') && doc.get('place.content').asHtml()
+    doc.get('place.content')
   );
 };
 

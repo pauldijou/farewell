@@ -63,7 +63,6 @@ module.exports.stopLoading = function () {
 module.exports.setColor = function (color) {
   var newColor = 'color-' + color;
   var currentColor =_.find(elements.footer.classList, function (clazz) {
-    console.log(clazz);
     return (clazz.indexOf('color-') === 0);
   });
 

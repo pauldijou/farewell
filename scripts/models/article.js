@@ -75,7 +75,7 @@ function Article (reference, title, date, author, illustration, color, image, te
 }
 
 var fromDoc = function (doc) {
-  var toto = new Article(
+  return new Article(
     reference.fromDoc(doc),
     doc.get('article.title') && doc.get('article.title').asHtml(),
     doc.getDate('article.date'),
@@ -83,13 +83,13 @@ var fromDoc = function (doc) {
     doc.getImage('article.illustration'),
     doc.getText('article.color'),
     {
-      template: 'partial', //doc.getText('article.imageTemplate'),
-      size: 3, //doc.getNumber('article.imageSize'),
-      position: 'bottom' //doc.getText('article.imagePosition')
+      template: doc.getText('article.imageTemplate') || 'full',
+      size: doc.getNumber('article.imageSize') || 1,
+      position: doc.getText('article.imagePosition') || 'left'
     },
     {
-      position: doc.getText('article.textPosition'),
-      size: 1 //doc.getNumber('article.textSize')
+      position: doc.getText('article.textPosition') || 'right',
+      size: doc.getNumber('article.textSize') || 1
     },
     {
       short: doc.get('article.shortdescription') && doc.get('article.shortdescription').asHtml(),
@@ -97,8 +97,6 @@ var fromDoc = function (doc) {
     },
     doc.get('article.content')
   );
-  // console.log(toto);
-  return toto;
 };
 
 module.exports = {

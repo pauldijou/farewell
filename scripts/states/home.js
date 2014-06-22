@@ -136,8 +136,6 @@ var showArticle = function (id) {
     return a.reference.id === id;
   });
 
-  console.log('showArticle', id, article);
-
   if (article) {
     aside.show('right', templates.article(article));
     disqus.reloadReference(article.reference);
@@ -151,7 +149,6 @@ module.exports = State('?page&search', {
 
     hammer(elements.content).on('tap', function (e) {
       if (e.target.getAttribute('data-article-id')) {
-        // showArticle(e.target.getAttribute('data-article-id'));
         router.search('right', 'article-' + e.target.getAttribute('data-article-id'));
       }
     });

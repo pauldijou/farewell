@@ -4,20 +4,35 @@
 .footer {
   height: @footer-height;
   text-align: center;
-  border: 1px solid @footer-color;
-  border-bottom-width: 0;
+  border-top: 1px solid @footer-color;
   cursor: pointer;
   .transition(background-color 300ms);
 
   .footer-icon {
-    .translate3d(0, -35px, 0);
-    padding: @footer-height;
+    display: inline-block;
+    padding: (@footer-height - 5px);
     font-size: (10 + @footer-height);
     border-radius: 50%;
     color: @footer-color;
     border-top: 1px solid @footer-color;
     border-left: 1px solid @footer-color;
+    .translate3d(0, -35px, 0);
     .transition(background-color 300ms);
+
+    .spinner {
+      display: none;
+      .spinner(30px);
+    }
+  }
+
+  &.footer-loading .footer-icon {
+    .fa {
+      display: none;
+    }
+
+    .spinner {
+      display: block;
+    }
   }
 }
 
@@ -30,5 +45,7 @@
     width: 50%;
     border-radius: @footer-height @footer-height 0 0;
     margin: 0 auto;
+    border-right: 1px solid @footer-color;
+    border-left: 1px solid @footer-color;
   }
 }

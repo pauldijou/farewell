@@ -1,18 +1,21 @@
 // hay frand, play with these vars.
-@spinner-style: double; 
-@spinner-width: 0.5em;
+@spinner-style: double;
 @spinner-color: #ecf0f1;
-@spinner-size: 150px;
 @spinner-speed: 1s;
+@spinner-width: .5em;
 
 .loader {
   display: flex;
   align-items: center;
   justify-content: center;
   .cover-mask();
+
+  .spinner {
+    .spinner(150px);
+  }
 }
 
-.spinner {
+.spinner(@spinner-size) {
   width: 1em;
   height: 1em;
   font-size: @spinner-size;

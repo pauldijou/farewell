@@ -3,7 +3,7 @@ var config = require('./config'),
 
 var is = function (name) {
   return theme.toLowerCase() === name;
-}
+};
 
 module.exports = {
   isFullscreen: is('fullscreen'),

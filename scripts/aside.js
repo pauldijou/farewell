@@ -147,32 +147,26 @@ var hideOthersUri = function (position) {
 };
 
 hammer(elements.rightMask).on('tap', function() {
-  // hide('right');
   router.search('right', null);
 });
 
 hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
-  // hide('right');
-  router.search('right', null);
+  hideCloserUri();
 });
 
 hammer(elements.feedbackMask).on('tap', function() {
-  // hide('feedback');
   router.search('feedback', null);
 });
 
 hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
-  // toggle('feedback');
   toggleUri('feedback');
 });
 
 hammer(elements.topMask).on('tap', function() {
-  // hide('top');
   router.search('top', null);
 });
 
 hammer(elements.top, {preventDefault: true}).on('swipeup', function () {
-  // hide('top');
   router.search('top', null);
 });
 

@@ -60,7 +60,7 @@ var setPlacePosition = function () {
 
 var updatePlaces = function () {
   setPlacePosition();
-  
+
   _.forEach(places, function (place) {
     var li = $('[data-place-id='+ place.reference.id +']', elements.places);
     utils.setStyle(li, 'transform', 'translate3d('+place.position.left+'px, '+place.position.top+'px, 0)');
@@ -77,7 +77,9 @@ var showPlaceDetail = function (id) {
   var place = _.find(places, function (p) { return p.reference.id === id; });
 
   if (place) {
-    aside.show('right', templates.place(place));
+    // NOT A BUG
+    // just rendering places exactly like articles right now
+    aside.show('right', templates.article(place));
     disqus.reloadReference(place.reference);
   }
 };
@@ -127,8 +129,10 @@ var load = function (mapsIn, placesIn) {
   });
 
   _.forEach($$('[data-place-id]', elements.places), function (place) {
-    hammer(place).on('tap', function(event) {
-      showPlaceDetail(event.target.getAttribute('data-place-id'));
+    hammer(place).on('tap', function(e) {
+      if (e.target.getAttribute('data-place-id')) {
+        router.search('right', 'place-' + e.target.getAttribute('data-place-id'));
+      }
     });
   });
 

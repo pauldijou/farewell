@@ -16,12 +16,12 @@
 }
 
 .article {
-  .iscroll-wrapper();
+  .cover-mask();
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
   padding: 2%;
-  overflow-x: hidden;
-  overflow-y: auto;
 
   .illustration {
     position: absolute;
@@ -93,6 +93,16 @@
 
   .summary {
     padding: 30px;
+
+    h1, .title {
+      margin-top: 0;
+    }
+
+    .btn {
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+    }
   }
 
   &.image-template-full {
@@ -157,12 +167,6 @@
     }
   }
 
-  .summary {
-    h1, .title {
-      margin-top: 0;
-    }
-  }
-
   &.color-plum { .article-color('color-plum'); }
   &.color-seance { .article-color('color-seance'); }
   &.color-studio { .article-color('color-studio'); }
@@ -215,6 +219,12 @@
   &.color-jacksonpurple { .article-color('color-jacksonpurple'); }
   &.color-steelblue { .article-color('color-steelblue'); }
   &.color-fountainblue { .article-color('color-fountainblue'); }
+}
+
+@media (min-width: @screen-md-min) {
+  .fullscreen .article-summary .summary .btn {
+    width: auto;
+  }
 }
 
 .zigzag .article-summary {
