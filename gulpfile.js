@@ -12,3 +12,5 @@ tasks.forEach(function(task) {
 gulp.task('build', ['handlebars', 'browserify', 'less', 'copy']);
 
 gulp.task('default', ['build', 'watch', 'connect']);
+
+gulp.task('deploy', ['out', 'usemin']);
