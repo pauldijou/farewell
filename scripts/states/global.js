@@ -48,11 +48,11 @@ module.exports = State('?top&right&feedback&lightbox', {
 
     if (_.contains(keys, 'right')) {
       if (diffParams.right) {
-        var ref = diffParams.right.split('-');
+        var rightDoc = utils.extractTypeId(diffParams.right);
         if (diffParams.right === 'in') {
           router.search('right', lastRight || null);
-        } else if (ref[0] === 'place') {
-          map.showPlaceDetail(ref[1]);
+        } else if (rightDoc.nature === 'place') {
+          map.showPlaceDetail(rightDoc.id);
         }
 
         if (diffParams.right !== 'in') {

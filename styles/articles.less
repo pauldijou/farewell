@@ -35,10 +35,6 @@
   }
 
   .article-content {
-    h1, .title {
-      margin-top: 0;
-    }
-
     position: relative;
     top: 40%;
     z-index: 100;
@@ -48,6 +44,14 @@
     margin: 0 auto;
     padding: 10% 10% 75px 10%;
     border-radius: 10px 10px 0 0;
+
+    & > * {
+      line-height: 1.5em;
+    }
+
+    h1, .title {
+      margin-top: 0;
+    }
 
     p {
       text-align: justify;

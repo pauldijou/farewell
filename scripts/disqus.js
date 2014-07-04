@@ -2,18 +2,23 @@ var idScript = 'script-disqus',
     body = document.getElementsByTagName('body')[0],
     script;
 
-var load = function (config) {
-  window.disqus_shortname = 'farewell-pauldijou';
+window.disqus_shortname = 'farewell-pauldijou';
+window.disqus_disable_mobile = false;
+
+var setVariables = function (config) {
   window.disqus_identifier = config.id;
   window.disqus_title = config.title;
+  window.disqus_url = window.location.origin + '/' + config.id;
+};
 
+var load = function (config) {
+  setVariables(config);
   (function() {
       script = document.createElement('script');
       script.id = idScript;
       script.type = 'text/javascript';
       script.async = true;
-      script.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      console.log(script);
+      script.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
       body.appendChild(script);
   })();
 };
@@ -26,15 +31,18 @@ var destroy = function () {
 };
 
 var reload = function (config) {
+  console.log('reload disqus', config);
   if (config && config.id && config.title) {
     if (script && window.DISQUS) {
+      setVariables(config);
       window.DISQUS.reset({
         reload: true,
         config: function () {
-          this.page.identifier = config.id;
-          this.page.title = config.title;
-          this.page.url = window.href;
+          this.page.identifier = window.disqus_identifier;
+          this.page.title = window.disqus_title;
+          this.page.url = window.disqus_url;
           // this.language = newLanguage;
+          console.log('setting', this.page);
         }
       });
     } else {

@@ -1,49 +1,17 @@
-// #mask-top {
-//   z-index: 1000;
-// }
-
-// #aside-top {
-//   z-index: 1002;
-// }
-
-// #mask-right {
-//   z-index: 2000;
-// }
-
-// #aside-right {
-//   z-index: 2001;
-// }
-
-@media (min-width: @screen-md-min) {
-  #aside-right {
-    left: 15%;
-  }
-}
-
-// #mask-feedback {
-//   z-index: 3000;
-// }
-
-// #aside-feedback {
-//   z-index: 3001;
-// }
-
-// #aside-feedback-buttons {
-//   z-index: 3002;
-// }
+@aside-transition-speed: 300ms;
 
 #mask-right, #mask-feedback, #mask-top {
   .cover-mask();
   display: none;
   background-color: #000000;
   opacity: 0;
-  .transition(opacity 500ms ease);
+  .transition(opacity (2 * @aside-transition-speed) ease);
 }
 
 #aside-right, #aside-feedback, #aside-top {
   display: block;
   .cover-mask();
-  .transition-transform(250ms ease);
+  .transition-transform(@aside-transition-speed ease);
 }
 
 #aside-feedback-buttons, #aside-bottom {
@@ -52,7 +20,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  .transition-transform(250ms 250ms ease);
+  .transition-transform(@aside-transition-speed @aside-transition-speed ease);
 }
 
 #aside-right, #aside-feedback {

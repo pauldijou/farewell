@@ -14,7 +14,8 @@ var whatever = require('lightbox'),
     router = require('./router'),
     map = require('./map'),
     on = require('./on'),
-    footer = require('./footer');
+    footer = require('./footer'),
+    footer = require('./nyan');
 
 window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
@@ -50,8 +51,13 @@ jQuery('body').on('lightboxend', function () {
 
 keys.bind('esc', function() { if (!lightbox.isVisible()) aside.hideCloserUri(); });
 keys.bind('m', function() { lightbox.hide(); aside.toggleUri('top'); });
-keys.bind('c', function() { lightbox.hide(); aside.toggleUri('feedback'); });
 keys.bind('b', function() { lightbox.hide(); aside.hideCloserUri(); });
 keys.bind('r', function() { lightbox.hide(); aside.hideCloserUri(); });
+keys.bind('c', function() {
+  if (aside.isOpen('right')) {
+    lightbox.hide();
+    aside.toggleUri('feedback'); }
+  }
+);
 
 router.addState('global', require('./states/global')).init();

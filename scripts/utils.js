@@ -54,7 +54,7 @@ var vendor = module.exports.vendor = (function () {
   var styles = window.getComputedStyle(document.documentElement, ''),
     pre = (Array.prototype.slice
       .call(styles)
-      .join('') 
+      .join('')
       .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
     )[1],
     dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
@@ -106,5 +106,15 @@ module.exports.diff = function (newObject, oldObject) {
     }
   });
 
+  return result;
+};
+
+module.exports.extractTypeId = function (value) {
+  var result = {};
+  var indexDash = value && value.indexOf('-') || -1;
+  if (indexDash > -1) {
+    result.nature = value.substring(0, indexDash);
+    result.id = value.substring(indexDash + 1);
+  }
   return result;
 };

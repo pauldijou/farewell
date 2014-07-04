@@ -19,7 +19,7 @@ var is = {
   }
 }
 
-function Article (reference, title, date, author, illustration, color, image, text, descriptions, content) {
+function Article (reference, title, date, author, illustration, color, image, text, description, content) {
   this.reference = reference;
   this.title = title;
   this.date = date;
@@ -28,8 +28,8 @@ function Article (reference, title, date, author, illustration, color, image, te
   this.color = color && color.split(' (')[0].toLowerCase();
   this.image = image;
   this.text = text;
-  this.descriptions = descriptions;
-  this.isNew = config.isNew(date.getTime());
+  this.description = description;
+  this.isNew = date && config.isNew(date.getTime()) || false;
   this.content = content && prismic.asHtml(content, {}, {
     lightbox: reference.type + '-' + reference.id
   });
@@ -91,10 +91,7 @@ var fromDoc = function (doc) {
       position: doc.getText('article.textPosition') || 'right',
       size: doc.getNumber('article.textSize') || 1
     },
-    {
-      short: doc.get('article.shortdescription') && doc.get('article.shortdescription').asHtml(),
-      long: doc.get('article.longdescription') && doc.get('article.longdescription').asHtml()
-    },
+    doc.get('article.description') && doc.get('article.description').asHtml(),
     doc.get('article.content')
   );
 };

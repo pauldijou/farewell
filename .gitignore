@@ -7,4 +7,4 @@ templates/build/templates.js
 # ENV
 resources/*
 !resources/fonts
-!resources/mobile.js
+!resources/head.js
