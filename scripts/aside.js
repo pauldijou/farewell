@@ -76,8 +76,28 @@ var show = function (position, content) {
   }
 };
 
+var showUri = function (position) {
+  if (position === 'feedback') { router.siblingState('feedback'); }
+  else if (position === 'top') {
+    router.state('global.map.root');
+  }
+};
+
 var hide = function (position) {
   body.classList.remove(className(position));
+};
+
+var hideUri = function (position) {
+  if (position === 'feedback') {
+    router.siblingState('root');
+  } else if (position === 'right') {
+    var currentState = router.currentState();
+    if (currentState.state && currentState.state.parent && currentState.state.parent.parent) {
+      router.backTo(currentState.state.parent.parent.fullName + '.root', currentState.params);
+    }
+  } else if (position === 'top') {
+    router.state('global.root.root');
+  }
 };
 
 var toggle = function (position) {
@@ -86,9 +106,9 @@ var toggle = function (position) {
 
 var toggleUri = function (position) {
   if (isOpen(position)) {
-    router.search(position, null);
+    hideUri(position);
   } else {
-    router.search(position, 'in');
+    showUri(position);
   }
 };
 
@@ -109,45 +129,47 @@ var hideCloserUri = function () {
   _.forEach(ordering, function (position) {
     if (!hidden && isOpen(position)) {
       hidden = true;
-      router.search(position, null);
+      // router.search(position, null);
+      hideUri(position);
     }
   });
 };
 
 var hideAllUri = function () {
-  _.forEach(ordering, function (position) {
-    if (isOpen(position)) {
-      router.search(position, null);
-    }
-  });
+  // _.forEach(ordering, function (position) {
+  //   if (isOpen(position)) {
+  //     router.search(position, null);
+  //   }
+  // });
+  router.backTo('global.root.root');
 };
 
-var hideAll = function () {
-  _.forEach(ordering, function (position) {
-    if (isOpen(position)) {
-      hide(position);
-    }
-  });
-};
-
-var hideOthers = function (position) {
-  _.forEach(ordering, function (currentPosition) {
-    if (position !== currentPosition && isOpen(currentPosition)) {
-      hide(currentPosition);
-    }
-  });
-};
-
-var hideOthersUri = function (position) {
-  _.forEach(ordering, function (currentPosition) {
-    if (position !== currentPosition && isOpen(currentPosition)) {
-      router.search(currentPosition, null);
-    }
-  });
-};
+// var hideAll = function () {
+//   _.forEach(ordering, function (position) {
+//     if (isOpen(position)) {
+//       hide(position);
+//     }
+//   });
+// };
+//
+// var hideOthers = function (position) {
+//   _.forEach(ordering, function (currentPosition) {
+//     if (position !== currentPosition && isOpen(currentPosition)) {
+//       hide(currentPosition);
+//     }
+//   });
+// };
+//
+// var hideOthersUri = function (position) {
+//   _.forEach(ordering, function (currentPosition) {
+//     if (position !== currentPosition && isOpen(currentPosition)) {
+//       router.search(currentPosition, null);
+//     }
+//   });
+// };
 
 hammer(elements.rightMask).on('tap', function() {
-  router.search('right', null);
+  hideUri('right');
 });
 
 hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
@@ -155,7 +177,7 @@ hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
 });
 
 hammer(elements.feedbackMask).on('tap', function() {
-  router.search('feedback', null);
+  hideUri('feedback');
 });
 
 hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
@@ -163,11 +185,11 @@ hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
 });
 
 hammer(elements.topMask).on('tap', function() {
-  router.search('top', null);
+  hideUri('top');
 });
 
 hammer(elements.top, {preventDefault: true}).on('swipeup', function () {
-  router.search('top', null);
+  hideUri('top');
 });
 
 module.exports = {
@@ -176,13 +198,15 @@ module.exports = {
   isOpen: isOpen,
   allHidden: allHidden,
   show: show,
+  showUri: showUri,
   hide: hide,
+  hideUri: hideUri,
   toggle: toggle,
   toggleUri: toggleUri,
   hideCloser: hideCloser,
-  hideCloserUri: hideCloserUri,
-  hideAll: hideAll,
-  hideAllUri: hideAllUri,
-  hideOthers: hideOthers,
-  hideOthersUri: hideOthersUri
+  hideCloserUri: hideCloserUri
+  // hideAll: hideAll,
+  // hideAllUri: hideAllUri,
+  // hideOthers: hideOthers,
+  // hideOthersUri: hideOthersUri
 };

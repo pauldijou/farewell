@@ -3,11 +3,19 @@ var abyssa = require('abyssa'),
 
 var router = module.exports = abyssa.Router().configure({
   enableLogs: false,
-  urlSync: 'hash'
+  urlSync: 'hash',
+  hashPrefix: '!'
 });
 
+router.siblingState = function siblingState(childName, params) {
+  var currentState = router.currentState();
+  var names = currentState.fullName.split('.');
+  names.pop();
+  names.push(childName);
+  router.state(names.join('.'), _.merge(params || {}, currentState.params));
+};
+
 var updateAll = router.updateAll = function updateAll(state, params) {
-  console.log(state);
   state.update(params);
 
   if (state.parent) {
@@ -80,4 +88,3 @@ var search = router.search = function (key, value, toggle) {
     return setSearch(key);
   }
 };
-

@@ -1,33 +1,46 @@
-var jQuery = require('jquery'),
-    elements = {};
+var whatever = require('lightbox'),
+    router = require('./router'),
+    utils = require('./utils'),
+    $ = utils.$,
+    $$ = utils.$$,
+    gallery;
 
-var checkElements = function () {
-  if (!elements.container) {
-    elements.container = document.getElementById('lightbox');
-    elements.overlay = document.getElementById('lightboxOverlay');
-    elements.next = jQuery('.lb-nav .lb-next', elements.container),
-    elements.previous = jQuery('.lb-nav .lb-prev', elements.container)
+$('body').addEventListener('click', function (event) {
+  var link = utils.closest(event.target || event.srcElement, 'a');
+  var galleryName = link && link.getAttribute('data-lightbox');
+
+  if (galleryName) {
+    var links = $$('[data-lightbox=' + galleryName + ']');
+    gallery = blueimp.Gallery(links, {
+      index: link,
+      event: event,
+      emulateTouchEvents: false,
+      urlProperty: 'lightbox-src',
+      onopen: function () {
+        router.search('lightbox', 'in');
+      },
+      onclosed: function () {
+        gallery = undefined;
+        router.search('lightbox', null);
+      }
+    });
   }
-};
+});
 
 var isVisible = function () {
-  checkElements();
-  return elements.container.style.display !== 'none';
+  return !!gallery;
 };
 
 var hide = function () {
-  checkElements();
-  elements.overlay.click();
+  gallery && gallery.close();
 };
 
 var next = function () {
-  checkElements();
-  elements.next.click();
+  gallery && gallery.next();
 };
 
 var previous = function () {
-  checkElements();
-  elements.previous.click();
+  gallery && gallery.prev();
 };
 
 module.exports = {

@@ -5,6 +5,7 @@ out
 templates/build/templates.js
 
 # ENV
+img
 resources/*
 !resources/fonts
 !resources/head.js

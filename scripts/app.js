@@ -1,8 +1,7 @@
 var jQuery = require('jquery');
 window.jQuery = jQuery;
 
-var whatever = require('lightbox'),
-    hammer = require('hammerjs'),
+var hammer = require('hammerjs'),
     utils = require('./utils'),
     lightbox = require('./lightbox'),
     handlebarsHelpers = require('./handlebars-helpers'),
@@ -12,41 +11,31 @@ var whatever = require('lightbox'),
     api = require('./api'),
     aside = require('./aside'),
     router = require('./router'),
-    map = require('./map'),
     on = require('./on'),
     footer = require('./footer'),
-    footer = require('./nyan');
+    nyan = require('./nyan'),
+    body = utils.$('body');
 
 window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
 });
 
-hammer(window, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
+hammer(body, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
   if (lightbox.isVisible()) {
-    lightbox.previous();
+    // lightbox.previous();
   } else if (aside.isOpen('feedback')) {
-    router.search('feedback', null);
+    aside.hideUri('feedback');
   } else if (aside.isOpen('right')) {
-    router.search('right', null);
+    aside.hideUri('right');
   }
 });
 
-hammer(window, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swipeleft', function () {
+hammer(body, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swipeleft', function () {
   if (lightbox.isVisible()) {
-    lightbox.next();
+    // lightbox.next();
   } else if (aside.isOpen('right')) {
-    router.search('feedback', 'in');
-  } else {
-    router.search('right', 'in');
+    aside.showUri('feedback');
   }
-});
-
-jQuery('body').on('lightboxstart', function () {
-  router.search('lightbox', 'in');
-});
-
-jQuery('body').on('lightboxend', function () {
-  router.search('lightbox', null);
 });
 
 keys.bind('esc', function() { if (!lightbox.isVisible()) aside.hideCloserUri(); });

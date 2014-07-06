@@ -26,4 +26,4 @@ gulp.task('out:fonts', function() {
     .on('error', handleErrors);
 });
 
-gulp.task('out', ['out:clean', 'out:root', 'out:img', 'out:fonts']);
+gulp.task('out', ['out:clean', 'out:root', 'out:img', 'out:fonts', 'build']);

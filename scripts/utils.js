@@ -82,8 +82,9 @@ module.exports.preventDefault = function (event) {
 };
 
 module.exports.closest = function (element, tagName) {
+  tagName = tagName.toLowerCase();
   while (element) {
-    if (element.nodeName === tagName) return element;
+    if (element.nodeName.toLowerCase() === tagName) return element;
     element = element.parentNode;
   }
 };

@@ -7,9 +7,8 @@ var handleErrors = require('./utils/handleErrors');
 gulp.task('less', function() {
   return gulp.src('./styles/app.less')
     .pipe(less({
-      paths: [ path.join(__dirname, '..', 'styles'), path.join(__dirname, '..', 'bower_components') ]
+      paths: [ path.join(__dirname, '..', 'styles'), path.join(__dirname, '..', 'bower_components'), path.join(__dirname, '..', 'node_modules') ]
     }))
     .pipe(gulp.dest('./resources'))
-    .on('error', handleErrors)
-    .pipe(livereload());
+    .on('error', handleErrors);
 });

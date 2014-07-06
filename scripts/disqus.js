@@ -7,8 +7,8 @@ window.disqus_disable_mobile = false;
 
 var setVariables = function (config) {
   window.disqus_identifier = config.id;
-  window.disqus_title = config.title;
-  window.disqus_url = window.location.origin + '/' + config.id;
+  window.disqus_title= config.title;
+  window.disqus_url = window.location.href;
 };
 
 var load = function (config) {
@@ -31,9 +31,8 @@ var destroy = function () {
 };
 
 var reload = function (config) {
-  console.log('reload disqus', config);
   if (config && config.id && config.title) {
-    if (script && window.DISQUS) {
+    if (window.DISQUS) {
       setVariables(config);
       window.DISQUS.reset({
         reload: true,
@@ -42,7 +41,6 @@ var reload = function (config) {
           this.page.title = window.disqus_title;
           this.page.url = window.disqus_url;
           // this.language = newLanguage;
-          console.log('setting', this.page);
         }
       });
     } else {

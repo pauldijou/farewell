@@ -112,11 +112,11 @@ var asHtml = module.exports.asHtml = function (blocks, ctx, opts) {
       else if(blockGroup.tag === 'image') {
         var img = '';
         if (opts.lightbox) {
-          img += '<a href="' + blockGroup.blocks[0].url + '" data-lightbox="' + opts.lightbox + '"';
+          img += '<a data-lightbox-src="' + blockGroup.blocks[0].url + '" data-lightbox="' + opts.lightbox + '"';
 
           var next = blockGroups[index+1];
           if (next && next.tag === 'paragraph' && next.blocks[0].text.indexOf(keywords.caption) === 0) {
-            img += ' data-title="' + next.blocks[0].text.substring(keywords.caption.length) + '"';
+            img += ' title="' + next.blocks[0].text.substring(keywords.caption.length) + '"';
             next.blocks[0].text = '';
           }
 

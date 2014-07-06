@@ -1,21 +1,21 @@
 var q = require('q'),
     hammer = require('hammerjs'),
     _ = require('lodash'),
-    router = require('./router'),
-    aside = require('./aside'),
-    api = require('./api'),
-    utils = require('./utils'),
-    disqus = require('./disqus'),
-    on = require('./on'),
+    State = require('abyssa').State,
+    router = require('../router'),
+    aside = require('../aside'),
+    api = require('../api'),
+    utils = require('../utils'),
+    disqus = require('../disqus'),
+    on = require('../on'),
     $ = utils.$,
     $$ = utils.$$,
-    templates = require('./templates'),
-    Place = require('./models/place'),
-    Map = require('./models/map');
+    templates = require('../templates'),
+    Place = require('../models/place'),
+    Map = require('../models/map');
 
-var elements = {},
-    loaded = false,
-    firstShow = true,
+var state,
+    elements = {},
     places = [],
     maps = [],
     map;
@@ -69,43 +69,6 @@ var updatePlaces = function () {
 
 on.resized.add(_.throttle(updatePlaces, 100));
 
-var showPlaces = function () {
-
-};
-
-var showPlaceDetail = function (id) {
-  var place = _.find(places, function (p) { return p.reference.id === id; });
-
-  if (place) {
-    // NOT A BUG
-    // just rendering places exactly like articles right now
-    aside.show('right', templates.article(place));
-    disqus.reloadReference(place.reference);
-  }
-};
-
-var show = function () {
-  aside.hideOthersUri('top');
-  aside.show('top');
-
-  if (firstShow) {
-    firstShow = !firstShow;
-    showPlaces();
-  }
-};
-
-var hide = function () {
-  aside.hide('top');
-};
-
-var toggle = function () {
-  if (aside.isOpen('top')) {
-    hide();
-  } else {
-    show();
-  }
-};
-
 var load = function (mapsIn, placesIn) {
   maps = mapsIn;
   places = placesIn;
@@ -124,14 +87,13 @@ var load = function (mapsIn, placesIn) {
   elements.arrow = $('.map-arrow', aside.elements.top);
 
   hammer(elements.arrow).on('tap', function() {
-    // toggle();
     aside.toggleUri('top');
   });
 
   _.forEach($$('[data-place-id]', elements.places), function (place) {
     hammer(place).on('tap', function(e) {
       if (e.target.getAttribute('data-place-id')) {
-        router.search('right', 'place-' + e.target.getAttribute('data-place-id'));
+        router.state('global.map.place.root', {id: e.target.getAttribute('data-place-id')});
       }
     });
   });
@@ -142,12 +104,16 @@ var load = function (mapsIn, placesIn) {
   }, 500);
 };
 
-module.exports = {
-  elements: elements,
-  load: load,
-  isLoaded: function () { return loaded; },
-  show: show,
-  hide: hide,
-  toggle: toggle,
-  showPlaceDetail: showPlaceDetail
-};
+module.exports = State('map', {
+  enter: function (params) {
+    state = this;
+    aside.show('top');
+  },
+  exit: function () {
+    aside.hide('top');
+  },
+  root: require('./empty')(),
+  place: require('./place')
+});
+
+module.exports._load = load;

@@ -25,6 +25,5 @@ gulp.task('handlebars', ['handlebarsBuild'], function(){
   return gulp.src([buildPath + 'before.js', buildPath + 'templates.js', buildPath + 'after.js'])
     .pipe(concat('templates.js'))
     .pipe(gulp.dest('./scripts/'))
-    .on('error', handleErrors)
-    .pipe(livereload());
+    .on('error', handleErrors);
 });
