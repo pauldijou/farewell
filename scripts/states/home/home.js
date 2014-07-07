@@ -2,7 +2,6 @@ var q = require('q'),
     _ = require('lodash'),
     hammer = require('hammerjs'),
     jquery = require('jquery'),
-    mobileButton = require('mobile-button'),
     State = require('abyssa').State,
     Steady = require('steady'),
     templates = require('../../templates'),
@@ -127,7 +126,7 @@ module.exports = State('?page&search', {
     state = this;
     lastParams = {};
 
-    hammer(elements.content).on('tap', function (e) {
+    hammer(elements.content, utils.hammerOptions()).on('tap', function (e) {
       if (e.target.getAttribute('data-article-id')) {
         // router.search('right', 'article-' + e.target.getAttribute('data-article-id'));
         router.state('global.root.article.root', {id:  e.target.getAttribute('data-article-id')});

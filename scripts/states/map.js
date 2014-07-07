@@ -10,6 +10,7 @@ var q = require('q'),
     on = require('../on'),
     $ = utils.$,
     $$ = utils.$$,
+    tooltip = require('../tooltip'),
     templates = require('../templates'),
     Place = require('../models/place'),
     Map = require('../models/map');
@@ -52,8 +53,8 @@ var setPlacePosition = function () {
     var percents = map.getPosition(place.latitude, place.longitude);
 
     place.position = {
-      top: image.top + (percents.top * image.height) - 5,
-      left: image.left + (percents.left * image.width) - 5
+      top: image.top + (percents.top * image.height) - 10,
+      left: image.left + (percents.left * image.width) - 10
     };
   });
 };
@@ -86,16 +87,18 @@ var load = function (mapsIn, placesIn) {
   elements.places = $('.map .places', aside.elements.top);
   elements.arrow = $('.map-arrow', aside.elements.top);
 
+  tooltip.load(aside.elements.top);
+
   hammer(elements.arrow).on('tap', function() {
     aside.toggleUri('top');
   });
 
-  _.forEach($$('[data-place-id]', elements.places), function (place) {
-    hammer(place).on('tap', function(e) {
-      if (e.target.getAttribute('data-place-id')) {
-        router.state('global.map.place.root', {id: e.target.getAttribute('data-place-id')});
-      }
-    });
+  hammer(elements.map).on('tap', function(e) {
+    var target = e.target || e.srcElement;
+    var li = utils.closest(target, 'li');
+    if (li.getAttribute('data-place-id')) {
+      router.state('global.map.place.root', {id: li.getAttribute('data-place-id')});
+    }
   });
 
   setTimeout(function () {

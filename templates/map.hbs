@@ -1,7 +1,9 @@
 <div class="map" style="background-color:{{map.bgColor}};background-image:url('{{map.image.url}}')">
   <ul class="places" style="margin:0;padding:0;">
     {{#each places}}
-      <li data-place-id="{{reference.id}}" style="-webkit-transform:translate3d({{position.left}}px, {{position.top}}px, 0);transform:translate3d({{position.left}}px, {{position.top}}px, 0);"></li>
+      <li data-place-id="{{reference.id}}" style="-webkit-transform:translate3d({{position.left}}px, {{position.top}}px, 0);transform:translate3d({{position.left}}px, {{position.top}}px, 0);">
+        <div class="tooltip" title="{{title}}"></div>
+      </li>
     {{/each}}
   </ul>
 </div>

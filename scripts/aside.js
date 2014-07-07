@@ -1,11 +1,32 @@
 var _ = require('lodash'),
     hammer = require('hammerjs'),
+    jquery = require('jquery'),
     utils = require('./utils'),
     router = require('./router'),
     $ = utils.$;
 
 var body = $('body'),
     ordering = ['feedback', 'right', 'top'],
+    positionFromName = function (name, axis, withMask) {
+      var position = {
+        element: document.getElementById('aside-' + name),
+        $element: jquery('#aside-' + name),
+        animation: [{
+          property: 'translate' + axis.toUpperCase(),
+          from: '100%',
+          to: 0
+        }]
+      }
+
+      if (withMask) {
+        position.mask = {
+          element: document.getElementById('mask-' + name),
+          $element: jquery('#mask-' + name)
+        }
+      }
+
+      return position;
+    },
     elements = {
       bottom: document.getElementById('aside-bottom'),
       topMask: document.getElementById('mask-top'),
@@ -16,31 +37,23 @@ var body = $('body'),
       feedbackMask: document.getElementById('mask-feedback'),
       feedback: document.getElementById('aside-feedback'),
       feedbackButtons: document.getElementById('aside-feedback-buttons')
-    };
+    },
+    positions = {},
+    duration = 300;
 
-// var tShowMaskOpacity = zanimo.f('opacity', '0.5', 200);
-// var tHideMaskOpacity = zanimo.f('opacity', '0', 200);
-// var tShowAside = zanimo.f('transform', 'translate3d(0, 0, 0)', 200, 'ease-in');
-// var tHideAside = zanimo.f('transform', 'translate3d(100%, 0, 0)', 200, 'ease-in');
+positions.bottom = positionFromName('bottom', 'Y', false);
+positions.top = positionFromName('top', 'Y', true);
+positions.right = positionFromName('right', 'X', true);
+positions.feedback = positionFromName('feedback', 'X', true);
+positions.feedbackButtons = positionFromName('feedback-buttons', 'Y', false);
 
-// var showMask = function () {
-//   mask.style.display = 'block';
-//   return zanimo(mask).then(tShowMaskOpacity);
-// };
+positions.bottom.animation[0].from = '500%';
+positions.top.animation[0].from = '-100%';
 
-// var hideMask = function () {
-//   return zanimo(mask).then(tHideMaskOpacity).then(function () {
-//     mask.style.display = 'none';
-//   });
-// };
-
-// var showAside = function () {
-//   return zanimo(aside).then(tShowAside);
-// };
-
-// var hideAside = function () {
-//   return zanimo(aside).then(tHideAside);
-// };
+positions.right.content = {
+  element: $('.content', positions.right.element),
+  $element: positions.right.$element.find('.content')
+};
 
 var className = function (position) {
   return 'aside-'+ position +'-open';
@@ -61,10 +74,11 @@ var allHidden = function () {
 };
 
 var set = function (position, content) {
-  if (elements[position + 'Content']) {
-    elements[position + 'Content'].innerHTML = content;
-  } else if (elements[position]) {
-    elements[position].innerHTML = content;
+  position = positions[position];
+  if (position && position.content && position.content.element) {
+    position.content.element.innerHTML = content;
+  } else if (position && position.element) {
+    position.element.innerHTML = content;
   }
 };
 
@@ -74,6 +88,17 @@ var show = function (position, content) {
   if (content) {
     set(position, content);
   }
+
+  // position = positions[position];
+  // if (position) {
+  //   var movements = {};
+  //   _.forEach(position.animation || [], function (anim) {
+  //     movements[anim.property] = anim.to;
+  //   });
+  //
+  //   position.$element.velocity(movements, {duration: duration});
+  //   position.mask && position.mask.$element.velocity({opacity: 0.5}, {display: 'block', duration: duration});
+  // }
 };
 
 var showUri = function (position) {
@@ -85,6 +110,16 @@ var showUri = function (position) {
 
 var hide = function (position) {
   body.classList.remove(className(position));
+  // position = positions[position];
+  // if (position) {
+  //   var movements = {};
+  //   _.forEach(position.animation || [], function (anim) {
+  //     movements[anim.property] = anim.from;
+  //   });
+  //
+  //   position.$element.velocity(movements, {duration: duration});
+  //   position.mask && position.mask.$element.velocity({opacity: 0}, {display: 'none', duration: duration});
+  // }
 };
 
 var hideUri = function (position) {
@@ -168,27 +203,27 @@ var hideAllUri = function () {
 //   });
 // };
 
-hammer(elements.rightMask).on('tap', function() {
+hammer(elements.rightMask, utils.hammerOptions()).on('tap', function() {
   hideUri('right');
 });
 
-hammer($('.btn-back', elements.feedbackButtons)).on('tap', function() {
+hammer($('.btn-back', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
   hideCloserUri();
 });
 
-hammer(elements.feedbackMask).on('tap', function() {
+hammer(elements.feedbackMask, utils.hammerOptions()).on('tap', function() {
   hideUri('feedback');
 });
 
-hammer($('.btn-feedback', elements.feedbackButtons)).on('tap', function() {
+hammer($('.btn-feedback', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
   toggleUri('feedback');
 });
 
-hammer(elements.topMask).on('tap', function() {
+hammer(elements.topMask, utils.hammerOptions()).on('tap', function() {
   hideUri('top');
 });
 
-hammer(elements.top, {preventDefault: true}).on('swipeup', function () {
+hammer(elements.top, utils.hammerOptions({preventDefault: true})).on('swipeup', function () {
   hideUri('top');
 });
 

@@ -111,7 +111,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1;
+  var buffer = "", stack1, helper;
   buffer += "\n      <li data-place-id=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.reference)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" style=\"-webkit-transform:translate3d("
@@ -122,7 +122,11 @@ function program1(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.position)),stack1 == null || stack1 === false ? stack1 : stack1.left)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "px, "
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.position)),stack1 == null || stack1 === false ? stack1 : stack1.top)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "px, 0);\"></li>\n    ";
+    + "px, 0);\">\n        <div class=\"tooltip\" title=\"";
+  if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"></div>\n      </li>\n    ";
   return buffer;
   }
 

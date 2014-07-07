@@ -1,10 +1,19 @@
 var abyssa = require('abyssa'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    tooltip = require('./tooltip');
 
 var router = module.exports = abyssa.Router().configure({
   enableLogs: false,
   urlSync: 'hash',
   hashPrefix: '!'
+});
+
+router.transition.started.add(function () {
+  setTimeout(tooltip.hideAll, 0);
+});
+
+router.transition.ended.add(function () {
+  setTimeout(tooltip.hideAll, 0);
 });
 
 router.siblingState = function siblingState(childName, params) {

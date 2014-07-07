@@ -1,10 +1,10 @@
-var clean        = require('gulp-clean');
+var rimraf       = require('gulp-rimraf');
 var gulp         = require('gulp');
 var handleErrors = require('./utils/handleErrors');
 
 gulp.task('out:clean', function() {
-  return gulp.src(['./out/img/*.*', './out/resources/*.*', './out/resources/fonts/*.*', './out/index.html', './out/CNAME'], {read: false})
-    .pipe(clean())
+  return gulp.src(['./out/img', './out/resources', './out/*.*', './out/CNAME'], {read: false})
+    .pipe(rimraf())
     .on('error', handleErrors);
 });
 

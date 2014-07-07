@@ -20,11 +20,20 @@
         position: absolute;
         top: 0;
         left: 0;
-        width: 10px;
-        height: 10px;
-        background-color: red;
-        border-radius: 50%;
+        width: 20px;
+        height: 20px;
         cursor: pointer;
+
+        .tooltip {
+          content: '';
+          display: block;
+          margin-top: 5px;
+          margin-left: 5px;
+          width: 10px;
+          height: 10px;
+          background-color: @color-main;
+          border-radius: 50%;
+        }
       }
     }
   }

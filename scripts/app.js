@@ -2,6 +2,7 @@ var jQuery = require('jquery');
 window.jQuery = jQuery;
 
 var hammer = require('hammerjs'),
+    // velocity = require('velocity-animate'),
     utils = require('./utils'),
     lightbox = require('./lightbox'),
     handlebarsHelpers = require('./handlebars-helpers'),
@@ -20,7 +21,7 @@ window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
 });
 
-hammer(body, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight', function () {
+hammer(body, utils.hammerOptions({dragLockToAxis: true, dragBlockHorizontal: true})).on('swiperight', function () {
   if (lightbox.isVisible()) {
     // lightbox.previous();
   } else if (aside.isOpen('feedback')) {
@@ -30,7 +31,7 @@ hammer(body, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swiperight',
   }
 });
 
-hammer(body, {dragLockToAxis: true, dragBlockHorizontal: true}).on('swipeleft', function () {
+hammer(body, utils.hammerOptions({dragLockToAxis: true, dragBlockHorizontal: true})).on('swipeleft', function () {
   if (lightbox.isVisible()) {
     // lightbox.next();
   } else if (aside.isOpen('right')) {

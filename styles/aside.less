@@ -41,16 +41,19 @@
 }
 
 .aside-right-open {
+  #aside-feedback-buttons {
+    .translate3d(0, 0, 0);
+  }
+}
+
+// CSS TRANSITIONS
+.aside-right-open {
   #mask-right {
     display: block;
     opacity: .5;
   }
 
   #aside-right {
-    .translate3d(0, 0, 0);
-  }
-
-  #aside-feedback-buttons {
     .translate3d(0, 0, 0);
   }
 }
@@ -82,6 +85,7 @@
     .translate3d(0, 0, 0);
   }
 }
+// END
 
 @media (min-width: @screen-md-min) {
   #aside-right {

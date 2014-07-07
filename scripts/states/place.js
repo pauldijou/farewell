@@ -16,7 +16,7 @@ var showPlace = function showPlaceF(id) {
 
     if (place) {
       aside.show('right', templates.article(place));
-      disqus.reloadReference(article.reference);
+      disqus.reloadReference(place.reference);
     } else {
       var previousState = router.previousState();
       if (previousState) {

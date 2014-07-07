@@ -119,3 +119,12 @@ module.exports.extractTypeId = function (value) {
   }
   return result;
 };
+
+module.exports.hammerOptions = function (options) {
+  return _.defaults(options || {}, {
+    behavior: {
+      userSelect: true,
+      userDrag: true
+    }
+  });
+};
