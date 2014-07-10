@@ -2,18 +2,18 @@ var q = require('q'),
     hammer = require('hammerjs'),
     _ = require('lodash'),
     State = require('abyssa').State,
-    router = require('../router'),
-    aside = require('../aside'),
-    api = require('../api'),
-    utils = require('../utils'),
-    disqus = require('../disqus'),
-    on = require('../on'),
+    router = require('../../router'),
+    aside = require('../../aside'),
+    api = require('../../api'),
+    utils = require('../../utils'),
+    disqus = require('../../disqus'),
+    on = require('../../on'),
     $ = utils.$,
     $$ = utils.$$,
-    tooltip = require('../tooltip'),
-    templates = require('../templates'),
-    Place = require('../models/place'),
-    Map = require('../models/map');
+    tooltip = require('../../tooltip'),
+    templates = require('../../templates'),
+    Place = require('../../models/place'),
+    Map = require('../../models/map');
 
 var state,
     elements = {},
@@ -47,16 +47,18 @@ var getImageSize = function () {
 };
 
 var setPlacePosition = function () {
-  var image = getImageSize();
+  if (map) {
+    var image = getImageSize();
 
-  _.forEach(places, function (place) {
-    var percents = map.getPosition(place.latitude, place.longitude);
+    _.forEach(places, function (place) {
+      var percents = map.getPosition(place.latitude, place.longitude);
 
-    place.position = {
-      top: image.top + (percents.top * image.height) - 10,
-      left: image.left + (percents.left * image.width) - 10
-    };
-  });
+      place.position = {
+        top: image.top + (percents.top * image.height) - 10,
+        left: image.left + (percents.left * image.width) - 10
+      };
+    });
+  }
 };
 
 var updatePlaces = function () {
@@ -97,7 +99,7 @@ var load = function (mapsIn, placesIn) {
     var target = e.target || e.srcElement;
     var li = utils.closest(target, 'li');
     if (li.getAttribute('data-place-id')) {
-      router.state('global.map.place.root', {id: li.getAttribute('data-place-id')});
+      router.state('global.root.map.place.root', {id: li.getAttribute('data-place-id')});
     }
   });
 
@@ -115,7 +117,7 @@ module.exports = State('map', {
   exit: function () {
     aside.hide('top');
   },
-  root: require('./empty')(),
+  root: require('../empty')(),
   place: require('./place')
 });
 

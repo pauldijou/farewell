@@ -1,10 +1,10 @@
 var _ = require('lodash'),
     State = require('abyssa').State,
-    aside = require('../aside'),
-    templates = require('../templates'),
-    router = require('../router'),
-    disqus = require('../disqus'),
-    utils = require('../utils');
+    aside = require('../../aside'),
+    templates = require('../../templates'),
+    router = require('../../router'),
+    disqus = require('../../disqus'),
+    utils = require('../../utils');
 
 var state, lastParams = {};
 
@@ -44,6 +44,6 @@ module.exports = State('places/:id', {
 
     lastParams = params;
   },
-  root: require('./empty')(),
-  feedback: require('./feedback')()
+  root: require('../empty')(),
+  feedback: require('../feedback')()
 });

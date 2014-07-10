@@ -8,6 +8,7 @@ var load = function load(context, options) {
   jquery(context).find('.tooltip').tooltipster(_.defaults(options || {}, {
     delay: 100,
     contentAsHTML: true,
+    autoClose: true,
     functionBefore: function (origin, continueTooltip) {
       current = origin;
       continueTooltip();

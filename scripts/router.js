@@ -3,7 +3,7 @@ var abyssa = require('abyssa'),
     tooltip = require('./tooltip');
 
 var router = module.exports = abyssa.Router().configure({
-  enableLogs: false,
+  enableLogs: true,
   urlSync: 'hash',
   hashPrefix: '!'
 });

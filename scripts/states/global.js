@@ -36,7 +36,7 @@ module.exports = State('?top&right&feedback&lightbox', {
     }));
 
     loading.spread(function (maps, places, authors) {
-      require('./map')._load(maps, places);
+      require('./home/map')._load(maps, places);
       state.update(params);
       return [maps, places, authors];
     });
@@ -44,39 +44,6 @@ module.exports = State('?top&right&feedback&lightbox', {
   update: function (params) {
     var diffParams = utils.diff(params, lastParams);
     var keys = _.keys(diffParams);
-
-    // if (_.contains(keys, 'top')) {
-    //   if (diffParams.top) {
-    //     map.show();
-    //   } else {
-    //     map.hide();
-    //   }
-    // }
-    //
-    // if (_.contains(keys, 'right')) {
-    //   if (diffParams.right) {
-    //     var rightDoc = utils.extractTypeId(diffParams.right);
-    //     if (diffParams.right === 'in') {
-    //       router.search('right', lastRight || null);
-    //     } else if (rightDoc.nature === 'place') {
-    //       map.showPlaceDetail(rightDoc.id);
-    //     }
-    //
-    //     if (diffParams.right !== 'in') {
-    //       lastRight = diffParams.right;
-    //     }
-    //   } else {
-    //     aside.hide('right');
-    //   }
-    // }
-    //
-    // if (_.contains(keys, 'feedback')) {
-    //   if (diffParams.feedback) {
-    //     aside.show('feedback');
-    //   } else {
-    //     aside.hide('feedback');
-    //   }
-    // }
 
     if (_.contains(keys, 'lightbox')) {
       if (!diffParams.lightbox) {
@@ -87,6 +54,5 @@ module.exports = State('?top&right&feedback&lightbox', {
     lastParams = params;
   },
   root: require('./home/home'),
-  map: require('./map'),
   maps: require('./maps')
 });

@@ -4,10 +4,13 @@
   <div id="{{reference.type}}-{{reference.id}}" class="article-summary {{classes}}"{{#if style}} style="{{style}}"{{/if}}>
     <div class="illustration" style="{{illustrationStyle}}')"></div>
     <div class="summary" style="{{summaryStyle}}">
+      {{#if isNew}}
+      <div class="article-new fa fa-star tooltip" title="Tout neuf !"></div>
+      {{/if}}
       {{{title}}}
       <div class="description">
         {{{description}}}
-        <button type="button" class="btn" data-article-id="{{reference.id}}"{{#if colors}} style="background-color:{{colors.lighten}};border-color:{{colors.primary}};"{{/if}}>Read more...</button>
+        <button type="button" class="btn" data-article-id="{{reference.id}}"{{#if colors}} style="background-color:{{colors.lighten}};border-color:{{colors.primary}};"{{/if}}>Lire la suite...</button>
       </div>
     </div>
   </div>

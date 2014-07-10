@@ -1,3 +1,4 @@
+// COLORS ------------------------------------------------------------
 // PURPLE
 @color-plum: #913D88;
 @color-seance: #9A12B3;
@@ -60,6 +61,76 @@
 @color-steelblue: #4B77BE;
 @color-fountainblue: #5C97BF;
 
+// ALT COLORS ------------------------------------------------------------
+// PURPLE
+@color-alt-plum: #31B200;
+@color-alt-seance: #62B200;
+@color-alt-studio: #82B200;
+@color-alt-wisteria: #81B200;
+
+// RED
+@color-alt-pomegranate: #00B250;
+@color-alt-sunglo: #00B233;
+@color-alt-thunderbird: #1BBC52;
+@color-alt-oldbrick: #00B257;
+@color-alt-flamingo: #00B254;
+@color-alt-valencia: #00B23C;
+@color-alt-tallpoppy: #00B253;
+@color-alt-monza: #00B22B;
+@color-alt-cinnabar: #00B253;
+
+// ORANGE
+@color-alt-tahitigold: #007DB2;
+@color-alt-casablanca: #0064B2;
+@color-alt-crusta: #00B290;
+@color-alt-burntorange: #00A9B2;
+@color-alt-buttercup: #0060B2;
+@color-alt-ecstasy: #00ADB2;
+@color-alt-jaffa: #00B2AF;
+@color-alt-zest: #0092B2;
+@color-alt-firebush: #007DB2;
+
+// GREEN
+@color-alt-downy: #B23800;
+@color-alt-mountainmeadowlight: #BC451B;
+@color-alt-lightgreensea: #BC521B;
+@color-alt-turquoise: #BC461B;
+@color-alt-observatory: #BC431B;
+@color-alt-shamrock: #BC271B;
+@color-alt-mountainmeadow: #BC461B;
+@color-alt-emeral: #BC2C1B;
+@color-alt-greenhaze: #BC431B;
+@color-alt-junglegreen: #BC341B;
+@color-alt-freespeechaquamarine: #BC3F1B;
+@color-alt-jade: #BC351B;
+@color-alt-salem: #BC2A1B;
+@color-alt-eucalyptus: #BC261B;
+
+// BLUE
+@color-alt-pictonblue: #FF9700;
+@color-alt-shakespeare: #FF8600;
+@color-alt-curiousblue: #FF9600;
+@color-alt-madison: #FFA000;
+@color-alt-jordyblue: #FF9B00;
+@color-alt-dodgerblue: #FF8B00;
+@color-alt-ming: #FF7800;
+@color-alt-ebonyclay: #FF9E00;
+@color-alt-malibu: #FF9700;
+@color-alt-chambray: #FFB800;
+@color-alt-pickledbluewood: #FFA000;
+@color-alt-hoki: #FFA500;
+@color-alt-jellybean: #FF9600;
+@color-alt-jacksonpurple: #FFBA00;
+@color-alt-steelblue: #FFAB00;
+@color-alt-fountainblue: #FF9700;
+
+
+// LOGIC -----------------------------------------------------------------
+// BRANDING
+@color-main: @color-jade;
+@color-alt-main: @color-alt-jade;
+.color-main { background-color: @color-main; }
+
 .color-plum { background-color: @color-plum; }
 .color-seance { background-color: @color-seance; }
 .color-studio { background-color: @color-studio; }
@@ -113,21 +184,25 @@
 .color-steelblue { background-color: @color-steelblue; }
 .color-fountainblue { background-color: @color-fountainblue; }
 
-// BRANDING
-@color-main: @color-jade;
-.color-main { background-color: @color-main; }
-
 .article-color(@name) {
-  background-color: @@name;
+  @color-name: "color-@{name}";
+  @color-alt-name: "color-alt-@{name}";
+  background-color: @@color-name;
 
   .summary {
-    background-color: @@name;
+    background-color: @@color-name;
     color: #ffffff;
 
     .btn {
       color: #ffffff;
-      background-color: spin(@@name, 25);
-      border-color: darken(spin(@@name, 25), 15%);
+      background-color: @@color-alt-name;
+      border-color: darken(@@color-alt-name, 15%);
+      .transition(background-color 300ms);
+
+      &:hover {
+        background-color: lighten(@@color-alt-name, 5%);
+        // border-color: @@color-alt-name;
+      }
     }
   }
 }

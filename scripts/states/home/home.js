@@ -12,6 +12,7 @@ var q = require('q'),
     router = require('../../router'),
     on = require('../../on'),
     footer = require('../../footer'),
+    tooltip = require('../../tooltip'),
     article = require('../../models/article'),
     $ = utils.$,
     $$ = utils.$$;
@@ -37,7 +38,7 @@ var updateFooter = function updateFooterColorF(values, done) {
       done();
     });
   } else {
-    aside.hide('bottom');
+    footer.hide();
     done();
   }
 };
@@ -46,7 +47,7 @@ var findIndexVisibleArticle = function findIndexVisibleArticleF() {
   return _.findIndex(articles, function (article) {
     if (article.element) {
       var top = article.element.getBoundingClientRect().top;
-      return ((window.innerHeight / -2 <= top) && (top < window.innerHeight / 2));
+      return ((-1 * window.innerHeight < top) && (top <= 0));
     } else {
       return false;
     }
@@ -76,19 +77,25 @@ var loadArticles = function loadArticlesF(page) {
       footer.setColor(newArticles[1] && newArticles[1].color || 'jade');
     }
 
-    articles = articles.concat(newArticles);
+    if (newArticles.length) {
+      articles = articles.concat(newArticles);
 
-    elements.content.innerHTML = templates.home({
-      articles: articles
-    });
+      elements.content.innerHTML = templates.home({
+        articles: articles
+      });
 
-    _.forEach(newArticles, function (article) {
-      article.element = document.getElementById('article-' + article.reference.id);
-    });
+      _.forEach(newArticles, function (article) {
+        article.element = document.getElementById('article-' + article.reference.id);
+        tooltip.load(article.element, {
+          theme: 'tooltipster-' + (article.color || 'default')
+        });
+      });
 
-    aside.show('bottom');
+      footer.show();
 
-    state.data('articles', q.when(articles));
+      state.data('articles', q.when(articles));
+    }
+
     return articles;
   });
 };
@@ -143,17 +150,9 @@ module.exports = State('?page&search', {
     var diffParams = utils.diff(params, lastParams);
     var keys = _.keys(diffParams);
 
-    // if (_.contains(keys, 'right')) {
-    //   if (diffParams.right) {
-    //     var rightDoc = utils.extractTypeId(diffParams.right);
-    //     if (rightDoc.nature  === 'article') {
-    //       showArticle(rightDoc.id);
-    //     }
-    //   }
-    // }
-
     lastParams = params;
   },
   root: require('../empty')(),
+  map: require('./map'),
   article: require('./article')
 });

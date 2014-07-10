@@ -5,6 +5,8 @@ var _ = require('lodash'),
     on = require('./on'),
     aside = require('./aside');
 
+var closed = false;
+
 var elements = {
   content: document.getElementById('content'),
   footer: $('.footer', aside.elements.bottom),
@@ -77,3 +79,11 @@ module.exports.setColor = function (color) {
   }
 };
 
+module.exports.show = function show() {
+  if (!closed) aside.show('bottom');
+};
+
+module.exports.hide = function hide() {
+  closed = true;
+  aside.hide('bottom');
+};

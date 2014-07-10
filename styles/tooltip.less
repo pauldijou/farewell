@@ -1,5 +1,15 @@
 .tooltipster-base {
+  border-radius: 5px;
+  border-width: 2px;
+  border-style: solid;
+
   .tooltipster-content {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 10px;
+    overflow: hidden;
+
     h1, h2, h3 {
       font-size: 1rem;
     }
@@ -10,12 +20,68 @@
   }
 }
 
-.tooltip-color(@color) {
+.tooltipster-default {
   color: #ffffff;
   border-color: #ffffff;
-  background: @color;
+  background: @color-main;
 }
 
-.tooltipster-default {
-  .tooltip-color(@color-main);
+.tooltip-color(@name) {
+  @color-name: "color-alt-@{name}";
+  color: #ffffff;
+  border-color: #ffffff;
+  background: @@color-name;
 }
+
+.tooltipster-plum { .tooltip-color('plum'); }
+.tooltipster-seance { .tooltip-color('seance'); }
+.tooltipster-studio { .tooltip-color('studio'); }
+.tooltipster-wisteria { .tooltip-color('wisteria'); }
+.tooltipster-pomegranate { .tooltip-color('pomegranate'); }
+.tooltipster-sunglo { .tooltip-color('sunglo'); }
+.tooltipster-thunderbird { .tooltip-color('thunderbird'); }
+.tooltipster-oldbrick { .tooltip-color('oldbrick'); }
+.tooltipster-flamingo { .tooltip-color('flamingo'); }
+.tooltipster-valencia { .tooltip-color('valencia'); }
+.tooltipster-tallpoppy { .tooltip-color('tallpoppy'); }
+.tooltipster-monza { .tooltip-color('monza'); }
+.tooltipster-cinnabar { .tooltip-color('cinnabar'); }
+.tooltipster-tahitigold { .tooltip-color('tahitigold'); }
+.tooltipster-casablanca { .tooltip-color('casablanca'); }
+.tooltipster-crusta { .tooltip-color('crusta'); }
+.tooltipster-burntorange { .tooltip-color('burntorange'); }
+.tooltipster-buttercup { .tooltip-color('buttercup'); }
+.tooltipster-ecstasy { .tooltip-color('ecstasy'); }
+.tooltipster-jaffa { .tooltip-color('jaffa'); }
+.tooltipster-zest { .tooltip-color('zest'); }
+.tooltipster-firebush { .tooltip-color('firebush'); }
+.tooltipster-downy { .tooltip-color('downy'); }
+.tooltipster-mountainmeadowlight { .tooltip-color('mountainmeadowlight'); }
+.tooltipster-lightgreensea { .tooltip-color('lightgreensea'); }
+.tooltipster-turquoise { .tooltip-color('turquoise'); }
+.tooltipster-observatory { .tooltip-color('observatory'); }
+.tooltipster-shamrock { .tooltip-color('shamrock'); }
+.tooltipster-mountainmeadow { .tooltip-color('mountainmeadow'); }
+.tooltipster-emeral { .tooltip-color('emeral'); }
+.tooltipster-greenhaze { .tooltip-color('greenhaze'); }
+.tooltipster-junglegreen { .tooltip-color('junglegreen'); }
+.tooltipster-freespeechaquamarine { .tooltip-color('freespeechaquamarine'); }
+.tooltipster-jade { .tooltip-color('jade'); }
+.tooltipster-salem { .tooltip-color('salem'); }
+.tooltipster-eucalyptus { .tooltip-color('eucalyptus'); }
+.tooltipster-pictonblue { .tooltip-color('pictonblue'); }
+.tooltipster-shakespeare { .tooltip-color('shakespeare'); }
+.tooltipster-curiousblue { .tooltip-color('curiousblue'); }
+.tooltipster-madison { .tooltip-color('madison'); }
+.tooltipster-jordyblue { .tooltip-color('jordyblue'); }
+.tooltipster-dodgerblue { .tooltip-color('dodgerblue'); }
+.tooltipster-ming { .tooltip-color('ming'); }
+.tooltipster-ebonyclay { .tooltip-color('ebonyclay'); }
+.tooltipster-malibu { .tooltip-color('malibu'); }
+.tooltipster-chambray { .tooltip-color('chambray'); }
+.tooltipster-pickledbluewood { .tooltip-color('pickledbluewood'); }
+.tooltipster-hoki { .tooltip-color('hoki'); }
+.tooltipster-jellybean { .tooltip-color('jellybean'); }
+.tooltipster-jacksonpurple { .tooltip-color('jacksonpurple'); }
+.tooltipster-steelblue { .tooltip-color('steelblue'); }
+.tooltipster-fountainblue { .tooltip-color('fountainblue'); }

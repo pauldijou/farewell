@@ -104,7 +104,7 @@ var show = function (position, content) {
 var showUri = function (position) {
   if (position === 'feedback') { router.siblingState('feedback'); }
   else if (position === 'top') {
-    router.state('global.map.root');
+    router.state('global.root.map.root');
   }
 };
 
@@ -123,9 +123,8 @@ var hide = function (position) {
 };
 
 var hideUri = function (position) {
-  if (position === 'feedback') {
-    router.siblingState('root');
-  } else if (position === 'right') {
+  if (position === 'feedback') { router.siblingState('root'); }
+  else if (position === 'right') {
     var currentState = router.currentState();
     if (currentState.state && currentState.state.parent && currentState.state.parent.parent) {
       router.backTo(currentState.state.parent.parent.fullName + '.root', currentState.params);
