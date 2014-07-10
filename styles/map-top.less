@@ -65,6 +65,11 @@
 }
 
 @media (max-width: @screen-sm-max) {
+  // Let's not display the map on small screen for now...
+  #aside-top {
+    display: none !important;
+  }
+
   .map-arrow .map-arrow-label {
     display: none;
   }

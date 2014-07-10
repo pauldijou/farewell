@@ -13,7 +13,9 @@ module.exports = function () {
     },
     exit: function () {
       aside.hide('feedback');
-      ga.send.event.feedback.closed();
+      setTimeout(function () {
+        ga.send.event.feedback.closed();
+      });
     }
   });
 }

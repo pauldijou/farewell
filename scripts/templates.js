@@ -49,7 +49,8 @@ function program1(depth0,data) {
   else { helper = (depth0 && depth0.classes); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\"";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.style), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
+  if (helper = helpers.attributes) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.attributes); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += ">\n    <div class=\"illustration\" style=\"";
   if (helper = helpers.illustrationStyle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -60,7 +61,7 @@ function program1(depth0,data) {
   else { helper = (depth0 && depth0.summaryStyle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\">\n      ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isNew), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.isNew), {hash:{},inverse:self.noop,fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      ";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -72,38 +73,13 @@ function program1(depth0,data) {
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        <button type=\"button\" class=\"btn\" data-article-id=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.reference)),stack1 == null || stack1 === false ? stack1 : stack1.id)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\"";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.colors), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += ">Lire la suite...</button>\n      </div>\n    </div>\n  </div>\n";
+    + "\">Lire la suite...</button>\n      </div>\n    </div>\n  </div>\n";
   return buffer;
   }
 function program2(depth0,data) {
   
-  var buffer = "", stack1, helper;
-  buffer += " style=\"";
-  if (helper = helpers.style) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.style); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\"";
-  return buffer;
-  }
-
-function program4(depth0,data) {
-  
   
   return "\n      <div class=\"article-new fa fa-star tooltip\" title=\"Tout neuf !\"></div>\n      ";
-  }
-
-function program6(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += " style=\"background-color:"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.colors)),stack1 == null || stack1 === false ? stack1 : stack1.lighten)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ";border-color:"
-    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.colors)),stack1 == null || stack1 === false ? stack1 : stack1.primary)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + ";\"";
-  return buffer;
   }
 
   buffer += "<h1 class=\"main-title\">Farewell...</h1>\n\n";

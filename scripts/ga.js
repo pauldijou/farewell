@@ -1,18 +1,27 @@
 var ga = window.ga;
 
+var page = '/';
+
 function sendEvent(category, action) {
-  ga('send', 'event', category, action);
+  // console.log('GA send event', category, action, page);
+  ga('send', 'event', category, action, {
+    page: page
+  });
 };
 
 module.exports = {
   set: {
     page: function (path) {
-      ga('set', 'page', path);
+      // ga('set', 'page', path);
+      page = path;
     }
   },
   send: {
     pageView: function () {
-      ga('send', 'pageview');
+      // console.log('GA send pageView', page);
+      ga('send', 'pageview', {
+        page: page
+      });
     },
     event: {
       lightbox: {

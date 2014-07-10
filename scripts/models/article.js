@@ -34,8 +34,9 @@ function Article (reference, title, date, author, illustration, color, image, te
     lightbox: reference.type + '-' + reference.id
   });
 
+  var style = '';
   this.classes = '';
-  this.style = '';
+  this.attributes = '';
   this.illustrationStyle = '';
   this.summaryStyle = '';
 
@@ -57,7 +58,7 @@ function Article (reference, title, date, author, illustration, color, image, te
 
   if (is.image.template.full(image)) {
     if (theme.isFullscreen) {
-      this.style += 'background-image:url('+ illustration.main.url +');';
+      style += 'background-image:url('+ illustration.main.url +');';
     }
   } else if (is.image.template.partial(image)) {
     this.illustrationStyle += 'background-image:url('+ illustration.main.url +');';
@@ -71,6 +72,10 @@ function Article (reference, title, date, author, illustration, color, image, te
     }
   } else if (is.image.template.thumbnail(image)) {
     this.illustrationStyle += 'background-image:url('+ illustration.main.url +');';
+  }
+
+  if (style) {
+    this.attributes += ' style="' + style + '"';
   }
 }
 

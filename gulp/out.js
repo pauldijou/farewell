@@ -11,7 +11,7 @@ gulp.task('out:clean', function() {
 });
 
 gulp.task('out:root', function() {
-  return gulp.src(['./CNAME'])
+  return gulp.src(['./CNAME', './*.ico'])
     .pipe(gulp.dest('./out'))
     .on('error', handleErrors);
 });
@@ -23,7 +23,7 @@ gulp.task('out:img', function() {
 });
 
 gulp.task('out:fonts', function() {
-  return gulp.src(['./resources/fonts/*'])
+  return gulp.src(['./resources/fonts/**/*'])
     .pipe(gulp.dest('./out/resources/fonts'))
     .on('error', handleErrors);
 });

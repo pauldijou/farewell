@@ -8,4 +8,5 @@ templates/build/templates.js
 img
 resources/*
 !resources/fonts
+resources/fonts/font-awesome
 !resources/head.js
