@@ -1,9 +1,11 @@
 var rimraf       = require('gulp-rimraf');
+var ignore       = require('gulp-ignore');
 var gulp         = require('gulp');
 var handleErrors = require('./utils/handleErrors');
 
 gulp.task('out:clean', function() {
   return gulp.src(['./out/img', './out/resources', './out/*.*', './out/CNAME'], {read: false})
+    .pipe(ignore('./out/.git'))
     .pipe(rimraf())
     .on('error', handleErrors);
 });

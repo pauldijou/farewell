@@ -40,6 +40,7 @@
     "gulp-usemin": "0.3.4",
     "gulp-rev": "0.4.0",
     "gulp-rimraf": "0.1.0",
+    "gulp-ignore": "1.1.0",
     "browserify-shim": "v3.5.0",
     "pretty-hrtime": "~0.2.1"
   },
