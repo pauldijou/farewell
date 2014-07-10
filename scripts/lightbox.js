@@ -1,6 +1,7 @@
 var whatever = require('lightbox'),
     router = require('./router'),
     utils = require('./utils'),
+    ga = require('./ga'),
     $ = utils.$,
     $$ = utils.$$,
     gallery;
@@ -18,9 +19,11 @@ $('body').addEventListener('click', function (event) {
       urlProperty: 'lightbox-src',
       onopen: function () {
         router.search('lightbox', 'in');
+        ga.send.event.lightbox.opened();
       },
       onclosed: function () {
         gallery = undefined;
+        ga.send.event.lightbox.closed();
         router.search('lightbox', null);
       }
     });
