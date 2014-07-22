@@ -3,6 +3,7 @@ window.jQuery = jQuery;
 
 var hammer = require('hammerjs'),
     // velocity = require('velocity-animate'),
+    carousel = require('carousel'),
     utils = require('./utils'),
     lightbox = require('./lightbox'),
     handlebarsHelpers = require('./handlebars-helpers'),

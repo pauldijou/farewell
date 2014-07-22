@@ -3,7 +3,7 @@ var connect = require('connect');
 var gulp    = require("gulp");
 var http    = require('http');
 var config  = {
-  port: '8080',
+  port: '8000',
   root: path.resolve('./')
 };
 

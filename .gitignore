@@ -7,6 +7,5 @@ templates/build/templates.js
 # ENV
 img
 resources/*
-!resources/fonts
-resources/fonts/font-awesome
+resources/fonts
 !resources/head.js

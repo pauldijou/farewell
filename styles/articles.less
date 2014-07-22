@@ -68,6 +68,59 @@
       margin: 0 auto;
     }
   }
+
+  &.article-color-plum { .article-color('plum'); }
+  &.article-color-seance { .article-color('seance'); }
+  &.article-color-studio { .article-color('studio'); }
+  &.article-color-wisteria { .article-color('wisteria'); }
+  &.article-color-pomegranate { .article-color('pomegranate'); }
+  &.article-color-sunglo { .article-color('sunglo'); }
+  &.article-color-thunderbird { .article-color('thunderbird'); }
+  &.article-color-oldbrick { .article-color('oldbrick'); }
+  &.article-color-flamingo { .article-color('flamingo'); }
+  &.article-color-valencia { .article-color('valencia'); }
+  &.article-color-tallpoppy { .article-color('tallpoppy'); }
+  &.article-color-monza { .article-color('monza'); }
+  &.article-color-cinnabar { .article-color('cinnabar'); }
+  &.article-color-tahitigold { .article-color('tahitigold'); }
+  &.article-color-casablanca { .article-color('casablanca'); }
+  &.article-color-crusta { .article-color('crusta'); }
+  &.article-color-burntorange { .article-color('burntorange'); }
+  &.article-color-buttercup { .article-color('buttercup'); }
+  &.article-color-ecstasy { .article-color('ecstasy'); }
+  &.article-color-jaffa { .article-color('jaffa'); }
+  &.article-color-zest { .article-color('zest'); }
+  &.article-color-firebush { .article-color('firebush'); }
+  &.article-color-downy { .article-color('downy'); }
+  &.article-color-mountainmeadowlight { .article-color('mountainmeadowlight'); }
+  &.article-color-lightgreensea { .article-color('lightgreensea'); }
+  &.article-color-turquoise { .article-color('turquoise'); }
+  &.article-color-observatory { .article-color('observatory'); }
+  &.article-color-shamrock { .article-color('shamrock'); }
+  &.article-color-mountainmeadow { .article-color('mountainmeadow'); }
+  &.article-color-emeral { .article-color('emeral'); }
+  &.article-color-greenhaze { .article-color('greenhaze'); }
+  &.article-color-junglegreen { .article-color('junglegreen'); }
+  &.article-color-freespeechaquamarine { .article-color('freespeechaquamarine'); }
+  &.article-color-jade { .article-color('jade'); }
+  &.article-color-salem { .article-color('salem'); }
+  &.article-color-eucalyptus { .article-color('eucalyptus'); }
+  &.article-color-pictonblue { .article-color('pictonblue'); }
+  &.article-color-shakespeare { .article-color('shakespeare'); }
+  &.article-color-curiousblue { .article-color('curiousblue'); }
+  &.article-color-madison { .article-color('madison'); }
+  &.article-color-jordyblue { .article-color('jordyblue'); }
+  &.article-color-dodgerblue { .article-color('dodgerblue'); }
+  &.article-color-ming { .article-color('ming'); }
+  &.article-color-ebonyclay { .article-color('ebonyclay'); }
+  &.article-color-malibu { .article-color('malibu'); }
+  &.article-color-chambray { .article-color('chambray'); }
+  &.article-color-pickledbluewood { .article-color('pickledbluewood'); }
+  &.article-color-hoki { .article-color('hoki'); }
+  &.article-color-jellybean { .article-color('jellybean'); }
+  &.article-color-jacksonpurple { .article-color('jacksonpurple'); }
+  &.article-color-steelblue { .article-color('steelblue'); }
+  &.article-color-fountainblue { .article-color('fountainblue'); }
 }
 
 @media (min-width: @screen-md-min) {
@@ -99,8 +152,10 @@
 }
 
 .fullscreen .article-summary {
-  display: flex;
-  align-items: center;
+  .flex-display();
+  .align-items(center);
+  // display: flex;
+  // align-items: center;
   width: 100%;
   min-height: 100%;
 
@@ -132,39 +187,48 @@
     }
 
     &.text-position-left {
-      flex-direction: row;
+      .flex-direction(row);
+      // flex-direction: row;
     }
 
     &.text-position-right {
-      flex-direction: row-reverse;
+      .flex-direction(row-reverse);
+      // flex-direction: row-reverse;
     }
 
     &.text-position-top {
-      flex-direction: column;
+      .flex-direction(column);
+      // flex-direction: column;
     }
 
     &.text-position-bottom {
-      flex-direction: column-reverse;
+      .flex-direction(column-reverse);
+      // flex-direction: column-reverse;
     }
   }
 
   &.image-template-partial {
-    align-items: stretch;
+    .align-items(stretch);
+    // align-items: stretch;
 
     &.image-position-left {
-      flex-direction: row;
+      .flex-direction(row);
+      // flex-direction: row;
     }
 
     &.image-position-right {
-      flex-direction: row-reverse;
+      .flex-direction(row-reverse);
+      // flex-direction: row-reverse;
     }
 
     &.image-position-top {
-      flex-direction: column;
+      .flex-direction(column);
+      // flex-direction: column;
     }
 
     &.image-position-bottom {
-      flex-direction: column-reverse;
+      .flex-direction(column-reverse);
+      // flex-direction: column-reverse;
     }
 
     .illustration {
@@ -180,58 +244,58 @@
     }
   }
 
-  &.color-plum { .article-color('plum'); }
-  &.color-seance { .article-color('seance'); }
-  &.color-studio { .article-color('studio'); }
-  &.color-wisteria { .article-color('wisteria'); }
-  &.color-pomegranate { .article-color('pomegranate'); }
-  &.color-sunglo { .article-color('sunglo'); }
-  &.color-thunderbird { .article-color('thunderbird'); }
-  &.color-oldbrick { .article-color('oldbrick'); }
-  &.color-flamingo { .article-color('flamingo'); }
-  &.color-valencia { .article-color('valencia'); }
-  &.color-tallpoppy { .article-color('tallpoppy'); }
-  &.color-monza { .article-color('monza'); }
-  &.color-cinnabar { .article-color('cinnabar'); }
-  &.color-tahitigold { .article-color('tahitigold'); }
-  &.color-casablanca { .article-color('casablanca'); }
-  &.color-crusta { .article-color('crusta'); }
-  &.color-burntorange { .article-color('burntorange'); }
-  &.color-buttercup { .article-color('buttercup'); }
-  &.color-ecstasy { .article-color('ecstasy'); }
-  &.color-jaffa { .article-color('jaffa'); }
-  &.color-zest { .article-color('zest'); }
-  &.color-firebush { .article-color('firebush'); }
-  &.color-downy { .article-color('downy'); }
-  &.color-mountainmeadowlight { .article-color('mountainmeadowlight'); }
-  &.color-lightgreensea { .article-color('lightgreensea'); }
-  &.color-turquoise { .article-color('turquoise'); }
-  &.color-observatory { .article-color('observatory'); }
-  &.color-shamrock { .article-color('shamrock'); }
-  &.color-mountainmeadow { .article-color('mountainmeadow'); }
-  &.color-emeral { .article-color('emeral'); }
-  &.color-greenhaze { .article-color('greenhaze'); }
-  &.color-junglegreen { .article-color('junglegreen'); }
-  &.color-freespeechaquamarine { .article-color('freespeechaquamarine'); }
-  &.color-jade { .article-color('jade'); }
-  &.color-salem { .article-color('salem'); }
-  &.color-eucalyptus { .article-color('eucalyptus'); }
-  &.color-pictonblue { .article-color('pictonblue'); }
-  &.color-shakespeare { .article-color('shakespeare'); }
-  &.color-curiousblue { .article-color('curiousblue'); }
-  &.color-madison { .article-color('madison'); }
-  &.color-jordyblue { .article-color('jordyblue'); }
-  &.color-dodgerblue { .article-color('dodgerblue'); }
-  &.color-ming { .article-color('ming'); }
-  &.color-ebonyclay { .article-color('ebonyclay'); }
-  &.color-malibu { .article-color('malibu'); }
-  &.color-chambray { .article-color('chambray'); }
-  &.color-pickledbluewood { .article-color('pickledbluewood'); }
-  &.color-hoki { .article-color('hoki'); }
-  &.color-jellybean { .article-color('jellybean'); }
-  &.color-jacksonpurple { .article-color('jacksonpurple'); }
-  &.color-steelblue { .article-color('steelblue'); }
-  &.color-fountainblue { .article-color('fountainblue'); }
+  &.article-color-plum { .article-summary-color('plum'); }
+  &.article-color-seance { .article-summary-color('seance'); }
+  &.article-color-studio { .article-summary-color('studio'); }
+  &.article-color-wisteria { .article-summary-color('wisteria'); }
+  &.article-color-pomegranate { .article-summary-color('pomegranate'); }
+  &.article-color-sunglo { .article-summary-color('sunglo'); }
+  &.article-color-thunderbird { .article-summary-color('thunderbird'); }
+  &.article-color-oldbrick { .article-summary-color('oldbrick'); }
+  &.article-color-flamingo { .article-summary-color('flamingo'); }
+  &.article-color-valencia { .article-summary-color('valencia'); }
+  &.article-color-tallpoppy { .article-summary-color('tallpoppy'); }
+  &.article-color-monza { .article-summary-color('monza'); }
+  &.article-color-cinnabar { .article-summary-color('cinnabar'); }
+  &.article-color-tahitigold { .article-summary-color('tahitigold'); }
+  &.article-color-casablanca { .article-summary-color('casablanca'); }
+  &.article-color-crusta { .article-summary-color('crusta'); }
+  &.article-color-burntorange { .article-summary-color('burntorange'); }
+  &.article-color-buttercup { .article-summary-color('buttercup'); }
+  &.article-color-ecstasy { .article-summary-color('ecstasy'); }
+  &.article-color-jaffa { .article-summary-color('jaffa'); }
+  &.article-color-zest { .article-summary-color('zest'); }
+  &.article-color-firebush { .article-summary-color('firebush'); }
+  &.article-color-downy { .article-summary-color('downy'); }
+  &.article-color-mountainmeadowlight { .article-summary-color('mountainmeadowlight'); }
+  &.article-color-lightgreensea { .article-summary-color('lightgreensea'); }
+  &.article-color-turquoise { .article-summary-color('turquoise'); }
+  &.article-color-observatory { .article-summary-color('observatory'); }
+  &.article-color-shamrock { .article-summary-color('shamrock'); }
+  &.article-color-mountainmeadow { .article-summary-color('mountainmeadow'); }
+  &.article-color-emeral { .article-summary-color('emeral'); }
+  &.article-color-greenhaze { .article-summary-color('greenhaze'); }
+  &.article-color-junglegreen { .article-summary-color('junglegreen'); }
+  &.article-color-freespeechaquamarine { .article-summary-color('freespeechaquamarine'); }
+  &.article-color-jade { .article-summary-color('jade'); }
+  &.article-color-salem { .article-summary-color('salem'); }
+  &.article-color-eucalyptus { .article-summary-color('eucalyptus'); }
+  &.article-color-pictonblue { .article-summary-color('pictonblue'); }
+  &.article-color-shakespeare { .article-summary-color('shakespeare'); }
+  &.article-color-curiousblue { .article-summary-color('curiousblue'); }
+  &.article-color-madison { .article-summary-color('madison'); }
+  &.article-color-jordyblue { .article-summary-color('jordyblue'); }
+  &.article-color-dodgerblue { .article-summary-color('dodgerblue'); }
+  &.article-color-ming { .article-summary-color('ming'); }
+  &.article-color-ebonyclay { .article-summary-color('ebonyclay'); }
+  &.article-color-malibu { .article-summary-color('malibu'); }
+  &.article-color-chambray { .article-summary-color('chambray'); }
+  &.article-color-pickledbluewood { .article-summary-color('pickledbluewood'); }
+  &.article-color-hoki { .article-summary-color('hoki'); }
+  &.article-color-jellybean { .article-summary-color('jellybean'); }
+  &.article-color-jacksonpurple { .article-summary-color('jacksonpurple'); }
+  &.article-color-steelblue { .article-summary-color('steelblue'); }
+  &.article-color-fountainblue { .article-summary-color('fountainblue'); }
 }
 
 @media (min-width: @screen-md-min) {

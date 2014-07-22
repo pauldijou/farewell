@@ -1,4 +1,5 @@
 var _ = require('lodash'),
+    jquery = require('jquery'),
     State = require('abyssa').State,
     aside = require('../../aside'),
     templates = require('../../templates'),
@@ -17,6 +18,7 @@ var showArticle = function showArticleF(id) {
 
     if (article) {
       aside.show('right', templates.article(article));
+      jquery('.carousel').slick();
       disqus.reloadReference(article.reference);
     } else {
       var previousState = router.previousState();

@@ -1,5 +1,6 @@
 var _ = require('lodash'),
-    Prismic = require('prismic.io').Prismic;
+    Prismic = require('prismic.io').Prismic,
+    responsive = require('./responsive');
 
 var configuration = module.exports.configuration = {
   apiEndpoint: 'https://farewell.prismic.io/api',
@@ -61,7 +62,7 @@ function BlockGroup(tag, blocks) {
   this.blocks = blocks;
 }
 
-var asHtml = module.exports.asHtml = function (blocks, ctx, opts) {
+var asHtml = module.exports.asHtml = function (blocks, ctx, opts, model) {
   var blockGroups = [],
       blockGroup,
       block,
@@ -102,8 +103,16 @@ var asHtml = module.exports.asHtml = function (blocks, ctx, opts) {
         html.push('<h3>' + insertSpans(blockGroup.blocks[0].text, blockGroup.blocks[0].spans, ctx) + '</h3>');
       }
       else if(blockGroup.tag === 'paragraph') {
-        if (blockGroup.blocks[0].text) {
-          html.push('<p>' + insertSpans(blockGroup.blocks[0].text, blockGroup.blocks[0].spans, ctx) + '</p>');
+        var name;
+        var content = blockGroup.blocks[0].text;
+        if (content) {
+          if (content.indexOf('{image-') === 0 && (name = /{image\-([a-zA-Z0-9_-]+)}/.exec(content)[1])) {
+            html.push(renderImage(name, opts, model));
+          } else if (content.indexOf('{carousel-') === 0 && (name = /{carousel\-([a-zA-Z0-9_-]+)}/.exec(content)[1])) {
+            html.push(renderCarousel(name, opts, model));
+          } else {
+            html.push('<p>' + insertSpans(content, blockGroup.blocks[0].spans, ctx) + '</p>');
+          }
         }
       }
       else if(blockGroup.tag === 'preformatted') {
@@ -213,4 +222,40 @@ function insertSpans(text, spans, ctx) {
     html.push(text.substring(cursor));
 
     return html.join('');
+}
+
+function renderImage(name, opts, model) {
+  var img = '';
+  var image = _.find(model && model.images || [], {name: name});
+  if (image) {
+    var device = responsive.device();
+    var view = image[device] || image.main;
+
+    if (opts.lightbox) {
+      img += '<a data-lightbox-src="' + view.url + '" data-lightbox="' + opts.lightbox + '" title="' + image.caption + '">';
+      img += '<img src="' + view.url + '" alt="' + view.alt + '">';
+      img += '</a>';
+    } else {
+      img = '<img src="' + view.url + '" alt="' + view.alt + '">';
+    }
+  }
+
+  return img;
+}
+
+function renderCarousel(name, opts, model) {
+  var car = '';
+  var carousel = _.find(model && model.carousels || [], {name: name});
+  if (carousel) {
+    var device = responsive.device();
+    car += '<div class="carousel">';
+
+    _.forEach(carousel.images, function (image) {
+      var view = image[device] || image.main;
+      car += '<div><img src="' + view.url + '"></div>'
+    });
+
+    car += '</div>';
+  }
+  return car;
 }

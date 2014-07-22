@@ -1,6 +1,6 @@
-<div class="illustration" style="background-image:url('{{illustration.main.url}}')"></div>
+<div class="illustration" style="background-image:url('{{illustration.url}}')"></div>
 
-<div class="article">
+<div class="article {{#if color}}article-color-{{color}}{{/if}}">
   <div class="article-content">
     {{{title}}}
     {{{content}}}

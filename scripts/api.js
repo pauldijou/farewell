@@ -20,44 +20,29 @@ new Prismic.Api(prismic.configuration.apiEndpoint, function (err, resolvedApi) {
       var defer = q.defer();
 
       originalSubmit.call(this, function (err, docs) {
-        if (err) {
-          defer.reject(err);
-        } else {
-          defer.resolve(docs);
-        }
+        if (err) { defer.reject(err); }
+        else { defer.resolve(docs); }
       });
 
       return defer.promise;
     };
 
-    var ctx = {
-      ref: (ref || resolvedApi.data.master.ref),
-      api: resolvedApi,
-      maybeRefParam: (ref && ref != resolvedApi.data.master.ref ? '~' + ref : ''),
-      
-      oauth: function() {
-        var token = sessionStorage.getItem('ACCESS_TOKEN');
-        return {
-          accessToken: token,
-          hasPrivilegedAccess: !!token
-        };
-      },
-
-      linkResolver: function(ctx, doc) {
-        return prismic.configuration.linkResolver(ctx, doc);
-      }
-    };
-
-    deferApi.resolve(ctx);
+    deferApi.resolve(resolvedApi);
   }
 });
 
-var collection = function (name, page, pageSize) {
+var collection = function (name, page, pageSize, orderings) {
   if (!page) { page = 1; }
   if (pageSize === undefined) { pageSize = 20; }
 
   return api.then(function (ctx) {
-    return ctx.api.forms(name).ref(ctx.ref).set('pageSize', pageSize).set('page', page).submit();
+    var form = ctx.form(name).ref(ctx.master())
+
+    if (orderings) {
+      form.orderings(orderings);
+    }
+
+    return form.pageSize(pageSize).page(page).submit();
   });
 };
 
@@ -70,11 +55,11 @@ var maps = function () {
 };
 
 var places = function () {
-  return collection('places-' + lang.current());
+  return collection('places-' + lang.current(), 1, 9999999);
 };
 
-var articles = function () {
-  return collection('articles-' + lang.current(), 1, 20);
+var articles = function (page, pageSize) {
+  return collection('articles-' + lang.current(), page, pageSize, '[my.article.date desc]');
 };
 
 module.exports = {

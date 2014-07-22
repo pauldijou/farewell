@@ -9,7 +9,7 @@ tasks.forEach(function(task) {
   require('./gulp/' + task);
 });
 
-gulp.task('build', ['handlebars', 'browserify', 'less', 'copy:lightbox', 'copy:fontAwesome']);
+gulp.task('build', ['handlebars', 'browserify', 'less', 'copy:lightbox', 'copy:fontAwesome', 'copy:slick', 'copy:slickFonts']);
 
 gulp.task('default', ['build', 'watch', 'connect']);
 

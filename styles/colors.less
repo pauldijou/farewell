@@ -184,7 +184,7 @@
 .color-steelblue { background-color: @color-steelblue; }
 .color-fountainblue { background-color: @color-fountainblue; }
 
-.article-color(@name) {
+.article-summary-color(@name) {
   @color-name: "color-@{name}";
   @color-alt-name: "color-alt-@{name}";
   background-color: @@color-name;
@@ -204,5 +204,18 @@
         // border-color: @@color-alt-name;
       }
     }
+  }
+}
+
+.article-color(@name) {
+  @color-name: "color-@{name}";
+  @color-alt-name: "color-alt-@{name}";
+
+  h1 {
+    color: @@color-name;
+  }
+
+  .slick-prev::before, .slick-next::before {
+    color: @@color-name;
   }
 }
