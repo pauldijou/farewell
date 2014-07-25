@@ -4,7 +4,7 @@ var gulp         = require('gulp');
 var handleErrors = require('./utils/handleErrors');
 
 // For now, ugly hack chaining tasks
-gulp.task('out:clean', ['build'], function() {
+gulp.task('out:clean', function() {
   return gulp.src(['./out/img', './out/resources', './out/*.*', './out/CNAME'], {read: false})
     .pipe(ignore('./out/.git'))
     .pipe(rimraf())

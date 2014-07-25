@@ -5,7 +5,7 @@ var minifyCss = require('gulp-minify-css');
 var rev = require('gulp-rev');
 var gulp  = require('gulp');
 
-gulp.task('usemin', ['out'], function() {
+gulp.task('usemin', function() {
   gulp.src('./*.html')
     .pipe(usemin({
       css: [minifyCss(), 'concat', rev()],
