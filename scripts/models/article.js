@@ -55,14 +55,12 @@ function Article (reference, title, date, author, illustration, color, image, te
 
   this.images = _.map(images, mapImage);
 
-  console.log(carousels);
   this.carousels = _.map(carousels, function (c) {
     return {
       name: c.name,
       images: _.map(c.images, mapImage)
     }
   });
-  console.log(this.carousels);
 
   this.content = content && prismic.asHtml(content, {}, {
     lightbox: reference.type + '-' + reference.id

@@ -6,6 +6,8 @@ var whatever = require('lightbox'),
     $$ = utils.$$,
     gallery;
 
+var galleryElement = document.getElementById('blueimp-gallery');
+
 $('body').addEventListener('click', function (event) {
   var link = utils.closest(event.target || event.srcElement, 'a');
   var galleryName = link && link.getAttribute('data-lightbox');
@@ -15,7 +17,6 @@ $('body').addEventListener('click', function (event) {
     gallery = blueimp.Gallery(links, {
       index: link,
       event: event,
-      emulateTouchEvents: false,
       urlProperty: 'lightbox-src',
       onopen: function () {
         router.search('lightbox', 'in');
@@ -31,7 +32,7 @@ $('body').addEventListener('click', function (event) {
 });
 
 var isVisible = function () {
-  return !!gallery;
+  return window.getComputedStyle(galleryElement,null).getPropertyValue('display') !== 'none';
 };
 
 var hide = function () {

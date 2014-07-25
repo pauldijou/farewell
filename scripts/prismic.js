@@ -224,38 +224,63 @@ function insertSpans(text, spans, ctx) {
     return html.join('');
 }
 
+function renderImageView(view, opts) {
+  var img = '';
+
+  if (opts.lightbox) {
+    img += '<a data-lightbox-src="' + view.url + '" data-lightbox="' + opts.lightbox + '" title="' + view.caption + '">';
+    img += '<img src="' + view.url + '" alt="' + view.alt + '">';
+    img += '</a>';
+  } else {
+    img = '<img src="' + view.url + '" alt="' + view.alt + '">';
+  }
+
+  return img;
+}
+
 function renderImage(name, opts, model) {
   var img = '';
   var image = _.find(model && model.images || [], {name: name});
   if (image) {
     var device = responsive.device();
     var view = image[device] || image.main;
-
-    if (opts.lightbox) {
-      img += '<a data-lightbox-src="' + view.url + '" data-lightbox="' + opts.lightbox + '" title="' + image.caption + '">';
-      img += '<img src="' + view.url + '" alt="' + view.alt + '">';
-      img += '</a>';
-    } else {
-      img = '<img src="' + view.url + '" alt="' + view.alt + '">';
-    }
+    view.caption = image.caption;
+    img += renderImageView(view, opts);
   }
 
   return img;
 }
 
+function carouselTemplate(name) {
+  return  '<section data-swipe="disabled">' 
+        + '<div id="carousel-'+name+'" class="blueimp-gallery blueimp-gallery-carousel blueimp-gallery-controls">'
+        + '<div class="slides"></div>'
+        + '<h3 class="title"></h3>'
+        + '<a class="prev">‹</a>'
+        + '<a class="next">›</a>'
+        + '<a class="play-pause"></a>'
+        + '<ol class="indicator"></ol>'
+    + '</div>'
+  + '</section>';
+}
+
 function renderCarousel(name, opts, model) {
   var car = '';
   var carousel = _.find(model && model.carousels || [], {name: name});
-  if (carousel) {
-    var device = responsive.device();
-    car += '<div class="carousel">';
+  if (carousel && carousel.name) {
+    // var device = responsive.device();
+    // car += '<div class="carousel">';
+    //
+    // _.forEach(carousel.images, function (image) {
+    //   var view = image[device] || image.main;
+    //   car += '<div>';
+    //   car += '<img src="' + view.url + '" alt="' + view.alt + '">';
+    //   car += '</div>';
+    // });
+    //
+    // car += '</div>';
+    car += carouselTemplate(carousel.name);
 
-    _.forEach(carousel.images, function (image) {
-      var view = image[device] || image.main;
-      car += '<div><img src="' + view.url + '"></div>'
-    });
-
-    car += '</div>';
   }
   return car;
 }

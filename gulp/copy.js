@@ -12,15 +12,3 @@ gulp.task('copy:fontAwesome', function() {
     .pipe(gulp.dest('./resources/fonts/font-awesome'))
     .on('error', handleErrors);
 });
-
-gulp.task('copy:slick', function() {
-  return gulp.src(['./bower_components/slick-carousel/slick/*.gif'])
-    .pipe(gulp.dest('./resources'))
-    .on('error', handleErrors);
-});
-
-gulp.task('copy:slickFonts', function() {
-  return gulp.src(['./bower_components/slick-carousel/slick/fonts/*.*'])
-    .pipe(gulp.dest('./resources/fonts'))
-    .on('error', handleErrors);
-});

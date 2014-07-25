@@ -9,12 +9,12 @@
     "q": "1.0.1",
     "lodash": "2.4.1",
     "signals": "1.0.0",
-    "hammerjs": "1.1.3",
+    "hammerjs": "2.0.1",
     "steady": "1.1.0",
     "prismic.io": "1.0.12",
     "blueimp-gallery": "2.15.1",
     "velocity-animate": "0.4.1",
-    "abyssa": "pauldijou/abyssa-js#34ef3ce8f5e77b348048a28131b3fb1cb13b1a38",
+    "abyssa": "6.6.0",
     "tooltipster": "pauldijou/tooltipster#53466a49f7ddb21ef80340cef62bd390ee47edc4"
   },
   "devDependencies": {
@@ -49,13 +49,11 @@
   },
   "browser": {
     "lightbox": "./node_modules/blueimp-gallery/js/blueimp-gallery.min.js",
-    "tooltip": "./node_modules/tooltipster/js/jquery.tooltipster.js",
-    "carousel": "./bower_components/slick-carousel/slick/slick.js"
+    "tooltip": "./node_modules/tooltipster/js/jquery.tooltipster.js"
   },
   "browserify-shim": {
     "lightbox": "lightbox",
-    "tooltip": "tooltip",
-    "carousel": "carousel"
+    "tooltip": "tooltip"
   },
   "repository" : { "type" : "git", "url" : "https://github.com/pauldijou/farewell" }
 }

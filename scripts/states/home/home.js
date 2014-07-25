@@ -44,9 +44,9 @@ var updateFooter = function updateFooterColorF(values, done) {
 };
 
 var findIndexVisibleArticle = function findIndexVisibleArticleF() {
-  return _.findIndex(articles, function (article) {
+  return _.findIndex(articles, function (article, idx) {
     if (article.element) {
-      var top = article.element.getBoundingClientRect().top;
+      var top = Math.round(article.element.getBoundingClientRect().top);
       return ((-1 * window.innerHeight < top) && (top <= 0));
     } else {
       return false;

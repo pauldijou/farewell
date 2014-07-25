@@ -1,9 +1,8 @@
 var jQuery = require('jquery');
 window.jQuery = jQuery;
 
-var hammer = require('hammerjs'),
+var Hammer = require('hammerjs'),
     // velocity = require('velocity-animate'),
-    carousel = require('carousel'),
     utils = require('./utils'),
     lightbox = require('./lightbox'),
     handlebarsHelpers = require('./handlebars-helpers'),
@@ -18,11 +17,21 @@ var hammer = require('hammerjs'),
     nyan = require('./nyan'),
     body = utils.$('body');
 
+delete Hammer.defaults.cssProps.userSelect;
+
 window.addEventListener('resize', function (event) {
   on.resized.dispatch(event);
 });
 
-hammer(body, utils.hammerOptions({dragLockToAxis: true, dragBlockHorizontal: true})).on('swiperight', function () {
+function canSwipe(rec, input) {
+  var closest = input && utils.closest(input.target, 'SECTION');
+  return !closest || !(closest.getAttribute('data-swipe') === 'disabled');
+}
+
+var hm = new Hammer.Manager(body, {});
+hm.add(new Hammer.Swipe({enable: canSwipe, direction: Hammer.DIRECTION_HORIZONTAL}));
+
+hm.on("swiperight", function() {
   if (lightbox.isVisible()) {
     // lightbox.previous();
   } else if (aside.isOpen('feedback')) {
@@ -32,7 +41,7 @@ hammer(body, utils.hammerOptions({dragLockToAxis: true, dragBlockHorizontal: tru
   }
 });
 
-hammer(body, utils.hammerOptions({dragLockToAxis: true, dragBlockHorizontal: true})).on('swipeleft', function () {
+hm.on("swipeleft", function() {
   if (lightbox.isVisible()) {
     // lightbox.next();
   } else if (aside.isOpen('right')) {

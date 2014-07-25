@@ -15,13 +15,13 @@ router.transition.started.add(function () {
 
 router.transition.ended.add(function () {
   setTimeout(tooltip.hideAll, 0);
-  ga.set.page((router.currentState().pathQuery || '').split('?')[0]);
+  ga.set.page(router.path());
   ga.send.pageView();
 });
 
 router.siblingState = function siblingState(childName, params) {
   var currentState = router.currentState();
-  var names = currentState.fullName.split('.');
+  var names = currentState.state.fullName.split('.');
   names.pop();
   names.push(childName);
   router.state(names.join('.'), _.merge(params || {}, currentState.params));
@@ -45,7 +45,7 @@ var clonedCurrentParams = function () {
 
 var updateCurrentParams = function (newParams) {
   if (!_.isEqual(newParams, currentParams())) {
-    return router.state(router.currentState().fullName, newParams);
+    return router.state(router.currentState().state.fullName, newParams);
   }
 };
 

@@ -6,6 +6,7 @@ var _ = require('lodash'),
     disqus = require('../../disqus'),
     router = require('../../router'),
     lightbox = require('../../lightbox'),
+    carousel = require('../../carousel'),
     utils = require('../../utils');
 
 var state, lastParams = {};
@@ -18,12 +19,14 @@ var showArticle = function showArticleF(id) {
 
     if (article) {
       aside.show('right', templates.article(article));
-      jquery('.carousel').slick();
+      _.forEach(article.carousels || [], function (c) {
+        carousel.init(c);
+      });
       disqus.reloadReference(article.reference);
     } else {
       var previousState = router.previousState();
       if (previousState) {
-        router.backTo(previousState.fullName);
+        router.backTo(previousState.state.fullName);
       }
     }
   });

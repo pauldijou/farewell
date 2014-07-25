@@ -1,5 +1,5 @@
 var _ = require('lodash'),
-    hammer = require('hammerjs'),
+    Hammer = require('hammerjs'),
     jquery = require('jquery'),
     utils = require('./utils'),
     router = require('./router'),
@@ -202,29 +202,32 @@ var hideAllUri = function () {
 //   });
 // };
 
-hammer(elements.rightMask, utils.hammerOptions()).on('tap', function() {
+Hammer(elements.rightMask, utils.hammerOptions()).on('tap', function() {
   hideUri('right');
 });
 
-hammer($('.btn-back', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
+Hammer($('.btn-back', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
   hideCloserUri();
 });
 
-hammer(elements.feedbackMask, utils.hammerOptions()).on('tap', function() {
+Hammer(elements.feedbackMask, utils.hammerOptions()).on('tap', function() {
   hideUri('feedback');
 });
 
-hammer($('.btn-feedback', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
+Hammer($('.btn-feedback', elements.feedbackButtons), utils.hammerOptions()).on('tap', function() {
   toggleUri('feedback');
 });
 
-hammer(elements.topMask, utils.hammerOptions()).on('tap', function() {
+Hammer(elements.topMask, utils.hammerOptions()).on('tap', function() {
   hideUri('top');
 });
 
-hammer(elements.top, utils.hammerOptions({preventDefault: true})).on('swipeup', function () {
+var hm = new Hammer.Manager(elements.top, {});
+hm.add(new Hammer.Swipe({direction: Hammer.DIRECTION_VERTICAL}));
+hm.on("swipeup", function() {
   hideUri('top');
 });
+
 
 module.exports = {
   elements: elements,

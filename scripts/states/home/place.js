@@ -20,7 +20,7 @@ var showPlace = function showPlaceF(id) {
     } else {
       var previousState = router.previousState();
       if (previousState) {
-        router.backTo(previousState.fullName);
+        router.backTo(previousState.state.fullName);
       }
     }
   });
