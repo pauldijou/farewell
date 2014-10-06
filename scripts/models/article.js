@@ -21,44 +21,24 @@ var is = {
   }
 }
 
-var mapImage = function mapImage(i) {
-  if (i.image) {
-    return {
-      name: i.name && i.name.value,
-      caption: i.caption.value,
-      main: i.image.main,
-      desktop: i.image.main,
-      tablet: i.image.views.tablet,
-      mobile: i.image.views.mobile
-    };
-  } else {
-    return {
-      main: i.main,
-      desktop: i.main,
-      tablet: i.views.tablet,
-      mobile: i.views.mobile
-    };
-  }
-};
-
 function Article (reference, title, date, author, illustration, color, image, text, description, content, images, carousels) {
   this.reference = reference;
   this.title = title;
   this.date = date;
   this.author = author;
-  this.illustration = mapImage(illustration)[responsive.device()] || illustration.main;
+  this.illustration = responsive.mapImage(illustration)[responsive.device()] || illustration.main;
   this.color = color && color.split(' (')[0].toLowerCase();
   this.image = image;
   this.text = text;
   this.description = description;
   this.isNew = date && config.isNew(date.getTime()) || false;
 
-  this.images = _.map(images, mapImage);
+  this.images = _.map(images, responsive.mapImage);
 
   this.carousels = _.map(carousels, function (c) {
     return {
       name: c.name,
-      images: _.map(c.images, mapImage)
+      images: _.map(c.images, responsive.mapImage)
     }
   });
 

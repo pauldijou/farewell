@@ -1,10 +1,11 @@
 var reference = require('./reference'),
+    responsive = require('../responsive'),
     prismic = require('../prismic');
 
 function Place (reference, name, illustration, latitude, longitude, dates, content) {
   this.reference = reference;
   this.title = name;
-  this.illustration = illustration;
+  this.illustration = responsive.mapImage(illustration)[responsive.device()] || illustration.main;
   this.latitude = latitude;
   this.longitude = longitude;
   this.dates = dates;
