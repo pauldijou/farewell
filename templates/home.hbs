@@ -8,6 +8,9 @@
       <div class="article-new fa fa-star tooltip" title="Tout neuf !"></div>
       {{/if}}
       {{{title}}}
+      <div class="date">
+        {{{author.name.first}}}, le {{date date}}
+      </div>
       <div class="description">
         {{{description}}}
         <button type="button" class="btn" data-article-id="{{reference.id}}">Lire la suite...</button>

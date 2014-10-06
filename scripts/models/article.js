@@ -91,7 +91,11 @@ function Article (reference, title, date, author, illustration, color, image, te
   }
 }
 
-var fromDoc = function (doc) {
+var fromDoc = function (doc, authors) {
+  var author = _.find(authors, function (a) {
+    return a.reference.id === doc.get('article.author').value.document.id;
+  });
+
   var carousels = [];
 
   for (var i = 1; i <= 3; ++i) {
@@ -110,7 +114,7 @@ var fromDoc = function (doc) {
     reference.fromDoc(doc),
     doc.get('article.title') && doc.get('article.title').asHtml(),
     doc.getDate('article.date'),
-    doc.get('article.author'),
+    author,
     doc.getImage('article.illustration'),
     doc.getText('article.color'),
     {

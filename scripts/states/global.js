@@ -3,6 +3,7 @@ var _ = require('lodash'),
     State = require('abyssa').State,
     Map = require('../models/map'),
     Place = require('../models/place'),
+    Author = require('../models/author'),
     api = require('../api'),
     utils = require('../utils'),
     aside = require('../aside'),
@@ -18,7 +19,7 @@ module.exports = State('?top&right&feedback&lightbox', {
     lastParams = {};
 
     var loading = q.all([api.maps(), api.places(), api.authors()]).spread(function (mapsDoc, placesDoc, authorsDoc) {
-      return [_.map(mapsDoc.results, Map.fromDoc), _.map(placesDoc.results, Place.fromDoc), authorsDoc];
+      return [_.map(mapsDoc.results, Map.fromDoc), _.map(placesDoc.results, Place.fromDoc), _.map(authorsDoc.results, Author.fromDoc)];
     });
 
     state.data('loaded', loading);

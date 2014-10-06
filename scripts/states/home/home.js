@@ -68,10 +68,12 @@ var hasNextArticles = function hasNextArticlesF() {
 };
 
 var loadArticles = function loadArticlesF(page) {
-  return api.articles().then(function (articlesDocs) {
+  return q.all([api.articles(), state.data('authors')]).spread(function (articlesDocs, authors) {
     nextArticles = articlesDocs.next_page;
 
-    var newArticles = _.map(articlesDocs.results, article.fromDoc);
+    var newArticles = _.map(articlesDocs.results, function (art) {
+      return article.fromDoc(art, authors);
+    });
 
     if (!articles.length) {
       footer.setColor(newArticles[1] && newArticles[1].color || 'jade');
@@ -84,10 +86,10 @@ var loadArticles = function loadArticlesF(page) {
         articles: articles
       });
 
-      _.forEach(newArticles, function (article) {
-        article.element = document.getElementById('article-' + article.reference.id);
-        tooltip.load(article.element, {
-          theme: 'tooltipster-' + (article.color || 'default')
+      _.forEach(newArticles, function (art) {
+        art.element = document.getElementById('article-' + art.reference.id);
+        tooltip.load(art.element, {
+          theme: 'tooltipster-' + (art.color || 'default')
         });
       });
 

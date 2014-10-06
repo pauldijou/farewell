@@ -1,6 +1,14 @@
 var Handlebars = require('handlebars'),
     lang = require('./lang');
 
+function pad(value) {
+  if (value < 10) {
+    return '0' + value;
+  } else {
+    return value;
+  }
+}
+
 Handlebars.registerHelper('i18n', function(key) {
   return new Handlebars.SafeString(lang.msg(key));
 });
@@ -11,6 +19,10 @@ Handlebars.registerHelper('json', function(obj) {
 
 Handlebars.registerHelper('escapedjson', function(obj) {
   return window.escape(JSON.stringify(obj));
+});
+
+Handlebars.registerHelper('date', function(date) {
+  return pad(date.getDay()) + '/' + pad(1 + date.getMonth()) + '/' + date.getFullYear();
 });
 
 Handlebars.registerHelper('equals', function(val1, val2, options) {
