@@ -211,8 +211,8 @@
   @color-name: "color-@{name}";
   @color-alt-name: "color-alt-@{name}";
 
-  h1 {
-    color: @@color-name;
+  .article-title {
+    background-color: fadeout(@@color-name, 30%);
   }
 
   .slick-prev::before, .slick-next::before {

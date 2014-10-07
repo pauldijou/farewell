@@ -1,13 +1,20 @@
 var Handlebars = require('handlebars'),
     lang = require('./lang');
 
-function pad(value) {
-  if (value < 10) {
-    return '0' + value;
-  } else {
-    return value;
-  }
-}
+var months = [
+  'Janvier',
+  'Février',
+  'Mars',
+  'Avril',
+  'Mai',
+  'Juin',
+  'Juillet',
+  'Aout',
+  'Septembre',
+  'Octobre',
+  'Novembre',
+  'Décembre'
+];
 
 Handlebars.registerHelper('i18n', function(key) {
   return new Handlebars.SafeString(lang.msg(key));
@@ -22,7 +29,11 @@ Handlebars.registerHelper('escapedjson', function(obj) {
 });
 
 Handlebars.registerHelper('date', function(date) {
-  return pad(date.getDay()) + '/' + pad(1 + date.getMonth()) + '/' + date.getFullYear();
+  if (date) {
+    return ', le ' + (date.getDay() === 1 ? '1er' : date.getDay()) + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+  } else {
+    return '';
+  }
 });
 
 Handlebars.registerHelper('equals', function(val1, val2, options) {

@@ -1,8 +1,20 @@
 <div class="illustration" style="background-image:url('{{illustration.url}}')"></div>
 
 <div class="article {{#if color}}article-color-{{color}}{{/if}}">
-  <div class="article-content">
-    {{{title}}}
-    {{{content}}}
+  <div class="article-title-container">
+    <div class="article-title">
+      <div>
+        {{{title}}}
+        <p>
+          {{{author.name.first}}}{{date date}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="article-content-container">
+    <div class="article-content">
+      {{{content}}}
+    </div>
   </div>
 </div>

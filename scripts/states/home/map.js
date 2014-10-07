@@ -98,7 +98,7 @@ var load = function (mapsIn, placesIn) {
   hammer(elements.map).on('tap', function(e) {
     var target = e.target || e.srcElement;
     var li = utils.closest(target, 'li');
-    if (li.getAttribute('data-place-id')) {
+    if (li && li.getAttribute('data-place-id')) {
       router.state('global.root.map.place.root', {id: li.getAttribute('data-place-id')});
     }
   });

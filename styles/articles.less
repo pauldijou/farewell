@@ -1,4 +1,6 @@
 @article-summary-image-width: 50%;
+@article-illustration-height: 50%;
+@article-max-width: 850px;
 
 #aside-right {
   overflow-y: auto;
@@ -9,7 +11,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 50%;
+  height: @article-illustration-height;
   display: block;
   background-size: cover;
   background-repeat: no-repeat;
@@ -22,7 +24,6 @@
   overflow-y: auto;
   width: 100%;
   height: 100%;
-  padding: 2%;
 
   .illustration {
     position: absolute;
@@ -36,16 +37,36 @@
     background-position: center;
   }
 
-  .article-content {
+  .article-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: @article-illustration-height;
+    width: 100%;
+  }
+
+  .article-title {
+    background: rgba(0, 0, 0, .7);
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+  }
+
+  .article-content-container {
     position: relative;
-    top: 40%;
+    // top: 40%;
     z-index: 100;
     background-color: #ffffff;
+    width: 100%;
+  }
+
+  .article-content {
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px 20px 85px 20px;
-    border-radius: 10px 10px 0 0;
+    // border-radius: 10px 10px 0 0;
 
     & > * {
       line-height: 1.5em;
@@ -126,12 +147,18 @@
 }
 
 @media (min-width: @screen-md-min) {
-  .article {
-    padding: 5%;
+  .article .article-title-container {
+    max-width: @article-max-width;
+    margin: 0 auto;
+    padding: 30px 50px;
+  }
+
+  .article .article-title {
+    padding: 30px;
   }
 
   .article .article-content {
-    max-width: 850px;
+    max-width: @article-max-width;
     padding: 30px 50px 85px 50px;
   }
 }
