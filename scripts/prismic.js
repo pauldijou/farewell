@@ -229,7 +229,10 @@ function renderImageView(view, opts) {
 
   if (opts.lightbox) {
     img += '<a data-lightbox-src="' + view.url + '" data-lightbox="' + opts.lightbox + '" title="' + view.caption + '">';
+    img += '<figure>';
     img += '<img src="' + view.url + '" alt="' + view.alt + '">';
+    img += '<figcaption>' + view.caption + '</figcaption>';
+    img += '</figure>';
     img += '</a>';
   } else {
     img = '<img src="' + view.url + '" alt="' + view.alt + '">';
@@ -252,7 +255,7 @@ function renderImage(name, opts, model) {
 }
 
 function carouselTemplate(name) {
-  return  '<section data-swipe="disabled">' 
+  return  '<section data-swipe="disabled">'
         + '<div id="carousel-'+name+'" class="blueimp-gallery blueimp-gallery-carousel blueimp-gallery-controls">'
         + '<div class="slides"></div>'
         + '<h3 class="title"></h3>'
