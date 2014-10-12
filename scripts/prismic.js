@@ -151,7 +151,9 @@ var asHtml = module.exports.asHtml = function (blocks, ctx, opts, model) {
         });
         html.push(blockGroup.tag === 'list-item'?'</ul>':'</ol>');
       }
-      else throw new Error(blockGroup.tag+' not implemented');
+      else {
+        throw new Error(blockGroup.tag+' not implemented');
+      }
     });
   }
 

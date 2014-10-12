@@ -113,7 +113,7 @@ var fromDoc = function (doc, authors) {
   return new Article(
     reference.fromDoc(doc),
     doc.get('article.title') && doc.get('article.title').asHtml(),
-    doc.getDate('article.date'),
+    doc.get('article.date').value,
     author,
     doc.getImage('article.illustration'),
     doc.getText('article.color'),
