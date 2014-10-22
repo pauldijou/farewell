@@ -27,7 +27,7 @@ var mapImage = function mapImage(i) {
   if (i.image) {
     return {
       name: i.name && i.name.value,
-      caption: i.caption.value,
+      caption: i.caption && i.caption.value || '',
       main: i.image.main,
       desktop: i.image.main,
       tablet: i.image.views.tablet,
