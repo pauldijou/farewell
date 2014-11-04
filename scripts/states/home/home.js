@@ -137,8 +137,13 @@ module.exports = State('?page&search', {
 
     hammer(elements.content, utils.hammerOptions()).on('tap', function (e) {
       if (e.target.getAttribute('data-article-id')) {
-        // router.search('right', 'article-' + e.target.getAttribute('data-article-id'));
-        router.state('global.root.article.root', {id:  e.target.getAttribute('data-article-id')});
+        var articleParams = {id: e.target.getAttribute('data-article-id')};
+
+        if (params.r) {
+          articleParams.r = params.r;
+        }
+
+        router.state('global.root.article.root', articleParams);
       }
     });
 

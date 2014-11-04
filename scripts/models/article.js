@@ -93,7 +93,7 @@ function Article (reference, title, date, author, illustration, color, image, te
 
 var fromDoc = function (doc, authors) {
   var author = _.find(authors, function (a) {
-    return a.reference.id === doc.get('article.author').value.document.id;
+    return a.reference.id === (doc.get('article.author') && doc.get('article.author').value.document.id);
   });
 
   var carousels = [];

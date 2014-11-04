@@ -27,9 +27,18 @@ function program1(depth0,data) {
   return buffer;
   }
 
-  buffer += "<div class=\"illustration\" style=\"background-image:url('"
+function program3(depth0,data) {
+  
+  var buffer = "", stack1;
+  stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.author)),stack1 == null || stack1 === false ? stack1 : stack1.name)),stack1 == null || stack1 === false ? stack1 : stack1.first)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += ", ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"illustration\" style=\"background-image:url("
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.illustration)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "')\"></div>\n\n<div class=\"article ";
+    + ")\"></div>\n\n<div class=\"article ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.color), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">\n  <div class=\"article-title-container\">\n    <div class=\"article-title\">\n      <div>\n        ";
@@ -37,7 +46,7 @@ function program1(depth0,data) {
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n        <p>\n          ";
-  stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.author)),stack1 == null || stack1 === false ? stack1 : stack1.name)),stack1 == null || stack1 === false ? stack1 : stack1.first)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.author), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += escapeExpression((helper = helpers.date || (depth0 && depth0.date),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.date), options) : helperMissing.call(depth0, "date", (depth0 && depth0.date), options)))
     + "\n        </p>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"article-content-container\">\n    <div class=\"article-content\">\n      ";
@@ -84,7 +93,7 @@ function program1(depth0,data) {
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n      <div class=\"date\">\n        ";
-  stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.author)),stack1 == null || stack1 === false ? stack1 : stack1.name)),stack1 == null || stack1 === false ? stack1 : stack1.first)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.author), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += escapeExpression((helper = helpers.date || (depth0 && depth0.date),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.date), options) : helperMissing.call(depth0, "date", (depth0 && depth0.date), options)))
     + "\n      </div>\n      <div class=\"description\">\n        ";
@@ -100,6 +109,15 @@ function program2(depth0,data) {
   
   
   return "\n      <div class=\"article-new fa fa-star tooltip\" title=\"Tout neuf !\"></div>\n      ";
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = "", stack1;
+  stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.author)),stack1 == null || stack1 === false ? stack1 : stack1.name)),stack1 == null || stack1 === false ? stack1 : stack1.first)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1);
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += ", ";
+  return buffer;
   }
 
   buffer += "<h1 class=\"main-title\">Farewell...</h1>\n\n";

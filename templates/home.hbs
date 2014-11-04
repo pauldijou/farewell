@@ -9,7 +9,7 @@
       {{/if}}
       {{{title}}}
       <div class="date">
-        {{{author.name.first}}}{{date date}}
+        {{#if author}}{{{author.name.first}}}, {{/if}}{{date date}}
       </div>
       <div class="description">
         {{{description}}}

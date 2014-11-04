@@ -1,4 +1,4 @@
-<div class="illustration" style="background-image:url('{{illustration.url}}')"></div>
+<div class="illustration" style="background-image:url({{illustration.url}})"></div>
 
 <div class="article {{#if color}}article-color-{{color}}{{/if}}">
   <div class="article-title-container">
@@ -6,7 +6,7 @@
       <div>
         {{{title}}}
         <p>
-          {{{author.name.first}}}{{date date}}
+          {{#if author}}{{{author.name.first}}}, {{/if}}{{date date}}
         </p>
       </div>
     </div>

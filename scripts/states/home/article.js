@@ -32,7 +32,7 @@ var showArticle = function showArticleF(id) {
   });
 };
 
-module.exports = State('articles/:id', {
+module.exports = State('articles/:id?r', {
   enter: function (params) {
     state = this;
     lastParams = {};

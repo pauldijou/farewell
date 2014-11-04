@@ -1,9 +1,10 @@
 var q = require('q'),
-    Prismic = require('prismic.io').Prismic,
-    prismic = require('./prismic'),
-    lang = require('./lang');
+  Prismic = require('prismic.io').Prismic,
+  prismic = require('./prismic'),
+  lang = require('./lang');
 
-var ref;
+var releaseRegex = /r=([^&]+)/;
+var ref = ((location.href.split('?')[1] || '').match(releaseRegex) || [])[1];
 
 var deferApi = q.defer();
 var api = deferApi.promise;
@@ -36,7 +37,7 @@ var collection = function (name, page, pageSize, orderings) {
   if (pageSize === undefined) { pageSize = 20; }
 
   return api.then(function (ctx) {
-    var form = ctx.form(name).ref(ctx.master())
+    var form = ctx.form(name).ref(ref || ctx.master())
 
     if (orderings) {
       form.orderings(orderings);
@@ -64,10 +65,6 @@ var articles = function (page, pageSize) {
 
 module.exports = {
   api: api,
-  ref: function (newRef) {
-    if (newRef) { ref = newRef; }
-    return ref;
-  },
   authors: authors,
   maps: maps,
   places: places,

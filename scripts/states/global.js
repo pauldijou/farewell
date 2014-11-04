@@ -13,7 +13,7 @@ var _ = require('lodash'),
 var lastParams = {},
     lastRight;
 
-module.exports = State('?top&right&feedback&lightbox', {
+module.exports = State('?top&right&feedback&lightbox&r', {
   enter: function (params) {
     var state = this;
     lastParams = {};

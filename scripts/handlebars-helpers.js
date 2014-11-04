@@ -30,7 +30,7 @@ Handlebars.registerHelper('escapedjson', function(obj) {
 
 Handlebars.registerHelper('date', function(date) {
   if (date) {
-    return ', le ' + (date.getUTCDate() === 1 ? '1er' : date.getUTCDate()) + ' ' + months[date.getUTCMonth()] + ' ' + date.getFullYear();
+    return 'le ' + (date.getUTCDate() === 1 ? '1er' : date.getUTCDate()) + ' ' + months[date.getUTCMonth()] + ' ' + date.getFullYear();
   } else {
     return '';
   }
