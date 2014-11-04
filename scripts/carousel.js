@@ -17,7 +17,7 @@ function init(carousel) {
       var view = image[device] || image.main;
       links.push({
         href: view.url,
-        title: view.caption
+        title: image.caption || ''
       });
     });
 
