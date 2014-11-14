@@ -5,7 +5,7 @@ var reference = require('./reference'),
 function Place (reference, name, illustration, latitude, longitude, dates, content) {
   this.reference = reference;
   this.title = name;
-  this.illustration = responsive.mapImage(illustration)[responsive.device()] || illustration.main;
+  this.illustration = illustration && (responsive.mapImage(illustration)[responsive.device()] || illustration.main);
   this.latitude = latitude;
   this.longitude = longitude;
   this.dates = dates;

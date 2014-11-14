@@ -56,11 +56,11 @@ var maps = function () {
 };
 
 var places = function () {
-  return collection('places-' + lang.current(), 1, 9999999);
+  return collection('places', 1, 9999999);
 };
 
 var articles = function (page, pageSize) {
-  return collection('articles-' + lang.current(), page, pageSize, '[my.article.date desc]');
+  return collection('articles', page, pageSize, '[my.article.date desc]');
 };
 
 module.exports = {
