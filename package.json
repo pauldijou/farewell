@@ -10,7 +10,7 @@
     "lodash": "2.4.1",
     "signals": "1.0.0",
     "hammerjs": "2.0.1",
-    "steady": "1.1.0",
+    "steady": "2.0.0",
     "prismic.io": "1.0.20",
     "blueimp-gallery": "2.15.1",
     "velocity-animate": "0.4.1",

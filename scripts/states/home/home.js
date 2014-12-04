@@ -23,6 +23,7 @@ var state,
       content: document.getElementById('content')
     },
     lastParams = {},
+    lastPage = 1,
     nextArticles = undefined;
 
 var updateFooter = function updateFooterColorF(values, done) {
@@ -33,7 +34,7 @@ var updateFooter = function updateFooterColorF(values, done) {
   } else if (hasNextArticles()) {
     // Load articles here finally
     footer.startLoading();
-    loadArticles().then(function () {
+    loadArticles(lastPage + 1).then(function () {
       footer.stopLoading();
       done();
     });
@@ -68,8 +69,9 @@ var hasNextArticles = function hasNextArticlesF() {
 };
 
 var loadArticles = function loadArticlesF(page) {
-  return q.all([api.articles(), state.data('authors')]).spread(function (articlesDocs, authors) {
+  return q.all([api.articles(page), state.data('authors')]).spread(function (articlesDocs, authors) {
     nextArticles = articlesDocs.next_page;
+    lastPage = articlesDocs.page;
 
     var newArticles = _.map(articlesDocs.results, function (art) {
       return article.fromDoc(art, authors);
@@ -86,7 +88,7 @@ var loadArticles = function loadArticlesF(page) {
         articles: articles
       });
 
-      _.forEach(newArticles, function (art) {
+      _.forEach(articles, function (art) {
         art.element = document.getElementById('article-' + art.reference.id);
         tooltip.load(art.element, {
           theme: 'tooltipster-' + (art.color || 'default')

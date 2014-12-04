@@ -55,7 +55,7 @@ hammer(elements.footer).on('tap', function (e) {
 });
 
 module.exports.startLoading = function () {
-  elments.footer.classList.add('footer-loading');
+  elements.footer.classList.add('footer-loading');
 };
 
 module.exports.stopLoading = function () {
