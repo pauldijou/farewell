@@ -98,7 +98,7 @@ var fromDoc = function (doc, authors) {
 
   var carousels = [];
 
-  for (var i = 1; i <= 3; ++i) {
+  for (var i = 1; i <= 200; ++i) {
     var carouselPrefix = 'article.carousel' + i;
     var name = doc.getText(carouselPrefix + 'Name');
 
